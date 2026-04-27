@@ -17,19 +17,36 @@ export default function NewsletterSignup({
   ctaLabel = 'Subscribe',
 }: Props) {
   const [email, setEmail] = useState('')
+  const [website, setWebsite] = useState('')
+  const [submitting, setSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
-  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       setError('Please enter a valid email address.')
       return
     }
-    // Newsletter backend wires up later (Buttondown/ConvertKit). For now this
-    // is a soft success state so the UX is testable end-to-end.
     setError(null)
-    setSubmitted(true)
+    setSubmitting(true)
+    try {
+      const res = await fetch('/api/newsletter/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, website }),
+      })
+      if (!res.ok) {
+        const data = (await res.json().catch(() => ({}))) as { error?: string }
+        setError(data.error ?? 'Could not subscribe right now. Try again in a moment.')
+        return
+      }
+      setSubmitted(true)
+    } catch {
+      setError('Could not subscribe right now. Try again in a moment.')
+    } finally {
+      setSubmitting(false)
+    }
   }
 
   const wrapperClass =
@@ -82,13 +99,26 @@ export default function NewsletterSignup({
               autoComplete="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full flex-1 rounded-full border border-white/10 bg-navy px-5 py-3 text-base text-starwhite placeholder:text-muted/70 focus:border-gold focus:outline-none focus:ring-2 focus:ring-gold/40"
+              disabled={submitting}
+              className="w-full flex-1 rounded-full border border-white/10 bg-navy px-5 py-3 text-base text-starwhite placeholder:text-muted/70 focus:border-gold focus:outline-none focus:ring-2 focus:ring-gold/40 disabled:opacity-60"
+            />
+            {/* Honeypot: hidden from real users, irresistible to dumb bots */}
+            <input
+              type="text"
+              name="website"
+              tabIndex={-1}
+              autoComplete="off"
+              value={website}
+              onChange={(e) => setWebsite(e.target.value)}
+              className="absolute left-[-9999px] h-0 w-0 opacity-0"
+              aria-hidden="true"
             />
             <button
               type="submit"
-              className="rounded-full bg-gold px-6 py-3 text-base font-semibold text-navy transition-colors hover:bg-goldDark"
+              disabled={submitting}
+              className="rounded-full bg-gold px-6 py-3 text-base font-semibold text-navy transition-colors hover:bg-goldDark disabled:cursor-not-allowed disabled:opacity-70"
             >
-              {ctaLabel}
+              {submitting ? 'Subscribing…' : ctaLabel}
             </button>
           </form>
         )}
