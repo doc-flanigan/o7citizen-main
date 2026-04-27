@@ -16,33 +16,40 @@ agent output rendered to the site, and every future weekly update.
 
 Rules — apply without exception:
 
-1. **No abbreviation without spelling it out the first time it appears in a
-   given page.** CIG = Cloud Imperium Games. PTU = Public Test Universe, the
-   open test version of the game. EVA = Extra-Vehicular Activity, floating in
-   zero gravity outside a ship. NDA = non-disclosure agreement. ASOP = the
-   in-game kiosk where you summon ships. UEC, aUEC, LTI, CCU, FPS, PvP, PvE,
-   etc. — same rule.
-2. **No game term without an immediate plain-English explanation in the
-   same sentence.** Not later. Same sentence. Examples: "Comm-Link, the
-   official RSI blog," "Spectrum, the official Star Citizen forum,"
-   "Bar Citizen — the community's name for an in-person meet-up,"
-   "loadout — your ship's configured weapons, shields and parts,"
-   "blueprint — an in-game recipe used to craft items."
-3. **Avoid gaming verbs.** "Released," not "shipped" or "went live." "Update,"
+1. **Every abbreviation and every game term that exists in
+   `src/data/glossary.ts` must be wrapped in
+   `<Term name="...">display text</Term>` on its first mention in any page
+   or section.** The Term component renders the term with a dotted
+   underline, links to the full glossary entry, and shows the plain-English
+   definition on hover. This replaces the older "spell it out inline" rule
+   for glossary-backed terms — the reader still gets the definition without
+   sacrificing the digest's 800–1,100 word budget. Example:
+   `<Term name="UEC">UEC</Term>`, `<Term name="ASOP">ASOP terminal</Term>`,
+   `<Term name="the 'Verse">the &lsquo;Verse</Term>`.
+2. **For any term that is NOT in the glossary, the original rule still
+   applies.** Spell it out inline on first mention, in the same sentence.
+   Examples: "Comm-Link, the official RSI blog," "Spectrum, the official
+   Star Citizen forum," "Bar Citizen — the community's name for an
+   in-person meet-up," "loadout — your ship's configured weapons, shields
+   and parts," "blueprint — an in-game recipe used to craft items." If a
+   term recurs often enough to be worth a tooltip, add it to the glossary
+   and wrap it.
+3. **Ship and place names that aren't in the glossary still get a one-line
+   context on first mention.** Drake Caterpillar = a large cargo ship.
+   Idris = a capital warship. Nyx = a recently opened star system. Vanduul
+   Swarm = a wave-based combat activity. Tactical Strike Groups = a new
+   co-operative mission type. (Stanton, Pyro, the 'Verse, and most named
+   ships already live in the glossary — wrap those instead.)
+4. **Avoid gaming verbs.** "Released," not "shipped" or "went live." "Update,"
    not "patch" or "hotfix." "Reward," not "drop." "Players," not "users."
    Never "meta," "nerf," "buff," "grind," "carry," "kit."
-4. **Numbers under 100 in words** — *one hundred*, *ten*, *twenty-five* — but
+5. **Numbers under 100 in words** — *one hundred*, *ten*, *twenty-five* — but
    keep version numbers (Alpha 4.7.2) and dates (April 30, 2026) as digits.
-5. **Sentences under twenty-five words.** If a sentence runs longer, split it.
-6. **Every claim cites a source.** Wrap any factual statement that came from
+6. **Sentences under twenty-five words.** If a sentence runs longer, split it.
+7. **Every claim cites a source.** Wrap any factual statement that came from
    sc-news in a `<SourceLink>` to the originating RSI blog post or official
    forum post. Use plain labels like "Official RSI blog post" or
    "Official forum post," not "Comm-Link" or "Spectrum reply."
-7. **Ship and place names get a one-line context the first time** they
-   appear on a page. Drake Caterpillar = a large cargo ship. Idris = a
-   capital warship. Stanton = the main star system in the game. Nyx = a
-   recently opened star system. Vanduul Swarm = a wave-based combat
-   activity. Tactical Strike Groups = a new co-operative mission type.
 
 ### Rendering rule for sc-news output
 
@@ -56,13 +63,16 @@ structure, link wrappers, section headings to match site sections).
 
 Before committing, re-read every changed sentence and confirm:
 
-- [ ] No abbreviation appears without being spelled out first on the page
-- [ ] No game term appears without a same-sentence plain explanation
+- [ ] Every glossary-backed abbreviation or term is wrapped in `<Term>` on
+      its first mention (and ideally only the first or second mention per
+      page — the tooltip is unobtrusive but don't spam it)
+- [ ] Any term NOT in the glossary is spelled out inline on first mention
+- [ ] First mention of any ship, place, or system not in the glossary has a
+      one-line context
 - [ ] No gaming verbs (`shipped`, `dropped`, `went live`, `patch`, `nerf`)
 - [ ] Numbers under 100 are spelled out
 - [ ] No sentence over 25 words
 - [ ] Every factual claim has a `<SourceLink>` to an official source
-- [ ] First mention of any ship, place, or system has a one-line context
 
 If any item fails, fix it before commit. The rule is: **a curious friend who
 has never played a video game should be able to read the page and understand
