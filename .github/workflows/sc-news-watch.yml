@@ -2,8 +2,11 @@ name: sc-news watch
 
 on:
   schedule:
-    # Every hour at :15 (offset to avoid the top-of-the-hour rush on shared runners)
-    - cron: "15 * * * *"
+    # Daily at 23:30 UTC — chosen from a 100-Comm-Link sample showing CIG's
+    # publishing window is 15:00-22:00 UTC (mode 20:00, latest 22:00). 23:30
+    # is 90 minutes after the latest observed publish, so a digest run picks
+    # up everything from that day before the next day's window opens.
+    - cron: "30 23 * * *"
   workflow_dispatch:
     inputs:
       force:
@@ -118,24 +121,35 @@ jobs:
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: |
-          claude -p "$(cat <<'PROMPT'
+          claude --model claude-haiku-4-5-20251001 -p "$(cat <<'PROMPT'
           New official Star Citizen content has been detected. Use the Task tool to
           delegate to the sc-news subagent (defined in .claude/agents/sc-news.md) and
           have it produce a fresh weekly digest covering the past seven days.
 
-          Then apply the digest to the site:
+          Then apply the digest to the site and save an email-ready copy:
 
-          1. Update src/data/updates.ts: prepend a new entry with today's date
+          1. Write the full digest as clean markdown to digests/<UTC_DATE>.md where
+             UTC_DATE is today in YYYY-MM-DD form. Format:
+                # <Plain-English title, e.g. "This Week in the 'Verse — Monday April 27, 2026">
+                ## Game updates
+                <prose>
+                Source: Official RSI blog post — <url>
+                ## New ships and vehicles
+                ...etc, one section per site heading
+             Plain markdown only — no HTML, no JSX, no React wrappers. This file is
+             what the broadcast workflow turns into the emailed newsletter, so it
+             must read cleanly on its own.
+          2. Update src/data/updates.ts: prepend a new entry with today's date
              (YYYY-MM-DD), a slug, a short title, and a one-sentence summary. Keep
              prior entries intact.
-          2. Rewrite src/app/weekly-update/page.tsx so the hero and main sections
+          3. Rewrite src/app/weekly-update/page.tsx so the hero and main sections
              reflect the new digest. Match the existing visual style and section
              structure. Keep the SourceLink wrappers around every factual claim and
              use plain-English source labels ("Official RSI blog post" / "Official
              Star Citizen forum post").
-          3. Follow the Plain-English Standard in CLAUDE.md without exception, and
+          4. Follow the Plain-English Standard in CLAUDE.md without exception, and
              run the pre-commit checklist before finishing.
-          4. Do NOT run git commit, git add, or git push. The workflow handles those.
+          5. Do NOT run git commit, git add, or git push. The workflow handles those.
           PROMPT
           )" \
             --allowedTools "Read,Edit,Write,Bash,WebFetch,WebSearch,Glob,Grep,Task" \
@@ -153,7 +167,8 @@ jobs:
           git checkout -b "$BRANCH"
           git add .github/sc-news-state.json \
                   src/data/updates.ts \
-                  src/app/weekly-update/page.tsx
+                  src/app/weekly-update/page.tsx \
+                  digests/
           if git diff --staged --quiet; then
             echo "Agent produced no site changes; skipping PR."
             exit 0
