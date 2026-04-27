@@ -61,9 +61,15 @@ jobs:
           if [ -z "$TITLE" ]; then
             TITLE="o7citizen weekly update"
           fi
-          echo "title=$TITLE" >> "$GITHUB_OUTPUT"
+          # Resend's broadcast endpoint appears to crash on UTF-8 subjects
+          # (curly quotes, em-dashes, etc.), returning a generic 500
+          # application_error. Transliterate to ASCII for the email subject
+          # only — the page title on the site keeps the original typography.
+          TITLE_ASCII=$(echo "$TITLE" | iconv -f UTF-8 -t ASCII//TRANSLIT 2>/dev/null || echo "$TITLE")
+          echo "title=$TITLE_ASCII" >> "$GITHUB_OUTPUT"
           echo "Selected digest: $FILE"
-          echo "Subject: $TITLE"
+          echo "Original title:  $TITLE"
+          echo "ASCII subject:   $TITLE_ASCII"
 
       - name: Render digest to email HTML
         run: |
