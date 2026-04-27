@@ -1,0 +1,184 @@
+name: sc-news watch
+
+on:
+  schedule:
+    # Every hour at :15 (offset to avoid the top-of-the-hour rush on shared runners)
+    - cron: "15 * * * *"
+  workflow_dispatch:
+    inputs:
+      force:
+        description: "Run the agent even if no new content is detected"
+        required: false
+        default: "false"
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: sc-news-watch
+  cancel-in-progress: false
+
+jobs:
+  poll-and-trigger:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Read previous state
+        id: prev
+        run: |
+          if [ -f .github/sc-news-state.json ]; then
+            echo "latest_cl=$(jq -r '.latest_comm_link_iso // ""' .github/sc-news-state.json)" >> "$GITHUB_OUTPUT"
+            echo "latest_dt=$(jq -r '.latest_dev_tracker_iso // ""' .github/sc-news-state.json)" >> "$GITHUB_OUTPUT"
+          else
+            echo "latest_cl=" >> "$GITHUB_OUTPUT"
+            echo "latest_dt=" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Poll Star Citizen Wiki Comm-Link API
+        id: cl
+        run: |
+          set -euo pipefail
+          JSON=$(curl -fsSL "https://api.star-citizen.wiki/api/comm-links?limit=1")
+          LATEST=$(echo "$JSON" | jq -r '(.data // .)[0].created_at // ""')
+          echo "latest=$LATEST" >> "$GITHUB_OUTPUT"
+          echo "Comm-Link latest: $LATEST"
+
+      - name: Poll Developer Tracker RSS
+        id: dt
+        run: |
+          set -euo pipefail
+          XML=$(curl -fsSL "https://developertracker.com/star-citizen/rss")
+          PUB=$(echo "$XML" | grep -oP '<pubDate>\K[^<]+' | head -1 || true)
+          if [ -n "$PUB" ]; then
+            ISO=$(date -u -d "$PUB" -Iseconds 2>/dev/null || true)
+          else
+            ISO=""
+          fi
+          echo "latest=$ISO" >> "$GITHUB_OUTPUT"
+          echo "Developer Tracker latest: $ISO"
+
+      - name: Skip if a sc-news PR is already open
+        id: openpr
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          COUNT=$(gh pr list --state open --json headRefName \
+            --jq '[.[] | select(.headRefName | startswith("sc-news/"))] | length' \
+            || echo 0)
+          echo "count=$COUNT" >> "$GITHUB_OUTPUT"
+          echo "Open sc-news PRs: $COUNT"
+
+      - name: Decide whether to invoke the agent
+        id: decide
+        run: |
+          changed=false
+          if [ "${{ inputs.force }}" = "true" ]; then
+            changed=true
+          fi
+          if [ -n "${{ steps.cl.outputs.latest }}" ] && \
+             [ "${{ steps.cl.outputs.latest }}" != "${{ steps.prev.outputs.latest_cl }}" ]; then
+            changed=true
+          fi
+          if [ -n "${{ steps.dt.outputs.latest }}" ] && \
+             [ "${{ steps.dt.outputs.latest }}" != "${{ steps.prev.outputs.latest_dt }}" ]; then
+            changed=true
+          fi
+          if [ "${{ steps.openpr.outputs.count }}" != "0" ]; then
+            echo "An sc-news PR is already open; not opening another."
+            changed=false
+          fi
+          echo "changed=$changed" >> "$GITHUB_OUTPUT"
+
+      - name: Update state file
+        if: steps.decide.outputs.changed == 'true'
+        run: |
+          mkdir -p .github
+          cat > .github/sc-news-state.json <<EOF
+          {
+            "latest_comm_link_iso": "${{ steps.cl.outputs.latest }}",
+            "latest_dev_tracker_iso": "${{ steps.dt.outputs.latest }}",
+            "last_checked_utc": "$(date -u -Iseconds)"
+          }
+          EOF
+
+      - name: Setup Node
+        if: steps.decide.outputs.changed == 'true'
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install Claude Code CLI
+        if: steps.decide.outputs.changed == 'true'
+        run: npm install -g @anthropic-ai/claude-code
+
+      - name: Run sc-news agent and apply digest to the site
+        if: steps.decide.outputs.changed == 'true'
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          claude -p "$(cat <<'PROMPT'
+          New official Star Citizen content has been detected. Use the Task tool to
+          delegate to the sc-news subagent (defined in .claude/agents/sc-news.md) and
+          have it produce a fresh weekly digest covering the past seven days.
+
+          Then apply the digest to the site:
+
+          1. Update src/data/updates.ts: prepend a new entry with today's date
+             (YYYY-MM-DD), a slug, a short title, and a one-sentence summary. Keep
+             prior entries intact.
+          2. Rewrite src/app/weekly-update/page.tsx so the hero and main sections
+             reflect the new digest. Match the existing visual style and section
+             structure. Keep the SourceLink wrappers around every factual claim and
+             use plain-English source labels ("Official RSI blog post" / "Official
+             Star Citizen forum post").
+          3. Follow the Plain-English Standard in CLAUDE.md without exception, and
+             run the pre-commit checklist before finishing.
+          4. Do NOT run git commit, git add, or git push. The workflow handles those.
+          PROMPT
+          )" \
+            --allowedTools "Read,Edit,Write,Bash,WebFetch,WebSearch,Glob,Grep,Task" \
+            --max-turns 80
+
+      - name: Open pull request
+        if: steps.decide.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          BRANCH="sc-news/auto-$(date -u +%Y%m%d-%H%M)"
+          git config user.name "sc-news-bot"
+          git config user.email "sc-news-bot@users.noreply.github.com"
+          git checkout -b "$BRANCH"
+          git add .github/sc-news-state.json \
+                  src/data/updates.ts \
+                  src/app/weekly-update/page.tsx
+          if git diff --staged --quiet; then
+            echo "Agent produced no site changes; skipping PR."
+            exit 0
+          fi
+          DATE_PLAIN=$(date -u +"%Y-%m-%d")
+          git commit -m "feat: weekly update — sc-news auto digest $DATE_PLAIN"
+          git push -u origin "$BRANCH"
+          gh pr create \
+            --title "Weekly update — sc-news auto digest $DATE_PLAIN" \
+            --base main \
+            --head "$BRANCH" \
+            --body "$(cat <<'BODY'
+          Automated digest from the `sc-news` agent.
+
+          **Trigger:** new official Star Citizen content was detected on the Comm-Link API or the Spectrum developer tracker since the last run.
+
+          **Review checklist (must all pass before merge):**
+          - [ ] Every factual claim is wrapped in `<SourceLink>` to an official RSI page
+          - [ ] Every abbreviation is spelled out on first mention (CIG, PTU, NDA, EVA, etc.)
+          - [ ] Every ship / star system / event has a one-line context on first mention
+          - [ ] No hype words (`exciting`, `awesome`, `huge`, `epic`, `must-play`)
+          - [ ] No doomposting or negative editorialising
+          - [ ] No gaming verbs (`shipped`, `dropped`, `went live`, `nerf`, `buff`)
+          - [ ] Numbers under 100 are spelled out
+          - [ ] No sentence over 25 words
+          - [ ] Every event has what / when / who can join / what the reader does
+          BODY
+          )"
