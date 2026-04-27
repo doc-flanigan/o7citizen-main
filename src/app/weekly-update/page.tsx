@@ -67,68 +67,84 @@ export default function WeeklyUpdatePage() {
           <Section title="Game updates">
             <ul className="space-y-3">
               <Bullet>
-                <strong>Alpha 4.7.2 went live</strong> with nearly 100 new jobs
-                and activities in the Nyx star system. Beginner-friendly
-                delivery and courier missions are back, and some of them now
-                pay out crafting blueprints. (
+                <strong>Alpha 4.7.2 was released</strong> with nearly one
+                hundred new jobs in the Nyx star system — a region of space
+                inside the game. Beginner-friendly delivery and courier
+                missions are back. A few of them now reward you with
+                blueprints, which are in-game recipes you can use to craft
+                items later. (
                 <SourceLink href="https://robertsspaceindustries.com/en/comm-link/transmission/21125-Star-Citizen-Alpha-472">
-                  RSI Comm-Link
+                  Official RSI blog post
                 </SourceLink>
                 )
               </Bullet>
               <Bullet>
-                <strong>Alpha 4.8 Evocati testing started</strong>. Evocati is
-                a small invited group of NDA testers — the very first hands on
-                a new build. Two patch-note rounds dropped on Friday and
-                Sunday. (
+                <strong>Testing began on the next major update, Alpha
+                4.8.</strong> The first wave goes to a small invited group
+                called Evocati (pronounced evo-CAH-tee). They sign a
+                non-disclosure agreement and try the build before anyone
+                else. Cloud Imperium Games — usually shortened to CIG —
+                published two rounds of notes describing what changed in the
+                test build, on Friday and Sunday. (
                 <SourceLink href="https://robertsspaceindustries.com/spectrum/community/SC/forum/190048/thread/star-citizen-alpha-4-8-ptu-patch-notes-3/8797409">
-                  Spectrum patch notes
+                  Official forum post
                 </SourceLink>
                 )
               </Bullet>
               <Bullet>
-                <strong>Saved ship loadouts</strong> arrive in 4.8 as
-                &laquo;Item Recovery: Vehicle Loadouts.&raquo; You can now save
-                a snapshot of your ship&rsquo;s configured weapons and
-                components at an ASOP terminal, so insurance claims restore
-                the personalised setup for an in-game fee. (
+                <strong>Alpha 4.8 also brings saved ship configurations.</strong>{' '}
+                In Star Citizen, you can fit your spaceship with different
+                weapons, shields and parts — collectively called a loadout.
+                The new feature lets you save a snapshot of that loadout at
+                an in-game kiosk called an ASOP terminal, where you summon
+                your ships. If your ship is destroyed, your insurance claim
+                will then restore the same personalised setup, for an
+                in-game fee. (
                 <SourceLink href="https://robertsspaceindustries.com/spectrum/community/SC/forum/190048/thread/star-citizen-alpha-4-8-ptu-patch-notes-2/8793999">
-                  Spectrum
+                  Official forum post
                 </SourceLink>
                 )
               </Bullet>
               <Bullet>
-                <strong>Known issue:</strong> floating in zero-gravity outside
-                a ship (called EVA) is currently broken on mouse in 4.8
-                Evocati. Controller works.
+                <strong>Known issue in the test build:</strong> floating in
+                zero gravity outside a ship — known as Extra-Vehicular
+                Activity, or EVA — is currently broken when using a mouse.
+                A game controller still works.
               </Bullet>
             </ul>
           </Section>
 
           <Section title="New ships and vehicles">
             <p>
-              The 4.8 test build introduces the <strong>Vehicle Command
-              Module</strong>, debuting on the Drake Caterpillar. A smaller
-              ship physically docks with the Caterpillar, and after a brief
-              linking process the smaller pilot then controls both vessels as
-              one unit. Without a docked command ship, the Caterpillar
-              cannot be flown at all under this system. New keybind:{' '}
-              <kbd className="rounded border border-white/10 bg-navy px-1.5 py-0.5 text-xs">Right Alt + N</kbd>{' '}
-              docks and undocks. (
+              The Alpha 4.8 test build introduces a new feature called the{' '}
+              <strong>Vehicle Command Module</strong>. It debuts on a large
+              cargo ship called the Drake Caterpillar. The way it works: a
+              smaller ship physically docks with the Caterpillar. After a
+              brief linking process, the pilot of the smaller ship takes
+              control of both vessels as one combined unit. Without a docked
+              command ship attached, the Caterpillar cannot be flown at all
+              under this system. There is a new keyboard shortcut for
+              docking and undocking ships:{' '}
+              <kbd className="rounded border border-white/10 bg-navy px-1.5 py-0.5 text-xs">Right Alt + N</kbd>
+              . (
               <SourceLink href="https://robertsspaceindustries.com/spectrum/community/SC/forum/190048/thread/star-citizen-alpha-4-8-ptu-patch-notes-2/8793996">
-                Spectrum
+                Official forum post
               </SourceLink>
               )
             </p>
             <p>
-              The Wednesday <strong>Roadmap Roundup</strong> moved a handful
-              of 4.8 items to <em>Tentative</em> — meaning still planned, but
-              the version they ship in may slip. The list: a silent crossbow
-              called the UltiFlex &laquo;Novia,&raquo; the &laquo;Tailwind&raquo;
-              flight suit, and visual upgrades to the Deadrig Shotgun and
-              several Kastak Arms firearms. (
+              CIG publishes a public update every two weeks called the{' '}
+              <strong>Roadmap Roundup</strong>, which describes what features
+              are in development. This Wednesday&rsquo;s edition moved a
+              handful of Alpha 4.8 items into a status called{' '}
+              <em>Tentative</em>. That means the feature is still being
+              built, but the update it actually launches in may shift. The
+              list includes a silent crossbow called the UltiFlex &laquo;Novia,&raquo;
+              a wearable flight suit called the &laquo;Tailwind,&raquo; and
+              visual upgrades to several handheld weapons including the
+              Deadrig Shotgun and a number of Kastak Arms firearms. (
               <SourceLink href="https://robertsspaceindustries.com/en/comm-link/transmission/21132-Roadmap-Roundup-April-22-2026">
-                RSI Comm-Link
+                Official RSI blog post
               </SourceLink>
               )
             </p>
@@ -136,57 +152,76 @@ export default function WeeklyUpdatePage() {
 
           <Section title="What's new for new players">
             <p>
-              Pack 2 of the Nyx mission content is out and it&rsquo;s
-              specifically beginner-shaped: courier and delivery contracts
-              that pay you to fly cargo from one location to another. No
-              combat skill required, you can do them solo, and a few of them
-              drop blueprints — in-game recipes you can use to craft items
-              later. If you&rsquo;ve been waiting for a low-pressure way to
-              start earning credits, this is the week.
+              The new batch of jobs in the Nyx star system is shaped
+              specifically for beginners. They are courier and delivery
+              contracts that pay you to fly cargo from one location to
+              another. No combat skill is required, you can do them on your
+              own, and a few of them reward you with blueprints — in-game
+              recipes you can use to craft items later. If you have been
+              waiting for a low-pressure way to start earning in-game money,
+              this is the week to dive in.
             </p>
           </Section>
 
           <Section title="What's new for veterans">
             <p>
-              Two big ones in the 4.8 Evocati build. First, the cooperative{' '}
-              <strong>Xenothreat</strong> event has returned to Stanton —
-              five simultaneous contracts, a 10-player Idris assault as the
-              capstone, and a reward track that drops craftable blueprints
-              at milestones. Second, the saved-loadout system finally closes
-              a long-running insurance claim duplication exploit, per CIG
-              staff member Nicou&rsquo;s reply on Spectrum. Both are Evocati-only
-              for now; wider PTU access is planned &laquo;shortly.&raquo;
+              Two big arrivals in the Alpha 4.8 test build. First, the
+              co-operative event called <strong>Xenothreat</strong> has
+              returned. The story setup: an alien-sympathising human faction
+              has shown up in the Stanton star system — the main region of
+              space in the game — to fight players. The event runs as five
+              contracts at once, with a final challenge that requires
+              assaulting an enemy capital ship called an Idris. CIG says
+              that final stage needs at least ten players co-ordinating
+              together. Completing contracts earns progress on a reward
+              track, with craftable item recipes given out at milestones.
+              Second, the saved-loadout system finally closes a long-running
+              insurance bug that let players duplicate components when they
+              filed a claim, according to a forum reply from CIG team member
+              Nicou. Both features are limited to the Evocati invited group
+              for now. Wider access through the Public Test Universe — the
+              open test version of the game any player can opt into — is
+              planned &laquo;shortly.&raquo;
             </p>
           </Section>
 
           <Section title="Events and community">
             <ul className="space-y-3">
               <Bullet>
-                <strong>LVL UP EXPO, Las Vegas (Apr 24–26)</strong> — CIG was
-                on the show floor with AMD, CLX Gaming, Virpil and Tobii.
-                Players got hands-on with Vanduul Swarm and a Bar Citizen
-                meetup followed Saturday night. (
+                <strong>LVL UP EXPO, Las Vegas, Friday April 24 through
+                Sunday April 26</strong> — Cloud Imperium Games attended in
+                person, alongside hardware partners AMD, CLX Gaming, Virpil
+                and Tobii. Visitors at the show could try a wave-based space
+                combat activity called Vanduul Swarm on high-end gaming
+                hardware. A Bar Citizen — the community&rsquo;s name for an
+                in-person meet-up at a bar or pub — followed on Saturday
+                evening. (
                 <SourceLink href="https://robertsspaceindustries.com/en/comm-link/transmission/21137-This-Week-In-Star-Citizen">
-                  This Week in Star Citizen
+                  Official RSI blog post
                 </SourceLink>
                 )
               </Bullet>
               <Bullet>
                 <strong>Gamebox Festival, Herning, Denmark</strong> — the
-                Danish community ran a booth and Bar Citizen the same
-                weekend, with some CIG developers attending.
+                Danish player community ran their own booth and a Bar
+                Citizen meet-up the same weekend, with a few Cloud Imperium
+                Games developers attending in person.
               </Bullet>
               <Bullet>
-                <strong>Org spotlight call</strong> — CIG is collecting
-                player-formed organisations to feature alongside 4.8&rsquo;s
-                new Tactical Strike Groups feature. Submit a logo and short
-                description to{' '}
+                <strong>Organisation spotlight call</strong> — Cloud
+                Imperium Games is collecting player-formed groups to feature
+                alongside Alpha 4.8&rsquo;s new Tactical Strike Groups,
+                which is a new co-operative combat mission type. In Star
+                Citizen, players can form or join organisations, which work
+                much like guilds or clans in other online games. Send a logo
+                and a short English-language description to{' '}
                 <a className="text-gold underline-offset-4 hover:underline" href="mailto:communityteam@cloudimperiumgames.com">
                   communityteam@cloudimperiumgames.com
                 </a>{' '}
-                by <strong>Wednesday April 30, 2026</strong>. (
+                by <strong>Wednesday April 30, 2026</strong> to be
+                considered. (
                 <SourceLink href="https://robertsspaceindustries.com/spectrum/community/SC/forum/1/thread/alpha-4-8-promote-your-organization/8754401">
-                  Spectrum
+                  Official forum post
                 </SourceLink>
                 )
               </Bullet>
@@ -195,17 +230,21 @@ export default function WeeklyUpdatePage() {
 
           <Section title="Developer news">
             <p>
-              The Roadmap Roundup confirmed Pack 2 of the Nyx missions is
-              now flagged <em>Released</em> on the public roadmap. CIG&rsquo;s
-              Nicou said wider PTU access for the saved-loadout feature is
-              planned &laquo;shortly&raquo; after Evocati. Separately, flight
-              controls developer YogiKlatt acknowledged on Spectrum that the
-              high-zoom mouse sensitivity in <strong>Precision Targeting
-              Mode</strong> needs work, and said the team will look at
-              applying the existing turret-pointer scaling logic to it — no
-              timing committed. (
+              The Roadmap Roundup confirmed that the second batch of Nyx
+              jobs is now marked <em>Released</em> on the public roadmap.
+              CIG team member Nicou said wider access to the saved-loadout
+              feature, through the open Public Test Universe, is planned
+              &laquo;shortly&raquo; after the closed Evocati round.
+              Separately, a flight-controls developer who goes by YogiKlatt
+              replied on the official forum that mouse aiming feels
+              unresponsive at high zoom in{' '}
+              <strong>Precision Targeting Mode</strong> — the in-cockpit
+              weapon-aiming system used inside spacecraft. The developer
+              said the team will look into applying an existing scaling
+              rule, used in another aiming mode, to fix the issue. No
+              timeline was given. (
               <SourceLink href="https://robertsspaceindustries.com/spectrum/community/SC/forum/50259/thread/can-we-combine-acceleration-limiter-and-engine-pip/8795829">
-                Spectrum reply
+                Official forum reply
               </SourceLink>
               )
             </p>

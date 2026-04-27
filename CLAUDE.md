@@ -7,6 +7,69 @@ Star Citizen or "the 'Verse." Tone: friendly, plain-English, no jargon without
 explanation. Think of it as "Star Citizen explained by a helpful veteran to a
 curious newcomer."
 
+## Plain-English Standard (NON-NEGOTIABLE)
+
+The entire purpose of this site is to explain Star Citizen to people who have
+never played the game. Every piece of user-facing copy on every page must
+pass these rules. This standard applies to all pages, all sections, all
+agent output rendered to the site, and every future weekly update.
+
+Rules — apply without exception:
+
+1. **No abbreviation without spelling it out the first time it appears in a
+   given page.** CIG = Cloud Imperium Games. PTU = Public Test Universe, the
+   open test version of the game. EVA = Extra-Vehicular Activity, floating in
+   zero gravity outside a ship. NDA = non-disclosure agreement. ASOP = the
+   in-game kiosk where you summon ships. UEC, aUEC, LTI, CCU, FPS, PvP, PvE,
+   etc. — same rule.
+2. **No game term without an immediate plain-English explanation in the
+   same sentence.** Not later. Same sentence. Examples: "Comm-Link, the
+   official RSI blog," "Spectrum, the official Star Citizen forum,"
+   "Bar Citizen — the community's name for an in-person meet-up,"
+   "loadout — your ship's configured weapons, shields and parts,"
+   "blueprint — an in-game recipe used to craft items."
+3. **Avoid gaming verbs.** "Released," not "shipped" or "went live." "Update,"
+   not "patch" or "hotfix." "Reward," not "drop." "Players," not "users."
+   Never "meta," "nerf," "buff," "grind," "carry," "kit."
+4. **Numbers under 100 in words** — *one hundred*, *ten*, *twenty-five* — but
+   keep version numbers (Alpha 4.7.2) and dates (April 30, 2026) as digits.
+5. **Sentences under twenty-five words.** If a sentence runs longer, split it.
+6. **Every claim cites a source.** Wrap any factual statement that came from
+   sc-news in a `<SourceLink>` to the originating RSI blog post or official
+   forum post. Use plain labels like "Official RSI blog post" or
+   "Official forum post," not "Comm-Link" or "Spectrum reply."
+7. **Ship and place names get a one-line context the first time** they
+   appear on a page. Drake Caterpillar = a large cargo ship. Idris = a
+   capital warship. Stanton = the main star system in the game. Nyx = a
+   recently opened star system. Vanduul Swarm = a wave-based combat
+   activity. Tactical Strike Groups = a new co-operative mission type.
+
+### Rendering rule for sc-news output
+
+When publishing the sc-news agent's digest to the site, **do not paraphrase
+or tighten the prose**. Render the agent's text into the page structure as
+written. The agent has already done the plain-English work; condensing it
+is the fastest way to lose the standard. Only adjust formatting (HTML
+structure, link wrappers, section headings to match site sections).
+
+### Pre-commit checklist for any user-facing copy change
+
+Before committing, re-read every changed sentence and confirm:
+
+- [ ] No abbreviation appears without being spelled out first on the page
+- [ ] No game term appears without a same-sentence plain explanation
+- [ ] No gaming verbs (`shipped`, `dropped`, `went live`, `patch`, `nerf`)
+- [ ] Numbers under 100 are spelled out
+- [ ] No sentence over 25 words
+- [ ] Every factual claim has a `<SourceLink>` to an official source
+- [ ] First mention of any ship, place, or system has a one-line context
+
+If any item fails, fix it before commit. The rule is: **a curious friend who
+has never played a video game should be able to read the page and understand
+every sentence.** That is the product.
+
+---
+
 ## Agentic Build Instructions
 IMPORTANT: Use an agentic, incremental approach. Complete each subtask fully and
 confirm success before proceeding. Do not attempt to build everything in one pass.
