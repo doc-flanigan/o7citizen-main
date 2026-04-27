@@ -2,9 +2,11 @@ name: sc-news watch
 
 on:
   schedule:
-    # Every two days at 12:15 UTC (offset to avoid the top-of-the-hour runner rush).
-    # */2 fires on day-of-month 1, 3, 5, ..., 31, with a one-day gap at month boundaries.
-    - cron: "15 12 */2 * *"
+    # Daily at 23:30 UTC — chosen from a 100-Comm-Link sample showing CIG's
+    # publishing window is 15:00-22:00 UTC (mode 20:00, latest 22:00). 23:30
+    # is 90 minutes after the latest observed publish, so a digest run picks
+    # up everything from that day before the next day's window opens.
+    - cron: "30 23 * * *"
   workflow_dispatch:
     inputs:
       force:
