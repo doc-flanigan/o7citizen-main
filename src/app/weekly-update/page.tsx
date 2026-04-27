@@ -6,6 +6,7 @@ import CTAButton from '@/components/CTAButton'
 import NewsletterSignup from '@/components/NewsletterSignup'
 import UpdateCard from '@/components/UpdateCard'
 import Term from '@/components/Term'
+import { SITE } from '@/lib/site'
 import { UPDATES, FEATURED_UPDATE } from '@/data/updates'
 
 export const metadata: Metadata = {
@@ -45,9 +46,11 @@ export default function WeeklyUpdatePage() {
               <span className="inline-flex items-center gap-2 rounded-full border border-gold/30 bg-gold/10 px-4 py-1.5 text-xs font-semibold text-gold">
                 <Clock size={14} aria-hidden /> {FEATURED_UPDATE.readMinutes ?? 5}-minute read
               </span>
-              <span className="inline-flex items-center gap-2 rounded-full bg-emerald-500/10 px-4 py-1.5 text-xs font-semibold text-emerald-300">
-                <CheckCircle2 size={14} aria-hidden /> Referral bonus active
-              </span>
+              {SITE.referralBonusActive ? (
+                <span className="inline-flex items-center gap-2 rounded-full bg-emerald-500/10 px-4 py-1.5 text-xs font-semibold text-emerald-300">
+                  <CheckCircle2 size={14} aria-hidden /> Referral bonus active
+                </span>
+              ) : null}
               {FEATURED_UPDATE.tag ? (
                 <span className="rounded-full bg-navyLight px-4 py-1.5 text-xs text-starwhite/80">
                   {FEATURED_UPDATE.tag}
@@ -252,24 +255,33 @@ export default function WeeklyUpdatePage() {
             </p>
           </Section>
 
-          <Section title="Referral bonus status">
+          <Section title="Start with 50,000 UEC">
             <div className="card-surface flex flex-col gap-4 p-6 sm:flex-row sm:items-center sm:justify-between">
               <div className="flex items-start gap-3">
-                <CheckCircle2 className="mt-0.5 text-emerald-400" size={22} aria-hidden />
+                <CheckCircle2 className="mt-0.5 text-gold" size={22} aria-hidden />
                 <div>
                   <p className="text-base font-semibold text-starwhite">
-                    Referral bonus is currently <span className="text-emerald-300">ACTIVE</span>
+                    {SITE.referralBonusActive ? (
+                      <>
+                        Bonus reward <span className="text-emerald-300">ACTIVE</span> — 50,000 UEC plus extras
+                      </>
+                    ) : (
+                      <>The standard new-player reward: 50,000 UEC free</>
+                    )}
                   </p>
                   <p className="mt-1 text-sm text-muted">
-                    New accounts get 50,000 <Term name="UEC">UEC</Term> free
-                    when using a <Term name="Referral Code">referral code</Term>.{' '}
-                    <Term name="CIG">CIG</Term> has not announced an end date
-                    for this promo.
+                    New accounts get 50,000 <Term name="UEC">UEC</Term> when
+                    they sign up with a{' '}
+                    <Term name="Referral Code">referral code</Term>. From time
+                    to time <Term name="CIG">CIG</Term> announces an extra
+                    bonus item — usually a small ship or ground vehicle — on
+                    top of the standard reward. We light this card up when
+                    that happens.
                   </p>
                 </div>
               </div>
               <CTAButton size="md" trackingLabel="weekly-referral">
-                Claim 50,000 UEC
+                Take the 50K bonus
               </CTAButton>
             </div>
           </Section>
@@ -339,7 +351,9 @@ export default function WeeklyUpdatePage() {
                 for 50,000 <Term name="UEC">UEC</Term> free.
               </p>
             </div>
-            <CTAButton size="lg" trackingLabel="weekly-bottom-cta" />
+            <CTAButton size="lg" trackingLabel="weekly-bottom-cta">
+              Try Star Citizen
+            </CTAButton>
           </div>
         </section>
       </main>

@@ -8,6 +8,11 @@ export const SITE = {
     'https://www.robertsspaceindustries.com/enlist?referral=STAR-GCQJ-N6NC',
   referralCode: 'STAR-GCQJ-N6NC',
   ueecBonus: '50,000 UEC',
+  // Set to true when CIG has announced an extra bonus item (e.g. a small
+  // ship or vehicle) on top of the standard 50K UEC referral reward. When
+  // false, the site shows only the standard reward without "ACTIVE" / "BONUS"
+  // language, since 50K UEC by itself is the standing offer, not a bonus.
+  referralBonusActive: false,
   author: 'Doc_Flanigan',
   description:
     "Star Citizen — no jargon, no fluff. Just the 'Verse, plain and simple. An unofficial fan site by Doc_Flanigan.",

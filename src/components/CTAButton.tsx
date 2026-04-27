@@ -42,7 +42,7 @@ export default function CTAButton({
   showIcon = true,
 }: Props) {
   const isExternal = external ?? href.startsWith('http')
-  const label = children ?? `Claim Your Free ${SITE.ueecBonus}`
+  const label = children ?? `Get ${SITE.ueecBonus.replace(',000', 'K')}`
 
   const classes = `inline-flex items-center justify-center gap-2 rounded-full font-semibold tracking-wide transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-navy ${sizeClasses[size]} ${variantClasses[variant]} ${className}`
 

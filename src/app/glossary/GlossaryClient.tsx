@@ -170,7 +170,7 @@ export default function GlossaryClient() {
                             Use a referral code and start with 50,000 UEC free.
                           </p>
                           <CTAButton size="sm" trackingLabel="glossary-inline">
-                            Claim 50,000 UEC
+                            Get the new-player bonus
                           </CTAButton>
                         </div>
                       ) : null}

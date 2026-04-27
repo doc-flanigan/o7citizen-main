@@ -57,7 +57,7 @@ export default function Footer() {
                 rel="noopener noreferrer"
                 className="text-starwhite/80 hover:text-gold"
               >
-                Claim 50,000 UEC
+                Use my code
               </a>
             </li>
             <li>

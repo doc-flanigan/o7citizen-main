@@ -188,7 +188,9 @@ export default function FreeFlyPage() {
                 character. Don&rsquo;t skip this step.
               </p>
             </div>
-            <CTAButton size="lg" trackingLabel="freefly-cta" />
+            <CTAButton size="lg" trackingLabel="freefly-cta">
+              Begin with a boost
+            </CTAButton>
           </div>
         </section>
 
