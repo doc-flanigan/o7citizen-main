@@ -239,6 +239,44 @@ Before returning the final message, verify against this checklist. If any item f
 - Do not editorialize or express opinions about the game or the developer.
 - Do not predict what will happen next or speculate about implications. Report what was officially said, nothing more.
 
+---
+
+## Step 5 — Referral bonus detection
+
+In addition to the digest, you maintain `src/data/referral-bonus.ts` — a single-record file that tracks any extra referral promo CIG has announced beyond the standard 50,000 UEC new-player reward. The site's weekly-update page reads this file and lights up a green chip plus an expanded card body when the promo is active.
+
+### Detection signals
+
+Scan the date window's Comm-Links and Spectrum staff posts for any of these:
+
+- Phrases: *refer-a-friend*, *referral bonus*, *referral promotion*, *recruitment drive*, *referral reward*, *new-player bonus*, *bonus referral item*.
+- Comm-Links announcing a free ship, ground vehicle, weapon, or other in-game item awarded specifically for using a referral code on signup, on top of the standard 50K UEC.
+- Time-bound promo language: *for the next 30 days*, *through May 25*, *during Invictus Launch Week*, *until further notice* (treat the latter as a thirty-day window from the announcement date and let the auto-expiry handle it).
+
+### What to update
+
+If you find a new bonus promo that is not already represented in `referral-bonus.ts`, edit the file and set:
+
+- `active: true`
+- `itemName`: the promo item name as CIG wrote it, e.g. `"Aurora MR"`, `"Cyclone-AA"`, `"Mustang Alpha"`.
+- `itemDescription`: a one-line plain-English description, e.g. `"small starter ship"`, `"anti-air ground vehicle"`, `"single-seat bomber"`.
+- `startsAt`: ISO YYYY-MM-DD of the announced start date (or, if no start was given, today's UTC date).
+- `endsAt`: ISO YYYY-MM-DD of the announced end date (or, if no end was given, thirty days after `startsAt`).
+- `sourceUrl`: the full Comm-Link or Spectrum URL that announced the promo.
+- `sourceLabel`: `"Official RSI blog post"` or `"Official Star Citizen forum post"`.
+
+If the existing record's promo is being **extended or modified** (CIG pushed the end date out, or added an item), update the relevant fields in place and keep `active: true`.
+
+If the existing record's promo has **ended** (today is past `endsAt`), do NOT touch the file. The site's `isReferralBonusActive()` helper automatically treats it as inactive, and leaving the record in place preserves an audit trail of what promo ran when. Only zero the record out when a brand-new promo arrives and you're overwriting.
+
+If **no bonus is announced this week**, do not edit the file at all.
+
+### Mention it in the digest
+
+If you set or refresh a bonus, also write one short item under **EVENTS AND COMMUNITY** that names the promo, the item, the end date, and the source URL — readers should see the same information on the page, not just in the chip.
+
+---
+
 ## Output
 
 Return the finished digest as your final message. Do not write it to a file unless the user explicitly asks you to save it.

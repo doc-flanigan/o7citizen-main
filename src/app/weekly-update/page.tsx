@@ -6,8 +6,15 @@ import CTAButton from '@/components/CTAButton'
 import NewsletterSignup from '@/components/NewsletterSignup'
 import UpdateCard from '@/components/UpdateCard'
 import Term from '@/components/Term'
-import { SITE } from '@/lib/site'
 import { UPDATES, FEATURED_UPDATE } from '@/data/updates'
+import {
+  REFERRAL_BONUS,
+  isReferralBonusActive,
+} from '@/data/referral-bonus'
+
+// Re-render this page once a day so the referral-bonus chip and card
+// auto-shut-off the day after their endsAt without needing a deploy.
+export const revalidate = 86400
 
 export const metadata: Metadata = {
   title: 'Star Citizen Weekly Update — Plain English in 5 Minutes',
@@ -24,6 +31,7 @@ export default function WeeklyUpdatePage() {
   })
 
   const archive = UPDATES.slice(1)
+  const bonusActive = isReferralBonusActive()
 
   return (
     <>
@@ -46,9 +54,9 @@ export default function WeeklyUpdatePage() {
               <span className="inline-flex items-center gap-2 rounded-full border border-gold/30 bg-gold/10 px-4 py-1.5 text-xs font-semibold text-gold">
                 <Clock size={14} aria-hidden /> {FEATURED_UPDATE.readMinutes ?? 5}-minute read
               </span>
-              {SITE.referralBonusActive ? (
+              {bonusActive ? (
                 <span className="inline-flex items-center gap-2 rounded-full bg-emerald-500/10 px-4 py-1.5 text-xs font-semibold text-emerald-300">
-                  <CheckCircle2 size={14} aria-hidden /> Referral bonus active
+                  <CheckCircle2 size={14} aria-hidden /> Bonus active: {REFERRAL_BONUS.itemName}
                 </span>
               ) : null}
               {FEATURED_UPDATE.tag ? (
@@ -258,30 +266,57 @@ export default function WeeklyUpdatePage() {
           <Section title="Start with 50,000 UEC">
             <div className="card-surface flex flex-col gap-4 p-6 sm:flex-row sm:items-center sm:justify-between">
               <div className="flex items-start gap-3">
-                <CheckCircle2 className="mt-0.5 text-gold" size={22} aria-hidden />
+                <CheckCircle2
+                  className={`mt-0.5 ${bonusActive ? 'text-emerald-400' : 'text-gold'}`}
+                  size={22}
+                  aria-hidden
+                />
                 <div>
                   <p className="text-base font-semibold text-starwhite">
-                    {SITE.referralBonusActive ? (
+                    {bonusActive ? (
                       <>
-                        Bonus reward <span className="text-emerald-300">ACTIVE</span> — 50,000 UEC plus extras
+                        Bonus <span className="text-emerald-300">ACTIVE</span>:
+                        50,000 UEC plus a {REFERRAL_BONUS.itemName}
                       </>
                     ) : (
                       <>The standard new-player reward: 50,000 UEC free</>
                     )}
                   </p>
                   <p className="mt-1 text-sm text-muted">
-                    New accounts get 50,000 <Term name="UEC">UEC</Term> when
-                    they sign up with a{' '}
-                    <Term name="Referral Code">referral code</Term>. From time
-                    to time <Term name="CIG">CIG</Term> announces an extra
-                    bonus item — usually a small ship or ground vehicle — on
-                    top of the standard reward. We light this card up when
-                    that happens.
+                    {bonusActive ? (
+                      <>
+                        Through{' '}
+                        <strong className="text-starwhite">
+                          {new Date(REFERRAL_BONUS.endsAt).toLocaleDateString(
+                            'en-US',
+                            { month: 'long', day: 'numeric', year: 'numeric' },
+                          )}
+                        </strong>
+                        , new accounts that sign up with a{' '}
+                        <Term name="Referral Code">referral code</Term> also
+                        receive a {REFERRAL_BONUS.itemDescription}: the{' '}
+                        <strong className="text-starwhite">
+                          {REFERRAL_BONUS.itemName}
+                        </strong>
+                        . On top of the standard 50,000{' '}
+                        <Term name="UEC">UEC</Term>.
+                      </>
+                    ) : (
+                      <>
+                        New accounts get 50,000 <Term name="UEC">UEC</Term>{' '}
+                        when they sign up with a{' '}
+                        <Term name="Referral Code">referral code</Term>. From
+                        time to time <Term name="CIG">CIG</Term> announces an
+                        extra bonus item — usually a small ship or ground
+                        vehicle — on top of the standard reward. We light this
+                        card up when that happens.
+                      </>
+                    )}
                   </p>
                 </div>
               </div>
               <CTAButton size="md" trackingLabel="weekly-referral">
-                Take the 50K bonus
+                {bonusActive ? 'Claim the bonus' : 'Take the 50K bonus'}
               </CTAButton>
             </div>
           </Section>
