@@ -207,7 +207,7 @@ Source: Official Star Citizen YouTube — [full URL]
 End the entire digest with:
 
 ```
-Compiled by sc-news for o7citizen.com — [date in plain English, e.g. Monday 28 April 2026]
+Compiled by Doc_Flanigan for o7citizen.com — [date in plain English, e.g. Monday 28 April 2026]
 ```
 
 ### Self-check before returning the digest

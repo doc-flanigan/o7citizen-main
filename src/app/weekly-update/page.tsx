@@ -288,7 +288,7 @@ export default function WeeklyUpdatePage() {
           </div>
 
           <p className="mt-10 text-xs uppercase tracking-[0.2em] text-muted">
-            Compiled by sc-news for o7citizen.com — Monday 27 April 2026
+            Compiled by Doc_Flanigan for o7citizen.com — Monday 27 April 2026
           </p>
         </article>
 
