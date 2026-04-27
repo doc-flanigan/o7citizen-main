@@ -4,6 +4,7 @@ import NavBar from '@/components/NavBar'
 import Footer from '@/components/Footer'
 import CTAButton from '@/components/CTAButton'
 import NewsletterSignup from '@/components/NewsletterSignup'
+import Term from '@/components/Term'
 
 export const metadata: Metadata = {
   title: 'Star Citizen Free Fly Events — Play Free, No Purchase Needed',
@@ -35,10 +36,12 @@ export default function FreeFlyPage() {
               <span className="text-gold-gradient">No purchase needed.</span>
             </h1>
             <p className="mt-5 max-w-3xl text-base text-muted">
-              Several times a year, Cloud Imperium opens Star Citizen up for
-              free. Download the full game, fly real ships, explore the
-              &lsquo;Verse — no pledge required. This page tracks every Free
-              Fly window, past and future.
+              Several times a year, <Term name="CIG">Cloud Imperium</Term>{' '}
+              opens Star Citizen up for free. Download the full game, fly real
+              ships, explore <Term name="the 'Verse">the &lsquo;Verse</Term>{' '}
+              — no <Term name="Pledge">pledge</Term> required. This page tracks
+              every <Term name="Free Fly">Free Fly</Term> window, past and
+              future.
             </p>
           </div>
         </header>
@@ -52,9 +55,9 @@ export default function FreeFlyPage() {
                 <h2 className="heading-display text-xl">What it is</h2>
                 <p className="mt-3 text-sm leading-relaxed text-starwhite/85">
                   A promotional window — usually 5 to 14 days — where the full
-                  Star Citizen alpha is downloadable and playable for free. You
-                  make a free RSI account, download the launcher, and start
-                  flying.
+                  Star Citizen alpha is downloadable and playable for free.
+                  You make a free <Term name="RSI">RSI</Term> account, download
+                  the launcher, and start flying.
                 </p>
               </div>
               <div className="card-surface p-6">
@@ -62,8 +65,11 @@ export default function FreeFlyPage() {
                 <h2 className="heading-display text-xl">What you can do</h2>
                 <p className="mt-3 text-sm leading-relaxed text-starwhite/85">
                   Fly the loaner ships of the day, run missions, explore four
-                  planets and Pyro, dogfight, mine, salvage, trade. The whole
-                  game is open. Your character is wiped after the event ends.
+                  planets and <Term name="Pyro">Pyro</Term>, dogfight,{' '}
+                  <Term name="Mining">mine</Term>,{' '}
+                  <Term name="Salvage">salvage</Term>, trade. The whole game is
+                  open. Your character is{' '}
+                  <Term name="Wipe">wiped</Term> after the event ends.
                 </p>
               </div>
               <div className="card-surface p-6">
@@ -71,8 +77,9 @@ export default function FreeFlyPage() {
                 <h2 className="heading-display text-xl">What it costs</h2>
                 <p className="mt-3 text-sm leading-relaxed text-starwhite/85">
                   Nothing. If you decide to keep playing after the event, the
-                  cheapest game package is around $45 USD. Use a referral code
-                  on signup for 50,000 UEC free.
+                  cheapest game package is around $45 USD. Use a{' '}
+                  <Term name="Referral Code">referral code</Term> on signup
+                  for 50,000 <Term name="UEC">UEC</Term> free.
                 </p>
               </div>
             </div>
@@ -121,22 +128,37 @@ export default function FreeFlyPage() {
               The next likely Free Fly windows
             </h2>
             <p className="mt-4 max-w-2xl text-sm text-muted">
-              CIG hasn&rsquo;t officially announced these dates, but they
-              follow a predictable annual pattern. Treat these as best-guess
-              targets and check back for confirmation.
+              <Term name="CIG">CIG</Term> hasn&rsquo;t officially announced
+              these dates, but they follow a predictable annual pattern. Treat
+              these as best-guess targets and check back for confirmation.
             </p>
 
             <ol className="mt-10 space-y-4">
               <TimelineItem
                 date="May 2026"
                 name="Invictus Launch Week (predicted)"
-                detail="Annual military-themed event. Combat ships from Aegis, Anvil, and Drake typically rotate as flyables. 7–10 days."
+                detail={
+                  <>
+                    Annual military-themed event. Combat ships from{' '}
+                    <Term name="Aegis">Aegis</Term>,{' '}
+                    <Term name="Anvil">Anvil</Term>, and{' '}
+                    <Term name="Drake">Drake</Term> typically rotate as
+                    flyables. 7–10 days.
+                  </>
+                }
                 badge="Predicted"
               />
               <TimelineItem
                 date="Aug 2026"
                 name="Foundation Festival (possible)"
-                detail="Newer summer event focused on industrial gameplay — mining, salvage, hauling. Loaner ships often skew industrial."
+                detail={
+                  <>
+                    Newer summer event focused on industrial gameplay —{' '}
+                    <Term name="Mining">mining</Term>,{' '}
+                    <Term name="Salvage">salvage</Term>, hauling. Loaner ships
+                    often skew industrial.
+                  </>
+                }
                 badge="Possible"
               />
               <TimelineItem
@@ -157,11 +179,13 @@ export default function FreeFlyPage() {
                 During Free Fly: use a referral code on signup.
               </h2>
               <p className="mt-3 max-w-xl text-sm text-starwhite/85">
-                You can use a referral code <strong>only</strong> on a brand
-                new account. If you create your free Star Citizen account
-                during a Free Fly and decide to pledge later, the 50,000 UEC
-                bonus carries over to your real character. Don&rsquo;t skip
-                this step.
+                You can use a <Term name="Referral Code">referral code</Term>{' '}
+                <strong>only</strong> on a brand new account. If you create
+                your free Star Citizen account during a{' '}
+                <Term name="Free Fly">Free Fly</Term> and decide to{' '}
+                <Term name="Pledge">pledge</Term> later, the 50,000{' '}
+                <Term name="UEC">UEC</Term> bonus carries over to your real
+                character. Don&rsquo;t skip this step.
               </p>
             </div>
             <CTAButton size="lg" trackingLabel="freefly-cta" />
@@ -178,9 +202,10 @@ export default function FreeFlyPage() {
               Recent Free Fly events
             </h2>
             <p className="mt-4 max-w-2xl text-sm text-muted">
-              CIG runs Free Fly events two to four times a year. The table
-              below shows recent windows so you can predict how long the next
-              one might run.
+              <Term name="CIG">CIG</Term> runs{' '}
+              <Term name="Free Fly">Free Fly</Term> events two to four times a
+              year. The table below shows recent windows so you can predict
+              how long the next one might run.
             </p>
             <div className="mt-8 overflow-x-auto rounded-2xl border border-white/5">
               <table className="w-full text-sm">
@@ -213,12 +238,12 @@ export default function FreeFlyPage() {
               <div className="flex items-start gap-3">
                 <AlertCircle className="mt-0.5 text-yellow-300" size={20} aria-hidden />
                 <div className="text-sm text-starwhite/90">
-                  <strong className="text-yellow-300">Heads up:</strong> Free
-                  Fly servers get hammered. Expect queue times, occasional
-                  crashes, and slightly degraded performance. It&rsquo;s the
-                  best way to try the game, but it&rsquo;s not a representative
-                  experience of normal weeks. Stick around past the event for a
-                  fairer impression.
+                  <strong className="text-yellow-300">Heads up:</strong>{' '}
+                  <Term name="Free Fly">Free Fly</Term> servers get hammered.
+                  Expect queue times, occasional crashes, and slightly degraded
+                  performance. It&rsquo;s the best way to try the game, but
+                  it&rsquo;s not a representative experience of normal weeks.
+                  Stick around past the event for a fairer impression.
                 </div>
               </div>
             </div>
@@ -248,7 +273,7 @@ function TimelineItem({
 }: {
   date: string
   name: string
-  detail: string
+  detail: React.ReactNode
   badge: string
 }) {
   return (

@@ -3,6 +3,7 @@ import Link from 'next/link'
 import NavBar from '@/components/NavBar'
 import Footer from '@/components/Footer'
 import CTAButton from '@/components/CTAButton'
+import Term from '@/components/Term'
 import { SITE } from '@/lib/site'
 
 const FAQ = [
@@ -105,13 +106,15 @@ export default function O7MeaningPage() {
             </h2>
             <p className="mt-4 text-base leading-relaxed text-starwhite/85">
               In Star Citizen you&rsquo;ll see <strong>o7</strong> everywhere —
-              global chat, in your org Discord, in CIG&rsquo;s patch notes,
-              even on streamer overlays. It&rsquo;s the community&rsquo;s
-              shorthand for &laquo;respect.&raquo;
+              global chat, in your <Term name="Org">org</Term> Discord, in{' '}
+              <Term name="CIG">CIG</Term>&rsquo;s patch notes, even on streamer
+              overlays. It&rsquo;s the community&rsquo;s shorthand for
+              &laquo;respect.&raquo;
             </p>
             <ul className="mt-4 space-y-2 text-base text-starwhite/85">
               <li>
-                A pilot rescues you from a crash landing on Hurston:{' '}
+                A pilot rescues you from a crash landing on{' '}
+                <Term name="Hurston">Hurston</Term>:{' '}
                 <span className="font-mono text-gold">o7</span>
               </li>
               <li>
@@ -123,9 +126,10 @@ export default function O7MeaningPage() {
                 <span className="font-mono text-gold">o7 in chat</span>
               </li>
               <li>
-                CIG announces a delay to a long-anticipated feature: chat
-                fills with <span className="font-mono text-gold">o7</span> as
-                gallows respect.
+                <Term name="CIG">CIG</Term> announces a delay to a
+                long-anticipated feature: chat fills with{' '}
+                <span className="font-mono text-gold">o7</span> as gallows
+                respect.
               </li>
             </ul>
           </section>
@@ -268,7 +272,8 @@ export default function O7MeaningPage() {
                   Now you know the salute. Time to fly.
                 </h2>
                 <p className="mt-2 text-sm text-muted">
-                  Use a referral code on signup and start with 50,000 UEC free.
+                  Use a <Term name="Referral Code">referral code</Term> on
+                  signup and start with 50,000 <Term name="UEC">UEC</Term> free.
                 </p>
               </div>
               <CTAButton size="lg" trackingLabel="o7-bottom-cta" />

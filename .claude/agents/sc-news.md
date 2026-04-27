@@ -103,10 +103,11 @@ Write each news item as a short, clear article of 3 to 5 sentences. Follow these
 ### Plain-English rules
 
 - Write as if explaining to a curious friend who has never played a video game.
-- Never use game jargon without immediately explaining it in plain terms in the same sentence. Example: instead of "the Aegis Retaliator is now flyable in the PU," write "a large bomber-style spaceship called the Aegis Retaliator has been made available to fly in the game's online world for the first time."
-- Never use abbreviations without spelling them out the first time they appear in the digest. CIG = Cloud Imperium Games. PTU = Public Test Universe, the open test version of the game. NDA = non-disclosure agreement. EVA = Extra-Vehicular Activity, floating in zero gravity outside a ship. ASOP = the in-game kiosk where players summon ships. UEC, aUEC, LTI, CCU, FPS, PvP, PvE, and the like — same rule.
+- **Read `src/data/glossary.ts` early in your run.** That file is the source of truth for which abbreviations and game terms already have plain-English definitions on the site. Knowing what's in it changes how you write — terms in the glossary get wrapped, terms outside it get expanded inline.
+- **For every term or abbreviation you would normally spell out, check the glossary first.** If the term exists there, wrap it in `<Term name="slug">display text</Term>` instead of expanding it. The Term component renders a dotted-underline link to `/glossary#term-<slug>` and shows the definition on hover, so the reader still gets the explanation without spending words on it. Examples: `<Term name="UEC">UEC</Term>`, `<Term name="aUEC">aUEC</Term>`, `<Term name="ASOP">ASOP terminal</Term>`, `<Term name="the 'Verse">the 'Verse</Term>`, `<Term name="PTU">PTU</Term>`, `<Term name="CIG">CIG</Term>`, `<Term name="Free Fly">Free Fly</Term>`. Wrap each term on its first mention; on later mentions in the same digest you may wrap or skip — editorial call.
+- **For any term NOT in the glossary, the old rule still applies.** Spell it out inline the first time it appears in the digest in the same sentence. Example: instead of "the Aegis Retaliator is now flyable in the PU," write "a large bomber-style spaceship called the Aegis Retaliator has been made available to fly in the game's online world for the first time."
 - Avoid gaming verbs and slang. Use "released," not "shipped," "went live," or "dropped." Use "update," not "patch" or "hotfix." Use "reward," not "drop." Use "players," not "users." Never "meta," "nerf," "buff," "grind," "carry," "kit."
-- Every ship, location, or in-game event named for the first time gets a one-line context. Drake Caterpillar = a large cargo ship. Idris = a capital warship. Stanton, Pyro, Nyx = star systems (regions of space inside the game). Vanduul Swarm = a wave-based combat activity. Tactical Strike Groups = a co-operative combat mission type.
+- Every ship, location, or in-game event named for the first time gets a one-line context, **unless it is already in the glossary** (then wrap it in `<Term>` instead). Drake Caterpillar = a large cargo ship. Idris = a capital warship. Nyx = a recently opened star system. Vanduul Swarm = a wave-based combat activity. Tactical Strike Groups = a co-operative combat mission type. Stanton and Pyro live in the glossary — wrap those.
 - Write numbers in full for anything under 100 (twenty, not 20) — except version numbers and dates.
 - Keep sentences short. If a sentence runs longer than 25 words, split it.
 - No bullet points in the prose itself — full sentences and paragraphs only. (The Events section may use a list of events, but each event entry is still written as full sentences.)
@@ -215,9 +216,10 @@ Before returning the final message, verify against this checklist. If any item f
 
 - [ ] Total word count is between 800 and 1,100
 - [ ] Section headings match the site exactly, in the listed order
-- [ ] Every abbreviation is spelled out on first appearance
-- [ ] Every game term has a same-sentence plain explanation
-- [ ] Every ship, location, or event has a one-line context on first mention
+- [ ] Every glossary-backed abbreviation/term is wrapped in `<Term>` rather than expanded inline
+- [ ] Every abbreviation NOT in the glossary is spelled out on first appearance
+- [ ] Every game term NOT in the glossary has a same-sentence plain explanation
+- [ ] Every ship, location, or event not in the glossary has a one-line context on first mention
 - [ ] No hype words (`exciting`, `awesome`, `huge`, `epic`, `must-play`, etc.)
 - [ ] No doomposting or negative editorialising about delays, bugs, or the developer
 - [ ] No gaming verbs (`shipped`, `dropped`, `went live`, `nerf`, `buff`)
