@@ -23,14 +23,14 @@ If any subtask exceeds reasonable scope, break it into smaller agents.
     goldDark: '#c49a20'
     starwhite: '#e8eaf0'
     muted: '#8892a4'
-- Set up /public/images/hero/ folder with 10 placeholder images (solid color
+- Set up /public/images/hero/ folder with 12 placeholder images (solid color
   placeholders with text "Hero Image N — Replace Me")
 - Place placeholder at /public/images/made-by-community.png
 - Confirm scaffold runs with `npm run dev` before proceeding
 
 ### Agent 2 — Shared Components
 Build these reusable components in /components/:
-  - HeroCarousel.tsx: rotating image carousel, 7-10 slides, auto-advance 5s,
+  - HeroCarousel.tsx: rotating image carousel, 12 slides, auto-advance 5s,
     fade transition, accepts overlay title + subtitle + optional CTA button
   - CTAButton.tsx: primary gold button linking to referral URL
     https://www.robertsspaceindustries.com/enlist?referral=STAR-GCQJ-N6NC
