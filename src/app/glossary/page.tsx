@@ -6,7 +6,7 @@ import GlossaryClient from './GlossaryClient'
 export const metadata: Metadata = {
   title: 'Star Citizen Glossary — Plain English Definitions',
   description:
-    "New to Star Citizen? Plain-English definitions of every term, acronym, and piece of 'Verse slang you'll encounter. 40+ terms, search and filter by category.",
+    "New to Star Citizen? Plain-English definitions of every term, acronym, and piece of 'Verse slang you'll encounter. 150+ terms, search and filter by category.",
   alternates: { canonical: '/glossary' },
   openGraph: {
     title: 'Star Citizen Glossary — Plain English Definitions',

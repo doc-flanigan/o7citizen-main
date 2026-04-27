@@ -82,7 +82,7 @@ export default function GlossaryClient() {
               />
               <input
                 type="search"
-                placeholder="Search 40+ terms — try 'UEC' or 'Free Fly'…"
+                placeholder="Search 150+ terms — try 'tonk' or 'UEC'…"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 className="w-full rounded-full border border-white/10 bg-navyLight/60 py-3 pl-11 pr-4 text-base text-starwhite placeholder:text-muted/70 focus:border-gold focus:outline-none focus:ring-2 focus:ring-gold/40"
