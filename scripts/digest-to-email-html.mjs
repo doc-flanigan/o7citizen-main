@@ -55,13 +55,11 @@ const html = `<!doctype html>
   <div style="max-width:640px;margin:0 auto;background:#ffffff;padding:32px;border-radius:8px">
     ${styled}
     <hr style="margin:32px 0 16px;border:none;border-top:1px solid #e5e5dd" />
-    <p style="font-family:Georgia,serif;font-size:13px;line-height:1.5;color:#6b6b6b;margin:0 0 8px">
-      You're getting this because you signed up for the weekly update at
+    <p style="font-family:Georgia,serif;font-size:13px;line-height:1.5;color:#6b6b6b;margin:0">
+      You&rsquo;re getting this because you signed up for the weekly update at
       <a href="https://o7citizen.com" style="color:#c49a20;text-decoration:underline">o7citizen.com</a>.
       An unofficial fan site. Not affiliated with Cloud Imperium Games.
-    </p>
-    <p style="font-family:Georgia,serif;font-size:13px;line-height:1.5;color:#6b6b6b;margin:0">
-      <a href="{{{RESEND_UNSUBSCRIBE_URL}}}" style="color:#6b6b6b;text-decoration:underline">Unsubscribe</a>
+      Use the unsubscribe button in your email client&rsquo;s header to stop receiving these.
     </p>
   </div>
 </body>
