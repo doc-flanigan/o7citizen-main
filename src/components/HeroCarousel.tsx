@@ -27,7 +27,7 @@ export default function HeroCarousel({
   subtitle,
   ctaLabel,
   ctaHref,
-  intervalMs = 5000,
+  intervalMs = 9000,
   images = HERO_IMAGES,
   height = 'tall',
 }: Props) {
