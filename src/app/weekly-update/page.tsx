@@ -21,6 +21,8 @@ export default function WeeklyUpdatePage() {
     day: 'numeric',
   })
 
+  const archive = UPDATES.slice(1)
+
   return (
     <>
       <NavBar />
@@ -62,62 +64,151 @@ export default function WeeklyUpdatePage() {
             {FEATURED_UPDATE.summary}
           </p>
 
-          <Section title="Patch Notes Summary (plain English)">
+          <Section title="Game updates">
             <ul className="space-y-3">
               <Bullet>
-                Pyro salvage payouts went up about 18% across the board.
-                Reclaimer and Vulture pilots: it&rsquo;s your week.
+                <strong>Alpha 4.7.2 went live</strong> with nearly 100 new jobs
+                and activities in the Nyx star system. Beginner-friendly
+                delivery and courier missions are back, and some of them now
+                pay out crafting blueprints. (
+                <SourceLink href="https://robertsspaceindustries.com/en/comm-link/transmission/21125-Star-Citizen-Alpha-472">
+                  RSI Comm-Link
+                </SourceLink>
+                )
               </Bullet>
               <Bullet>
-                Drake Cutter Rampage hit hangar-ready status. Flyable test on
-                EPTU &laquo;within weeks,&raquo; per CIG.
+                <strong>Alpha 4.8 Evocati testing started</strong>. Evocati is
+                a small invited group of NDA testers — the very first hands on
+                a new build. Two patch-note rounds dropped on Friday and
+                Sunday. (
+                <SourceLink href="https://robertsspaceindustries.com/spectrum/community/SC/forum/190048/thread/star-citizen-alpha-4-8-ptu-patch-notes-3/8797409">
+                  Spectrum patch notes
+                </SourceLink>
+                )
               </Bullet>
               <Bullet>
-                Quantum drive recalibration after a server crash now correctly
-                returns full fuel. (Yes, finally.)
+                <strong>Saved ship loadouts</strong> arrive in 4.8 as
+                &laquo;Item Recovery: Vehicle Loadouts.&raquo; You can now save
+                a snapshot of your ship&rsquo;s configured weapons and
+                components at an ASOP terminal, so insurance claims restore
+                the personalised setup for an in-game fee. (
+                <SourceLink href="https://robertsspaceindustries.com/spectrum/community/SC/forum/190048/thread/star-citizen-alpha-4-8-ptu-patch-notes-2/8793999">
+                  Spectrum
+                </SourceLink>
+                )
               </Bullet>
               <Bullet>
-                ASOP terminal stutter on busy stations is mitigated. Not fixed
-                — mitigated. Use a less-trafficked station if you can.
+                <strong>Known issue:</strong> floating in zero-gravity outside
+                a ship (called EVA) is currently broken on mouse in 4.8
+                Evocati. Controller works.
               </Bullet>
             </ul>
           </Section>
 
+          <Section title="New ships and vehicles">
+            <p>
+              The 4.8 test build introduces the <strong>Vehicle Command
+              Module</strong>, debuting on the Drake Caterpillar. A smaller
+              ship physically docks with the Caterpillar, and after a brief
+              linking process the smaller pilot then controls both vessels as
+              one unit. Without a docked command ship, the Caterpillar
+              cannot be flown at all under this system. New keybind:{' '}
+              <kbd className="rounded border border-white/10 bg-navy px-1.5 py-0.5 text-xs">Right Alt + N</kbd>{' '}
+              docks and undocks. (
+              <SourceLink href="https://robertsspaceindustries.com/spectrum/community/SC/forum/190048/thread/star-citizen-alpha-4-8-ptu-patch-notes-2/8793996">
+                Spectrum
+              </SourceLink>
+              )
+            </p>
+            <p>
+              The Wednesday <strong>Roadmap Roundup</strong> moved a handful
+              of 4.8 items to <em>Tentative</em> — meaning still planned, but
+              the version they ship in may slip. The list: a silent crossbow
+              called the UltiFlex &laquo;Novia,&raquo; the &laquo;Tailwind&raquo;
+              flight suit, and visual upgrades to the Deadrig Shotgun and
+              several Kastak Arms firearms. (
+              <SourceLink href="https://robertsspaceindustries.com/en/comm-link/transmission/21132-Roadmap-Roundup-April-22-2026">
+                RSI Comm-Link
+              </SourceLink>
+              )
+            </p>
+          </Section>
+
           <Section title="What's new for new players">
             <p>
-              The new player tutorial got a lighting pass and clearer
-              objectives — you&rsquo;ll spend less time wondering where the
-              mission marker went. Tutorial completion now grants a guaranteed
-              first-bounty mission ping on entry to Stanton, which is a much
-              gentler on-ramp than &laquo;here&rsquo;s a planet, good luck.&raquo;
+              Pack 2 of the Nyx mission content is out and it&rsquo;s
+              specifically beginner-shaped: courier and delivery contracts
+              that pay you to fly cargo from one location to another. No
+              combat skill required, you can do them solo, and a few of them
+              drop blueprints — in-game recipes you can use to craft items
+              later. If you&rsquo;ve been waiting for a low-pressure way to
+              start earning credits, this is the week.
             </p>
           </Section>
 
           <Section title="What's new for veterans">
             <p>
-              EPTU has the Aegis Idris in a controlled flight test for select
-              Concierge backers. Expect leaks, expect bugs, and don&rsquo;t
-              expect this to land in live for a while. Meanwhile, the Pyro mining
-              yield buff persists into 4.0.3 — keep an eye on Quantanium
-              prices, the markets are still digesting the change.
+              Two big ones in the 4.8 Evocati build. First, the cooperative{' '}
+              <strong>Xenothreat</strong> event has returned to Stanton —
+              five simultaneous contracts, a 10-player Idris assault as the
+              capstone, and a reward track that drops craftable blueprints
+              at milestones. Second, the saved-loadout system finally closes
+              a long-running insurance claim duplication exploit, per CIG
+              staff member Nicou&rsquo;s reply on Spectrum. Both are Evocati-only
+              for now; wider PTU access is planned &laquo;shortly.&raquo;
             </p>
           </Section>
 
-          <Section title="Upcoming events this week">
+          <Section title="Events and community">
             <ul className="space-y-3">
               <Bullet>
-                <strong>Tuesday</strong> — community bounty hunting night,
-                hosted by the Anvil Discord. New players welcome.
+                <strong>LVL UP EXPO, Las Vegas (Apr 24–26)</strong> — CIG was
+                on the show floor with AMD, CLX Gaming, Virpil and Tobii.
+                Players got hands-on with Vanduul Swarm and a Bar Citizen
+                meetup followed Saturday night. (
+                <SourceLink href="https://robertsspaceindustries.com/en/comm-link/transmission/21137-This-Week-In-Star-Citizen">
+                  This Week in Star Citizen
+                </SourceLink>
+                )
               </Bullet>
               <Bullet>
-                <strong>Friday</strong> — Inside Star Citizen drops at 8AM
-                Pacific. Topic: &laquo;Engineering gameplay deep dive.&raquo;
+                <strong>Gamebox Festival, Herning, Denmark</strong> — the
+                Danish community ran a booth and Bar Citizen the same
+                weekend, with some CIG developers attending.
               </Bullet>
               <Bullet>
-                <strong>Saturday</strong> — rumored Free Fly window opens.
-                Watch <a href="https://freeflyevent.com" className="text-gold underline-offset-4 hover:underline">freeflyevent.com</a> for confirmation.
+                <strong>Org spotlight call</strong> — CIG is collecting
+                player-formed organisations to feature alongside 4.8&rsquo;s
+                new Tactical Strike Groups feature. Submit a logo and short
+                description to{' '}
+                <a className="text-gold underline-offset-4 hover:underline" href="mailto:communityteam@cloudimperiumgames.com">
+                  communityteam@cloudimperiumgames.com
+                </a>{' '}
+                by <strong>Wednesday April 30, 2026</strong>. (
+                <SourceLink href="https://robertsspaceindustries.com/spectrum/community/SC/forum/1/thread/alpha-4-8-promote-your-organization/8754401">
+                  Spectrum
+                </SourceLink>
+                )
               </Bullet>
             </ul>
+          </Section>
+
+          <Section title="Developer news">
+            <p>
+              The Roadmap Roundup confirmed Pack 2 of the Nyx missions is
+              now flagged <em>Released</em> on the public roadmap. CIG&rsquo;s
+              Nicou said wider PTU access for the saved-loadout feature is
+              planned &laquo;shortly&raquo; after Evocati. Separately, flight
+              controls developer YogiKlatt acknowledged on Spectrum that the
+              high-zoom mouse sensitivity in <strong>Precision Targeting
+              Mode</strong> needs work, and said the team will look at
+              applying the existing turret-pointer scaling logic to it — no
+              timing committed. (
+              <SourceLink href="https://robertsspaceindustries.com/spectrum/community/SC/forum/50259/thread/can-we-combine-acceleration-limiter-and-engine-pip/8795829">
+                Spectrum reply
+              </SourceLink>
+              )
+            </p>
           </Section>
 
           <Section title="Referral bonus status">
@@ -152,32 +243,37 @@ export default function WeeklyUpdatePage() {
               </p>
             </div>
           </div>
+
+          <p className="mt-10 text-xs uppercase tracking-[0.2em] text-muted">
+            Compiled by sc-news for o7citizen.com — Monday 27 April 2026
+          </p>
         </article>
 
-        {/* Archive */}
-        <section
-          id="archive"
-          className="border-t border-white/5 bg-navyLight/20 py-20"
-        >
-          <div className="container-wide">
-            <div className="mb-10 flex items-end justify-between gap-6">
-              <div>
-                <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-gold">
-                  Archive
-                </p>
-                <h2 className="heading-display text-3xl sm:text-4xl">
-                  Previous weeks
-                </h2>
+        {archive.length > 0 ? (
+          <section
+            id="archive"
+            className="border-t border-white/5 bg-navyLight/20 py-20"
+          >
+            <div className="container-wide">
+              <div className="mb-10 flex items-end justify-between gap-6">
+                <div>
+                  <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-gold">
+                    Archive
+                  </p>
+                  <h2 className="heading-display text-3xl sm:text-4xl">
+                    Previous weeks
+                  </h2>
+                </div>
+                <Calendar className="hidden text-muted sm:block" size={36} aria-hidden />
               </div>
-              <Calendar className="hidden text-muted sm:block" size={36} aria-hidden />
+              <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+                {archive.map((u) => (
+                  <UpdateCard key={u.slug} update={u} />
+                ))}
+              </div>
             </div>
-            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-              {UPDATES.slice(1).map((u) => (
-                <UpdateCard key={u.slug} update={u} />
-              ))}
-            </div>
-          </div>
-        </section>
+          </section>
+        ) : null}
 
         <section className="border-t border-white/5 py-20">
           <div className="container-narrow">
@@ -225,5 +321,18 @@ function Bullet({ children }: { children: React.ReactNode }) {
       <span className="absolute left-0 top-2.5 h-1.5 w-1.5 rounded-full bg-gold" />
       <span>{children}</span>
     </li>
+  )
+}
+
+function SourceLink({ href, children }: { href: string; children: React.ReactNode }) {
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="text-gold underline-offset-4 hover:underline"
+    >
+      {children}
+    </a>
   )
 }
