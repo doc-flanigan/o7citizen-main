@@ -8,6 +8,9 @@ export const SITE = {
     'https://www.robertsspaceindustries.com/enlist?referral=STAR-GCQJ-N6NC',
   referralCode: 'STAR-GCQJ-N6NC',
   ueecBonus: '50,000 UEC',
+  // Bonus state lives in src/data/referral-bonus.ts and is maintained
+  // automatically by the sc-news agent. Use isReferralBonusActive() at
+  // render time to check current status.
   author: 'Doc_Flanigan',
   description:
     "Star Citizen — no jargon, no fluff. Just the 'Verse, plain and simple. An unofficial fan site by Doc_Flanigan.",

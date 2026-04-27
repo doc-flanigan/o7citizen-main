@@ -68,7 +68,7 @@ export default function NavBar() {
           })}
           <li className="ml-2">
             <CTAButton size="sm" trackingLabel="nav-cta">
-              Get 50,000 UEC
+              Get 50K UEC
             </CTAButton>
           </li>
         </ul>
@@ -107,7 +107,7 @@ export default function NavBar() {
             })}
             <li className="pt-2">
               <CTAButton className="w-full" trackingLabel="nav-cta-mobile">
-                Get 50,000 UEC
+                Get 50K UEC
               </CTAButton>
             </li>
           </ul>

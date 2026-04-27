@@ -77,8 +77,6 @@ export default function Home() {
             </>
           }
           subtitle="A new-player guide to the most ambitious space sim ever made — written by a veteran backer for someone who has never even seen the game."
-          ctaLabel={`Claim Your Free ${SITE.ueecBonus}`}
-          ctaHref={SITE.referralUrl}
           height="full"
         />
 
@@ -235,7 +233,9 @@ export default function Home() {
               </p>
             </div>
             <div className="flex flex-col gap-3">
-              <CTAButton size="lg" trackingLabel="home-bottom-cta" />
+              <CTAButton size="lg" trackingLabel="home-bottom-cta">
+                Start with 50K UEC
+              </CTAButton>
               <span className="text-center text-xs text-muted">
                 Opens rsi.com in a new tab
               </span>

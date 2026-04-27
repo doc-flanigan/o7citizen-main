@@ -276,7 +276,9 @@ export default function O7MeaningPage() {
                   signup and start with 50,000 <Term name="UEC">UEC</Term> free.
                 </p>
               </div>
-              <CTAButton size="lg" trackingLabel="o7-bottom-cta" />
+              <CTAButton size="lg" trackingLabel="o7-bottom-cta">
+                Use my referral code
+              </CTAButton>
             </div>
           </div>
         </section>

@@ -167,6 +167,7 @@ jobs:
           git checkout -b "$BRANCH"
           git add .github/sc-news-state.json \
                   src/data/updates.ts \
+                  src/data/referral-bonus.ts \
                   src/app/weekly-update/page.tsx \
                   digests/
           if git diff --staged --quiet; then
