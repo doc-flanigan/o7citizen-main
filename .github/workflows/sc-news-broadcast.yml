@@ -88,7 +88,17 @@ jobs:
             echo "::error::RESEND_API_KEY or RESEND_AUDIENCE_ID not set in repo secrets."
             exit 1
           fi
+          # Strip any whitespace (including trailing newlines) that the GitHub
+          # Secrets form may have preserved from a paste. Local shell
+          # assignments auto-strip these, but the secret store doesn't —
+          # leading to "Bearer key\n" headers that Resend rejects with a
+          # generic 500 application_error instead of a useful 401.
+          RESEND_API_KEY="$(printf '%s' "$RESEND_API_KEY" | tr -d '[:space:]')"
+          RESEND_AUDIENCE_ID="$(printf '%s' "$RESEND_AUDIENCE_ID" | tr -d '[:space:]')"
+          echo "API key length after whitespace strip: ${#RESEND_API_KEY}"
+          echo "Audience id length after whitespace strip: ${#RESEND_AUDIENCE_ID}"
           FROM="${RESEND_FROM:-weekly@o7citizen.com}"
+          FROM="$(printf '%s' "$FROM" | tr -d '[:space:]')"
 
           PAYLOAD=$(jq -n \
             --arg aud "$RESEND_AUDIENCE_ID" \
