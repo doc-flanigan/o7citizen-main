@@ -4,6 +4,7 @@ import { Check, X, Heart } from 'lucide-react'
 import NavBar from '@/components/NavBar'
 import Footer from '@/components/Footer'
 import CTAButton from '@/components/CTAButton'
+import Term from '@/components/Term'
 import { SITE } from '@/lib/site'
 
 export const metadata: Metadata = {
@@ -28,8 +29,9 @@ export default function AboutPage() {
               <br className="hidden sm:block" />And why I built this site.
             </h1>
             <p className="mt-5 max-w-2xl text-base text-muted">
-              By {SITE.author} — veteran Star Citizen backer, plain-English
-              evangelist, occasional Vulture pilot.
+              By {SITE.author} — veteran Star Citizen{' '}
+              <Term name="Backer">backer</Term>, plain-English evangelist,
+              occasional <Term name="Vulture">Vulture</Term> pilot.
             </p>
           </div>
         </header>
@@ -45,17 +47,20 @@ export default function AboutPage() {
             </p>
             <p>
               That moment is why I built o7citizen.com: a plain-English guide
-              to Star Citizen for anyone who&rsquo;s curious about the
-              &lsquo;Verse but doesn&rsquo;t know where to start.
+              to Star Citizen for anyone who&rsquo;s curious about{' '}
+              <Term name="the 'Verse">the &lsquo;Verse</Term> but doesn&rsquo;t
+              know where to start.
             </p>
             <p>
-              I&rsquo;m {SITE.author}, a veteran Star Citizen backer, and this is my
-              unofficial love letter to the game and its community. The wiki
-              is great if you already speak the language. The Spectrum forums
-              are great if you have time. This site is for everyone else — the
-              friend who&rsquo;s curious, the partner who keeps hearing you say
-              &laquo;Pyro,&raquo; the new player who Googled &laquo;what does
-              o7 mean&raquo; and ended up here.
+              I&rsquo;m {SITE.author}, a veteran Star Citizen{' '}
+              <Term name="Backer">backer</Term>, and this is my unofficial love
+              letter to the game and its community. The wiki is great if you
+              already speak the language. The{' '}
+              <Term name="Spectrum">Spectrum</Term> forums are great if you
+              have time. This site is for everyone else — the friend
+              who&rsquo;s curious, the partner who keeps hearing you say
+              &laquo;<Term name="Pyro">Pyro</Term>,&raquo; the new player who
+              Googled &laquo;what does o7 mean&raquo; and ended up here.
             </p>
             <p>
               No gatekeeping. No 200-page wiki dives. No assumptions about what
@@ -107,7 +112,8 @@ export default function AboutPage() {
               <ul className="mt-4 space-y-3 text-sm text-starwhite/85">
                 <li>
                   <strong className="text-starwhite">Not affiliated with CIG.</strong>{' '}
-                  Cloud Imperium Games has nothing to do with this site.
+                  <Term name="CIG">Cloud Imperium Games</Term> has nothing to
+                  do with this site.
                 </li>
                 <li>
                   <strong className="text-starwhite">Not official.</strong> We
@@ -145,21 +151,26 @@ export default function AboutPage() {
             </h2>
             <div className="mt-6 space-y-4 text-sm leading-relaxed text-starwhite/85">
               <p>
-                This site contains <strong>referral links</strong> to Roberts
-                Space Industries. If you create a Star Citizen account using
-                the referral code on this site, you receive{' '}
+                This site contains <strong>referral links</strong> to{' '}
+                <Term name="RSI">Roberts Space Industries</Term>. If you
+                create a Star Citizen account using the{' '}
+                <Term name="Referral Code">referral code</Term> on this site,
+                you receive{' '}
                 <strong className="text-gold">50,000 UEC free</strong> on
                 signup. I (the site owner, {SITE.author}) receive a small
                 in-game bonus reward — usually a cosmetic item or a few
-                thousand UEC — for referring you. There is no monetary kickback.
+                thousand <Term name="UEC">UEC</Term> — for referring you.
+                There is no monetary kickback.
               </p>
               <p>
-                <strong>Cost to you: zero.</strong> The bonus is from CIG to
-                you, courtesy of CIG&rsquo;s long-running referral program.
-                You&rsquo;d pay the same amount whether you used my code, a
-                friend&rsquo;s code, no code, or someone else&rsquo;s code
-                entirely. If you have a friend who already plays Star Citizen,
-                use <em>their</em> code — they earned the introduction.
+                <strong>Cost to you: zero.</strong> The bonus is from{' '}
+                <Term name="CIG">CIG</Term> to you, courtesy of{' '}
+                <Term name="CIG">CIG</Term>&rsquo;s long-running referral
+                program. You&rsquo;d pay the same amount whether you used my
+                code, a friend&rsquo;s code, no code, or someone else&rsquo;s
+                code entirely. If you have a friend who already plays Star
+                Citizen, use <em>their</em> code — they earned the
+                introduction.
               </p>
               <p>
                 I disclose this on every page (see footer) and the disclosure
@@ -224,9 +235,11 @@ export default function AboutPage() {
               <Heart className="text-red-300" size={28} aria-hidden />
               <p className="text-sm text-starwhite/85">
                 Built with absurd amounts of caffeine, an embarrassing number
-                of Vulture salvage runs, and one stubborn belief: that Star
-                Citizen, for all its bugs and delays, is the most ambitious
-                game ever made — and it deserves a front door for newcomers.
+                of <Term name="Vulture">Vulture</Term>{' '}
+                <Term name="Salvage">salvage</Term> runs, and one stubborn
+                belief: that Star Citizen, for all its bugs and delays, is the
+                most ambitious game ever made — and it deserves a front door
+                for newcomers.
               </p>
             </div>
 
