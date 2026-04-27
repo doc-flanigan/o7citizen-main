@@ -100,12 +100,21 @@ jobs:
           FROM="${RESEND_FROM:-weekly@o7citizen.com}"
           FROM="$(printf '%s' "$FROM" | tr -d '[:space:]')"
 
+          # Build a human-readable broadcast name for the Resend dashboard.
+          # The "name" field is internal-only — different from "subject", which
+          # is what subscribers see in their inbox. Pulled from the digest
+          # filename so the dashboard list reads like:
+          #   o7citizen weekly — 2026-04-27
+          DIGEST_DATE=$(basename "${{ steps.pick.outputs.file }}" .md)
+          BROADCAST_NAME="o7citizen weekly — $DIGEST_DATE"
+
           PAYLOAD=$(jq -n \
             --arg aud "$RESEND_AUDIENCE_ID" \
             --arg from "$FROM" \
             --arg subject "$SUBJECT" \
+            --arg name "$BROADCAST_NAME" \
             --rawfile html /tmp/digest.html \
-            '{audience_id: $aud, from: $from, subject: $subject, html: $html}')
+            '{audience_id: $aud, from: $from, subject: $subject, name: $name, html: $html}')
 
           # Capture both the response body and the HTTP status. -f would discard
           # the body on non-2xx, which hides Resend's actual error message.
