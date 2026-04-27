@@ -92,12 +92,12 @@ export default function WeeklyUpdatePage() {
               </Bullet>
               <Bullet>
                 <strong>Alpha 4.8 testing began on Tuesday 21 April.</strong> The
-                first wave goes to a small invited group called Evocati —
-                selected testers who work under an NDA (non-disclosure agreement,
-                a legal obligation to keep what they see private) and are the
-                first outside the development team to test new content. Cloud
-                Imperium Games — CIG, the studio behind Star Citizen —
-                distributed multiple test builds across the week. (
+                first wave goes to a small invited group called Evocati. They
+                sign an NDA — a non-disclosure agreement, a legal obligation
+                to keep what they see private — and are the first outside the
+                development team to try new content. Cloud Imperium Games —
+                CIG, the studio behind Star Citizen — distributed multiple
+                test builds across the week. (
                 <SourceLink href="https://robertsspaceindustries.com/spectrum/community/SC/forum/190048/thread/star-citizen-alpha-4-8-ptu-patch-notes-1/8786552">
                   Official forum post
                 </SourceLink>
@@ -116,8 +116,10 @@ export default function WeeklyUpdatePage() {
             <p>
               If you are just starting, the new Courier and Delivery Pilot
               missions in Nyx are the most useful change this week. These are
-              cargo-hauling contracts with no combat required. The in-game test
-              currency is aUEC (alpha UEC).
+              cargo-hauling contracts with no combat required. Pay is in aUEC
+              — alpha UEC, the in-game test currency. UEC stands for United
+              Earth Credits, the fictional money used inside the game&rsquo;s
+              universe.
             </p>
             <p>
               They require no combat skill and no large ship. They teach you
@@ -135,7 +137,7 @@ export default function WeeklyUpdatePage() {
             <p>
               <strong>Alpha 4.8 testing introduces two major features.</strong> The
               first is Item Recovery: Vehicle Loadouts. This system lets players
-              save and recover their ship's configured parts and weapons via
+              save and recover their ship&rsquo;s configured parts and weapons via
               ASOP Terminals — the in-game kiosks where players summon ships.
               It prevents a known bug where ships and components could be
               duplicated. If a claimed vehicle sits unclaimed for a period, its
@@ -162,7 +164,7 @@ export default function WeeklyUpdatePage() {
                 event was open to the public. Attendees could play Vanduul Swarm
                 — a wave-based combat activity — on specialized hardware from
                 Virpil and Tobii. A CLX Gaming PC giveaway offered extra entries
-                for cosplay attendees. A Bar Citizen — the community's name for
+                for cosplay attendees. A Bar Citizen — the community&rsquo;s name for
                 an in-person meet-up — was held on Saturday evening. (
                 <SourceLink href="https://robertsspaceindustries.com/en/comm-link/transmission/21137-This-Week-In-Star-Citizen">
                   Official RSI blog post
@@ -182,7 +184,7 @@ export default function WeeklyUpdatePage() {
               </Bullet>
               <Bullet>
                 <strong>Captains of Industry — In-game event</strong> — Captains
-                of Industry is a month-long in-game celebration of the game's
+                of Industry is a month-long in-game celebration of the game&rsquo;s
                 industrial careers — hauling, mining, and salvage work. The
                 event runs through Monday 27 April 2026 and is open to all paid
                 backers. During the event, a selection of cargo and industrial
@@ -200,13 +202,15 @@ export default function WeeklyUpdatePage() {
 
           <Section title="Developer news">
             <p>
-              <strong>The Roadmap Roundup published on Wednesday 22 April</strong>{' '}
-              confirmed several changes to Alpha 4.8's development plan.
-              Two items moved to "Tentative" status: the FPS (first-person
-              shooting) Weapons Art Refactor and the "Tailwind" Flight Suit. This
-              means they might not launch in Alpha 4.8. The Item Recovery:
-              Vehicle Loadouts card also shifted to Tentative, though it's
-              actively being tested this week. (
+              The <strong>Roadmap Roundup</strong> is a public update CIG
+              publishes every two weeks describing what features are in
+              development. The edition published on Wednesday 22 April
+              confirmed several changes to Alpha 4.8&rsquo;s development plan. Two
+              items moved to &ldquo;Tentative&rdquo; status: the FPS (first-person
+              shooting) Weapons Art Refactor and the &ldquo;Tailwind&rdquo; Flight Suit.
+              &ldquo;Tentative&rdquo; means they might not launch in Alpha 4.8. The Item
+              Recovery: Vehicle Loadouts card also shifted to Tentative, though
+              it is actively being tested this week. (
               <SourceLink href="https://robertsspaceindustries.com/en/comm-link/transmission/21132-Roadmap-Roundup-April-22-2026">
                 Official RSI blog post
               </SourceLink>
@@ -214,7 +218,7 @@ export default function WeeklyUpdatePage() {
             </p>
             <p>
               <strong>A new crossbow weapon appeared on the roadmap:</strong> the
-              UltiFlex "Novia" Crossbow, described as a near-silent, high-power
+              UltiFlex &ldquo;Novia&rdquo; Crossbow, described as a near-silent, high-power
               weapon with significant projectile drop requiring precise aim. It
               remains scheduled for Alpha 4.8. (
               <SourceLink href="https://robertsspaceindustries.com/en/comm-link/transmission/21132-Roadmap-Roundup-April-22-2026">
@@ -227,7 +231,7 @@ export default function WeeklyUpdatePage() {
               42.</strong> On Monday 27 April, a CIG graphics developer confirmed
               this on Spectrum (the official Star Citizen forum). Ray-traced
               reflections — a visual technology for realistic mirror-like
-              surfaces — are being developed for Squadron 42 (the game's
+              surfaces — are being developed for Squadron 42 (the game&rsquo;s
               single-player campaign). Performance is the current priority. After
               the single-player version is stable, bringing this feature to the
               online multiplayer world (the Persistent Universe, or PU) will
@@ -273,7 +277,7 @@ export default function WeeklyUpdatePage() {
           </div>
 
           <p className="mt-10 text-xs uppercase tracking-[0.2em] text-muted">
-            Compiled by sc-news for o7citizen.com — Monday 28 April 2026
+            Compiled by sc-news for o7citizen.com — Monday 27 April 2026
           </p>
         </article>
 

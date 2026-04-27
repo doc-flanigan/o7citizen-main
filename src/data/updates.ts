@@ -4,9 +4,9 @@ export const UPDATES: WeeklyUpdate[] = [
   {
     slug: 'apr-27-2026-digest',
     date: '2026-04-27',
-    title: 'Alpha 4.7.2 with Hundred New Jobs, 4.8 Testing Underway, Community Gathers',
+    title: 'Alpha 4.7.2 with One Hundred New Jobs, 4.8 Testing Underway, Community Gathers',
     summary:
-      'This week brings nearly one hundred new missions to the Nyx star system — a region of space newly opened to players. These include beginner-friendly courier and delivery jobs that reward you with crafting recipes. The next major update, Alpha 4.8, entered early testing with two major features: saved ship configurations and a new co-operative combat mission type called Tactical Strike Groups. Community events wrapped up in Las Vegas and Denmark.',
+      'This week brings nearly one hundred new missions to the Nyx star system — a region of space newly opened to players. These include beginner-friendly courier and delivery jobs that reward you with crafting recipes. The next major update, Alpha 4.8, entered early testing this week. It introduces saved ship configurations and a new co-operative combat mission type called Tactical Strike Groups. Community events wrapped up in Las Vegas and Denmark.',
     readMinutes: 5,
     tag: 'Alpha 4.7.2',
   },
