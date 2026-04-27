@@ -2,8 +2,9 @@ name: sc-news watch
 
 on:
   schedule:
-    # Every hour at :15 (offset to avoid the top-of-the-hour rush on shared runners)
-    - cron: "15 * * * *"
+    # Every two days at 12:15 UTC (offset to avoid the top-of-the-hour runner rush).
+    # */2 fires on day-of-month 1, 3, 5, ..., 31, with a one-day gap at month boundaries.
+    - cron: "15 12 */2 * *"
   workflow_dispatch:
     inputs:
       force:
@@ -118,7 +119,7 @@ jobs:
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: |
-          claude -p "$(cat <<'PROMPT'
+          claude --model claude-haiku-4-5-20251001 -p "$(cat <<'PROMPT'
           New official Star Citizen content has been detected. Use the Task tool to
           delegate to the sc-news subagent (defined in .claude/agents/sc-news.md) and
           have it produce a fresh weekly digest covering the past seven days.
