@@ -91,11 +91,41 @@ jobs:
             --rawfile html /tmp/digest.html \
             '{audience_id: $aud, from: $from, subject: $subject, html: $html}')
 
-          RESPONSE=$(curl -fsSL -X POST 'https://api.resend.com/broadcasts' \
+          # Capture both the response body and the HTTP status. -f would discard
+          # the body on non-2xx, which hides Resend's actual error message.
+          HTTP_CODE=$(curl -sS -o /tmp/resend-response.json -w "%{http_code}" \
+            -X POST 'https://api.resend.com/broadcasts' \
             -H "Authorization: Bearer $RESEND_API_KEY" \
             -H "Content-Type: application/json" \
             --data "$PAYLOAD")
 
+          if [ "$HTTP_CODE" -ge 400 ] 2>/dev/null || ! [ "$HTTP_CODE" -lt 300 ] 2>/dev/null; then
+            echo "::error::Resend API returned HTTP $HTTP_CODE"
+            echo ""
+            echo "Request:"
+            echo "  POST https://api.resend.com/broadcasts"
+            echo "  from:        $FROM"
+            echo "  audience_id: $RESEND_AUDIENCE_ID"
+            echo "  subject:     $SUBJECT"
+            echo ""
+            echo "Response body:"
+            cat /tmp/resend-response.json
+            echo ""
+            echo "## Broadcast creation failed" >> "$GITHUB_STEP_SUMMARY"
+            echo "" >> "$GITHUB_STEP_SUMMARY"
+            echo "- HTTP: \`$HTTP_CODE\`" >> "$GITHUB_STEP_SUMMARY"
+            echo "- From: \`$FROM\`" >> "$GITHUB_STEP_SUMMARY"
+            echo "- Audience: \`$RESEND_AUDIENCE_ID\`" >> "$GITHUB_STEP_SUMMARY"
+            echo "" >> "$GITHUB_STEP_SUMMARY"
+            echo "Resend response:" >> "$GITHUB_STEP_SUMMARY"
+            echo '```json' >> "$GITHUB_STEP_SUMMARY"
+            cat /tmp/resend-response.json >> "$GITHUB_STEP_SUMMARY"
+            echo "" >> "$GITHUB_STEP_SUMMARY"
+            echo '```' >> "$GITHUB_STEP_SUMMARY"
+            exit 1
+          fi
+
+          RESPONSE=$(cat /tmp/resend-response.json)
           BROADCAST_ID=$(echo "$RESPONSE" | jq -r '.id // empty')
           if [ -z "$BROADCAST_ID" ]; then
             echo "::error::Resend did not return a broadcast id. Response: $RESPONSE"
