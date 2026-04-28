@@ -207,8 +207,10 @@ Source: Official Star Citizen YouTube — [full URL]
 End the entire digest with:
 
 ```
-Compiled by Doc_Flanigan for o7citizen.com — [date in plain English, e.g. Monday 28 April 2026]
+Compiled by Doc_Flanigan for o7citizen.com — [Weekday DD Month YYYY]
 ```
+
+**Computing the date:** use today's UTC date and write it as `<full weekday name> <day> <full month name> <four-digit year>` — for example `Tuesday 28 April 2026`. Do **not** default to Monday; run `date -u +"%A %d %B %Y"` (or its mental equivalent) to get the actual weekday for today. The same date string should appear at the very top of the digest as the H1 suffix and again on this final line.
 
 ### Self-check before returning the digest
 
