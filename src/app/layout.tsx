@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next'
 import { Inter, Orbitron } from 'next/font/google'
+import { Analytics } from '@vercel/analytics/next'
 import { SITE } from '@/lib/site'
 import './globals.css'
 
@@ -113,6 +114,7 @@ export default function RootLayout({
     >
       <body className="bg-navy text-starwhite antialiased">
         {children}
+        <Analytics />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }}
