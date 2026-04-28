@@ -79,7 +79,7 @@ export default function WeeklyUpdatePage() {
           <Section title="Game updates">
             <ul className="space-y-3">
               <Bullet>
-                <strong><Term name="Stanton">Stanton</Term> Alpha 4.7.2 was released on Wednesday, April 22.</strong>{' '}
+                <strong>Alpha 4.7.2 was released on Wednesday, April 22.</strong>{' '}
                 It expands Nyx — a recently opened third star system beyond <Term name="Stanton">Stanton</Term> and <Term name="Pyro">Pyro</Term> — with nearly one hundred new contracts spanning thirteen job types. These include transport runs, combat missions, cargo recovery, resource gathering, and missing-persons cases. Beginner-friendly Courier and Delivery Pilot contracts invite new players to haul packages and start building a career. (
                 <SourceLink href="https://robertsspaceindustries.com/en/comm-link/transmission/21125-Star-Citizen-Alpha-472">
                   Official RSI blog post
@@ -95,7 +95,7 @@ export default function WeeklyUpdatePage() {
                 )
               </Bullet>
               <Bullet>
-                <strong>Alpha 4.8 testing began this week.</strong> The first wave goes to a small invited group called <Term name="EPTU">Evocati</Term> testers. They sign an NDA — a non-disclosure agreement — and are the first outside the development team to try new content. <Term name="CIG">CIG</Term> distributed multiple test builds across the week. (
+                <strong>Alpha 4.8 testing began this week.</strong> The first wave goes to a small invited group called <Term name="Evocati">Evocati</Term> testers. They sign an NDA — a non-disclosure agreement — and are the first outside the development team to try new content. <Term name="CIG">CIG</Term> distributed multiple test builds across the week. (
                 <SourceLink href="https://robertsspaceindustries.com/spectrum/community/SC/forum/190048/thread/star-citizen-alpha-4-8-ptu-patch-notes-1/8786552">
                   Official forum post
                 </SourceLink>
@@ -115,7 +115,7 @@ export default function WeeklyUpdatePage() {
             </p>
             <p>
               <strong>The Drake <Term name="Caterpillar">Caterpillar</Term> gains a new ownership mechanic in Alpha 4.8.</strong>{' '}
-              The Vehicle Command Module introduces a new way to fly the large cargo hauler: without a small docked command ship attached, the <Term name="Caterpillar">Caterpillar</Term> cannot be piloted at all. The smaller ship connects and transfers navigation control to the larger vessel. (
+              The Vehicle Command Module changes how the large cargo hauler is flown. Without a small docked command ship attached, the <Term name="Caterpillar">Caterpillar</Term> cannot be piloted at all. The smaller ship connects and transfers navigation control to the larger vessel. (
               <SourceLink href="https://robertsspaceindustries.com/spectrum/community/SC/forum/190048/thread/star-citizen-alpha-4-8-ptu-patch-notes-2/8793999">
                 Official forum post
               </SourceLink>
@@ -125,7 +125,7 @@ export default function WeeklyUpdatePage() {
 
           <Section title="What's new for new players">
             <p>
-              If you are just starting, the ninety-odd new contracts added to Nyx are your biggest break this week. Courier and Delivery Pilot missions are beginner-friendly transport work with no combat required. Accept a job from the Contract Manager on your <Term name="mobiGlas">mobiGlas</Term>, fly to a pickup location, collect a package, and deliver it to the marked destination for payment in <Term name="aUEC">aUEC</Term>, the in-game test currency.
+              If you are just starting, the ninety-odd new contracts added to Nyx are your biggest break this week. Courier and Delivery Pilot missions are beginner-friendly transport work with no combat required. Accept a job from the Contract Manager on your <Term name="mobiGlas">mobiGlas</Term> and fly to a pickup location. Collect a package, deliver it to the marked destination, and get paid in <Term name="aUEC">aUEC</Term>, the in-game test currency.
             </p>
             <p>
               These missions require no combat skill and no large ship. They teach you flying, navigation, and money-making from day one. Nyx is a region of space now accessible from <Term name="Stanton">Stanton</Term>, where most new players start. (
@@ -191,7 +191,7 @@ export default function WeeklyUpdatePage() {
           <Section title="Developer news">
             <p>
               <strong>Ray tracing is in development for <Term name="Squadron 42">Squadron 42</Term>.</strong>{' '}
-              A <Term name="CIG">CIG</Term> graphics engineer confirmed this on <Term name="Spectrum">Spectrum</Term>. Ray-traced global illumination — a visual technology simulating realistic light bouncing — is being developed first for <Term name="Squadron 42">Squadron 42</Term>, the game&rsquo;s single-player campaign. After stabilizing there, bringing it to the online multiplayer world will require additional work. Reflections on metallic and opaque surfaces will use ray tracing in the high-spec version; transparent surfaces like water and glass will use an older technique due to performance constraints. (
+              A <Term name="CIG">CIG</Term> graphics engineer confirmed this on <Term name="Spectrum">Spectrum</Term>. Ray-traced global illumination — a visual technology simulating realistic light bouncing — is being developed first for <Term name="Squadron 42">Squadron 42</Term>, the game&rsquo;s single-player campaign. After stabilizing there, bringing it to the online multiplayer world will require additional work. Reflections on metallic and opaque surfaces will use ray tracing in the high-spec version. Transparent surfaces like water and glass will use an older technique due to performance constraints. (
               <SourceLink href="https://robertsspaceindustries.com/spectrum/community/SC/forum/50259/thread/ray-traced-reflections/8798846">
                 Official forum post
               </SourceLink>
@@ -199,7 +199,7 @@ export default function WeeklyUpdatePage() {
             </p>
             <p>
               <strong>The New Flight Model continues development.</strong>{' '}
-              A developer on the flight model team confirmed that distributing power to engines will affect ship performance in the redesigned system. Even at minimum power, a ship remains fully flyable — the performance difference between minimum and maximum power sits at roughly ten to fifteen percent depending on the ship. The model has not yet been released publicly. (
+              A developer on the flight model team confirmed that distributing power to engines will affect ship performance in the redesigned system. Even at minimum power, a ship remains fully flyable. The performance gap between minimum and maximum power sits at roughly ten to fifteen percent depending on the ship. The model has not yet been released publicly. (
               <SourceLink href="https://robertsspaceindustries.com/spectrum/community/SC/forum/50259/thread/can-we-combine-acceleration-limiter-and-engine-pip/8780197">
                 Official forum post
               </SourceLink>
@@ -287,7 +287,7 @@ export default function WeeklyUpdatePage() {
           </div>
 
           <p className="mt-10 text-xs uppercase tracking-[0.2em] text-muted">
-            Compiled by sc-news for o7citizen.com — Monday 28 April 2026
+            Compiled by Doc_Flanigan for o7citizen.com — Monday 28 April 2026
           </p>
         </article>
 
