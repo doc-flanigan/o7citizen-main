@@ -5,6 +5,16 @@ const VALID_TYPES = new Set(['free-fly', 'referral-bonus']);
 const VALID_STATUSES = new Set(['upcoming', 'active', 'past']);
 const ISO_RE = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d+)?Z$/;
 
+function isValidIso(value) {
+  if (typeof value !== 'string') return false;
+  if (!ISO_RE.test(value)) return false;
+  const ts = Date.parse(value);
+  if (!Number.isFinite(ts)) return false;
+  // Round-trip check — toISOString always emits .000Z, so normalise both sides
+  const normalised = value.replace(/(\.\d+)?Z$/, '.000Z');
+  return new Date(ts).toISOString() === normalised;
+}
+
 function validateEvent(event, index) {
   const errors = [];
   const where = `events[${index}]`;
@@ -24,10 +34,10 @@ function validateEvent(event, index) {
   if (typeof event.name !== 'string' || event.name.length === 0) {
     errors.push(`${where}.name: must be a non-empty string`);
   }
-  if (!ISO_RE.test(event.start || '')) {
+  if (!isValidIso(event.start)) {
     errors.push(`${where}.start: must be ISO 8601 UTC (e.g. 2026-05-01T00:00:00Z)`);
   }
-  if (!ISO_RE.test(event.end || '')) {
+  if (!isValidIso(event.end)) {
     errors.push(`${where}.end: must be ISO 8601 UTC`);
   }
   if (event.start && event.end && event.start >= event.end) {
@@ -39,7 +49,7 @@ function validateEvent(event, index) {
   if (typeof event.source_url !== 'string' || !/^https?:\/\//.test(event.source_url)) {
     errors.push(`${where}.source_url: must be an http(s) URL`);
   }
-  if (!ISO_RE.test(event.last_seen_at || '')) {
+  if (!isValidIso(event.last_seen_at)) {
     errors.push(`${where}.last_seen_at: must be ISO 8601 UTC`);
   }
   if (event.type === 'free-fly') {
@@ -56,6 +66,9 @@ function validateEvent(event, index) {
 
 function validate(data) {
   const errors = [];
+  if (!data || typeof data !== 'object' || Array.isArray(data)) {
+    return ['root: must be a JSON object'];
+  }
   if (data.schema_version !== 1) {
     errors.push(`schema_version: must be 1`);
   }

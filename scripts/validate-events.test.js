@@ -72,8 +72,36 @@ test('rejects malformed ISO timestamp in start', () => {
   assert.ok(errs.some(e => e.includes('start')));
 });
 
-test('rejects empty source_url', () => {
+test('rejects malformed source_url', () => {
   const bad = { ...baseFreeFly, source_url: 'not-a-url' };
   const errs = validate({ ...baseFile, events: [bad] });
   assert.ok(errs.some(e => e.includes('source_url')));
+});
+
+test('rejects missing description_plain', () => {
+  const bad = { ...baseFreeFly };
+  delete bad.description_plain;
+  const errs = validate({ ...baseFile, events: [bad] });
+  assert.ok(errs.some(e => e.includes('description_plain')));
+});
+
+test('rejects invalid month value', () => {
+  const bad = { ...baseFreeFly, start: '2026-13-01T00:00:00Z' };
+  const errs = validate({ ...baseFile, events: [bad] });
+  assert.ok(errs.some(e => e.includes('start')));
+});
+
+test('rejects start equal to end', () => {
+  const same = '2026-05-01T00:00:00Z';
+  const bad = { ...baseFreeFly, start: same, end: same };
+  const errs = validate({ ...baseFile, events: [bad] });
+  assert.ok(errs.some(e => e.includes('start must be before end')));
+});
+
+test('rejects non-object input', () => {
+  const errs1 = validate(null);
+  assert.ok(errs1.some(e => e.includes('root')));
+
+  const errs2 = validate('string');
+  assert.ok(errs2.some(e => e.includes('root')));
 });
