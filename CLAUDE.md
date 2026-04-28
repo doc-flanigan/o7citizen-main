@@ -343,6 +343,36 @@ component renders the children as plain text (no error) and logs a
 dev-only console warning. Add new terms to `src/data/glossary.ts`
 to light up wrapping that's already in place.
 
+### Glossary fact audit
+
+Ship and location entries make specific factual claims (manufacturer,
+chassis type, crew size, system body counts) that can drift as CIG
+reworks ships or releases new info. Two-track system keeps it
+honest:
+
+- **Type field**: every `GlossaryTerm` carries an optional
+  `lastVerified?: string` (ISO YYYY-MM-DD). Entries without one have
+  not yet been audited.
+- **Workflow**: `.github/workflows/glossary-audit.yml` runs an agent
+  that verifies definitions against `api.star-citizen.wiki` and the
+  RSI site, corrects any wrong facts, and stamps `lastVerified` on
+  what it confirms. Two trigger paths:
+    - **`workflow_dispatch`** — run manually with `mode=all` for the
+      big initial pass over every Ships and Locations entry, or
+      `mode=oldest` (with a `batch_size` input) for a smaller
+      catch-up batch.
+    - **`schedule`** — Mondays at 13:00 UTC, runs in `mode=oldest`
+      with batch size 10 so the glossary self-curates.
+- **Auto-PR**: when changes are produced, the workflow opens a
+  `glossary-audit/auto-YYYYMMDD-HHMM` branch with a diff for review.
+  Skips if a glossary-audit PR is already open (no pile-up). Doc
+  reviews and merges — the agent's per-entry summary in the workflow
+  log lists each correction so spot-checking is fast.
+
+The audit only touches entries it can verify against an authoritative
+source. Things it can't confirm get left alone (no `lastVerified`
+stamp), so `lastVerified` is genuine evidence rather than a checkbox.
+
 ### Referral bonus auto-detection
 
 - State lives in `src/data/referral-bonus.ts` — a single record
@@ -426,7 +456,7 @@ scope):
 | `src/app/weekly-update/page.tsx` | sc-news agent | every weekly digest |
 | `src/data/referral-bonus.ts` | sc-news agent | only when a CIG promo is detected |
 | `.github/sc-news-state.json` | watch workflow | every successful watch run |
-| `src/data/glossary.ts` | human (Doc) | as new SC terms become relevant |
+| `src/data/glossary.ts` | human (Doc) for new terms; glossary-audit agent for `lastVerified` | new terms = ad hoc; audit timestamps = weekly cron + on-demand |
 | `src/lib/site.ts` | human (Doc) | rarely — referral URL, palette, author |
 
 ### Lessons learned, encoded

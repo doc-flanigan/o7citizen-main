@@ -1,0 +1,193 @@
+name: glossary audit
+
+# Verifies factual claims in src/data/glossary.ts against authoritative
+# sources (api.star-citizen.wiki, RSI Comm-Links). Two trigger paths:
+#
+#   workflow_dispatch — Doc kicks it off manually, picks the mode.
+#     mode=all     -> verify EVERY entry where category is Ships or
+#                     Locations (the big initial pass).
+#     mode=oldest  -> verify the N entries with the oldest lastVerified
+#                     timestamps, or with no timestamp at all (default).
+#
+#   schedule (weekly Mondays 13:00 UTC) — runs in mode=oldest with N=10
+#     so the glossary stays self-curating.
+#
+# When changes are produced, the workflow opens an auto-PR for review.
+
+on:
+  schedule:
+    - cron: "0 13 * * 1"
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "Audit mode"
+        required: true
+        type: choice
+        default: "oldest"
+        options:
+          - "oldest"
+          - "all"
+      batch_size:
+        description: "Entries to verify in oldest mode (ignored when mode=all)"
+        required: false
+        default: "10"
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: glossary-audit
+  cancel-in-progress: false
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Skip if a glossary-audit PR is already open
+        id: openpr
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          COUNT=$(gh pr list --state open --json headRefName \
+            --jq '[.[] | select(.headRefName | startswith("glossary-audit/"))] | length' \
+            || echo 0)
+          echo "count=$COUNT" >> "$GITHUB_OUTPUT"
+          echo "Open glossary-audit PRs: $COUNT"
+          if [ "$COUNT" != "0" ]; then
+            echo "::warning::A glossary-audit PR is already open; exiting to avoid pile-up."
+            exit 0
+          fi
+
+      - name: Resolve audit mode
+        id: mode
+        run: |
+          MODE="${{ github.event.inputs.mode }}"
+          if [ -z "$MODE" ]; then
+            MODE="oldest"
+          fi
+          BATCH="${{ github.event.inputs.batch_size }}"
+          if [ -z "$BATCH" ]; then
+            BATCH="10"
+          fi
+          echo "mode=$MODE" >> "$GITHUB_OUTPUT"
+          echo "batch=$BATCH" >> "$GITHUB_OUTPUT"
+          echo "today=$(date -u +%Y-%m-%d)" >> "$GITHUB_OUTPUT"
+          echo "Mode: $MODE | Batch: $BATCH | Today: $(date -u +%Y-%m-%d)"
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install Claude Code CLI
+        run: npm install -g @anthropic-ai/claude-code
+
+      - name: Run glossary audit agent
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          AUDIT_MODE: ${{ steps.mode.outputs.mode }}
+          BATCH_SIZE: ${{ steps.mode.outputs.batch }}
+          TODAY: ${{ steps.mode.outputs.today }}
+        run: |
+          claude --model claude-haiku-4-5-20251001 -p "$(cat <<PROMPT
+          You are auditing src/data/glossary.ts for factual accuracy. The
+          file holds GlossaryTerm records; each has term, definition,
+          category (Currency, Ships, Gameplay, Community, Technical,
+          Locations), an optional 'also' alias field, and an optional
+          'lastVerified' ISO date.
+
+          Today's date is $TODAY (UTC).
+          Audit mode: $AUDIT_MODE.
+          Batch size: $BATCH_SIZE.
+
+          Your job:
+
+          1. Read src/data/glossary.ts to load every entry.
+          2. Build the work list:
+             - In mode=all: every entry where category === 'Ships' OR
+               category === 'Locations'.
+             - In mode=oldest: among entries where category === 'Ships'
+               OR category === 'Locations', take the BATCH_SIZE entries
+               with the oldest lastVerified timestamps (entries with no
+               lastVerified come first, sorted alphabetically).
+          3. For each entry on the work list, verify the definition's
+             factual claims against authoritative sources. Use:
+               - curl https://api.star-citizen.wiki/api/comm-links?limit=… for
+                 broad searches, /search?query=<term> for specific lookups
+               - WebFetch on https://robertsspaceindustries.com/pledge/ship
+                 pages, or wiki pages, when the API doesn't have what you
+                 need
+               - WebSearch as a last resort for narrow disambiguation
+             Focus on facts that the definition actually asserts:
+             manufacturer, role/class, crew size, chassis (wheeled vs
+             tracked), ship size category, system body counts, planet
+             body type. Do not editorialize or rewrite tone.
+          4. For each verified entry:
+               - If every factual claim in the definition is correct,
+                 stamp lastVerified: '$TODAY' on the entry. Do not change
+                 the definition.
+               - If a factual claim is wrong, correct ONLY the wrong
+                 piece (preserve voice, length, and any glossary cross-
+                 references), then stamp lastVerified: '$TODAY'.
+               - If a claim cannot be confirmed against any authoritative
+                 source, leave the entry untouched (do NOT stamp
+                 lastVerified, do NOT guess).
+          5. Maintain TypeScript syntax: lastVerified must be a string in
+             ISO YYYY-MM-DD form, placed on its own indented line. Match
+             the existing record's quote style (single quotes for
+             strings, no trailing comma issues).
+          6. Run npm run lint. Fix any lint errors you introduce. Do NOT
+             commit, add, or push — the workflow handles that.
+
+          When you finish, summarize in your final message:
+            - How many entries you reviewed
+            - How many you stamped without changes
+            - How many you corrected (list each one with a one-line note)
+            - How many you skipped because you couldn't verify
+          PROMPT
+          )" \
+            --allowedTools "Read,Edit,Write,Bash,WebFetch,WebSearch,Glob,Grep" \
+            --max-turns 200
+
+      - name: Run lint to confirm clean
+        run: npm install --no-save && npm run lint
+
+      - name: Open pull request
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          BRANCH="glossary-audit/auto-$(date -u +%Y%m%d-%H%M)"
+          git config user.name "glossary-audit-bot"
+          git config user.email "glossary-audit-bot@users.noreply.github.com"
+          git checkout -b "$BRANCH"
+          git add src/data/glossary.ts
+          if git diff --staged --quiet; then
+            echo "Agent produced no glossary changes; skipping PR."
+            exit 0
+          fi
+          DATE_PLAIN=$(date -u +"%Y-%m-%d")
+          MODE="${{ steps.mode.outputs.mode }}"
+          git commit -m "chore: glossary audit pass — $DATE_PLAIN ($MODE)"
+          git push -u origin "$BRANCH"
+          gh pr create \
+            --title "Glossary audit pass — $DATE_PLAIN ($MODE)" \
+            --base main \
+            --head "$BRANCH" \
+            --body "$(cat <<'BODY'
+          Automated factual audit of `src/data/glossary.ts` (Ships and Locations entries).
+
+          The agent verified each entry's factual claims against `api.star-citizen.wiki` and the RSI site. Entries that checked out got a `lastVerified` timestamp; entries with wrong facts had the wrong piece corrected (preserving voice and length) plus a fresh timestamp; entries that couldn't be verified against any source were left untouched.
+
+          **Review checklist:**
+          - [ ] Each diff entry has both a definition change and a `lastVerified` bump (or just a `lastVerified` bump on a no-change verification)
+          - [ ] No definition rewrites that change voice or length beyond the corrected fact
+          - [ ] No new errors introduced (spot-check 3–5 entries by hand against the source URLs)
+          - [ ] `npm run build` passes (CI will confirm)
+
+          See workflow run for the agent's per-entry summary.
+          BODY
+          )"
