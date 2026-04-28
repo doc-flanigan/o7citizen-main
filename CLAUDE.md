@@ -277,3 +277,181 @@ docs: update README
 - [ ] npm run build passes
 - [ ] Mobile responsive
 - [ ] All links verified
+
+---
+
+## Operational Architecture
+
+Everything below was added incrementally during the build-out and is the
+canonical reference for how the live site stays current.
+
+### The weekly digest pipeline
+
+Five pieces, all hands-off after the initial setup:
+
+1. **`sc-news-watch.yml`** — runs daily at **23:30 UTC** (chosen from a
+   100-Comm-Link sample showing CIG's publishing window is 15:00–22:00
+   UTC, mode 20:00). Polls `api.star-citizen.wiki/api/comm-links` and
+   `developertracker.com/star-citizen/rss`. Compares the latest
+   timestamps against `.github/sc-news-state.json`. Skips if an
+   `sc-news/*` PR is already open (no pile-up).
+2. When new content is detected, the workflow installs Claude Code,
+   runs the **sc-news subagent** (`.claude/agents/sc-news.md`,
+   pinned to Sonnet) under a **Haiku 4.5 orchestrator** for cost,
+   and lets it produce a fresh digest. The agent writes:
+     - `digests/<UTC_DATE>.md` — the canonical email-ready markdown
+     - `src/data/updates.ts` — new featured-update entry
+     - `src/app/weekly-update/page.tsx` — rewritten page sections
+     - `src/data/referral-bonus.ts` — only when a CIG bonus promo
+       is announced; otherwise untouched
+3. The workflow opens an **auto-PR** to `main` from a
+   `sc-news/auto-YYYYMMDD-HHMM` branch.
+4. Doc reviews + merges the PR.
+5. **`sc-news-broadcast.yml`** fires on the merge: picks the newest
+   `digests/*.md`, runs `scripts/digest-to-email-html.mjs` to render
+   inline-styled email HTML (dark navy/gold theme matching the site),
+   and POSTs to `api.resend.com/broadcasts` as a **draft**. The
+   broadcast `name` field is set to `"o7citizen weekly — YYYY-MM-DD"`.
+   The workflow never sends — Doc reviews and clicks send in the
+   Resend dashboard.
+
+Cost: about $0.40–$1.00/month at typical merge cadence.
+
+### The newsletter signup pipeline
+
+- Form: `src/components/NewsletterSignup.tsx` — validates email
+  client-side, includes a hidden honeypot field for bots.
+- Server route: `src/app/api/newsletter/subscribe/route.ts` — calls
+  `resend.contacts.create()` against the configured audience.
+  Treats "already exists" as success (privacy + idempotency).
+- Backend: a single **Resend Audience** (no separate database).
+  Subscribers are managed in the Resend dashboard. Unsubscribe is
+  handled automatically by Resend's `List-Unsubscribe` header on
+  every broadcast.
+
+### Glossary tooltip system
+
+`<Term name="UEC">UEC</Term>` renders as a dotted-underline gold
+link to `/glossary#term-uec` with a hover tooltip pulled from
+`src/data/glossary.ts`. The Plain-English Standard above instructs
+the agent (and any human author) to wrap glossary-backed terms with
+`<Term>` instead of expanding them inline — saves ~60–70 words per
+digest, freeing budget inside the 800–1,100 word ceiling.
+
+If `<Term name="X">` references a slug not in the glossary, the
+component renders the children as plain text (no error) and logs a
+dev-only console warning. Add new terms to `src/data/glossary.ts`
+to light up wrapping that's already in place.
+
+### Referral bonus auto-detection
+
+- State lives in `src/data/referral-bonus.ts` — a single record
+  with `active`, `itemName`, `itemDescription`, `startsAt`, `endsAt`,
+  `sourceUrl`, `sourceLabel`.
+- `isReferralBonusActive()` returns true only if `active === true`
+  AND today is within `[startsAt, endsAt]`. Expired promos
+  auto-go-dark even if the agent never edits the file again.
+- The weekly-update page uses `export const revalidate = 86400` so
+  Next.js ISR re-renders daily — the chip auto-shuts-off the day
+  after `endsAt` without needing a fresh deploy.
+- The sc-news agent edits this file when it detects a CIG promo
+  beyond the standard 50K UEC reward. See "Step 5 — Referral bonus
+  detection" in `.claude/agents/sc-news.md` for the detection
+  signals and update rules.
+- Manual override is still trivial: edit the file, push, merge.
+
+### CTA conventions
+
+The site has eight distinct referral CTA labels, each under 25
+characters, none repeating:
+
+| Location | Label |
+|---|---|
+| NavBar (desktop + mobile) | `Get 50K UEC` |
+| Footer | `Use my code` |
+| Home bottom CTA | `Start with 50K UEC` |
+| o7-meaning bottom | `Use my referral code` |
+| Glossary inline | `Get the new-player bonus` |
+| Weekly-update referral card (inactive) | `Take the 50K bonus` |
+| Weekly-update referral card (bonus active) | `Claim the bonus` |
+| Weekly-update bottom | `Try Star Citizen` |
+| Free-fly bottom | `Begin with a boost` |
+
+The homepage hero **does not** have a CTA button — info-first,
+referral second. New CTAs added to the site should pick a fresh
+short label, not reuse one of the above.
+
+### Required secrets and environment variables
+
+**GitHub repo** → Settings → Secrets and variables → Actions:
+
+| Secret | Purpose |
+|---|---|
+| `ANTHROPIC_API_KEY` | sc-news-watch agent runs |
+| `RESEND_API_KEY` | sc-news-broadcast (full-access scope, not "sending only") |
+| `RESEND_AUDIENCE_ID` | broadcast target audience |
+
+| Variable (optional) | Default if unset |
+|---|---|
+| `RESEND_FROM` | `weekly@o7citizen.com` |
+
+GitHub repo → Settings → Actions → General → Workflow permissions:
+**"Allow GitHub Actions to create and approve pull requests"** must
+be enabled (so the watch workflow can open auto-PRs).
+
+**Vercel project** → Settings → Environment Variables (Production
+scope):
+
+- `RESEND_API_KEY`
+- `RESEND_AUDIENCE_ID`
+- `NEXT_PUBLIC_SITE_URL` = `https://o7citizen.com`
+- `NEXT_PUBLIC_REFERRAL_URL` = the referral URL above
+- `NEXT_PUBLIC_HUB_URL` = `https://o7citizen.com`
+
+### Branch protection on `main`
+
+- Require pull request before merging (0 required approvals — solo
+  dev)
+- Require status check **`build`** to pass before merging
+- Block force pushes
+- Block deletions
+- Bypass allowed for admin (emergency hotfix path)
+
+### Where state lives at a glance
+
+| File | Owned by | Updated when |
+|---|---|---|
+| `digests/<DATE>.md` | sc-news agent | every weekly digest |
+| `src/data/updates.ts` | sc-news agent | every weekly digest |
+| `src/app/weekly-update/page.tsx` | sc-news agent | every weekly digest |
+| `src/data/referral-bonus.ts` | sc-news agent | only when a CIG promo is detected |
+| `.github/sc-news-state.json` | watch workflow | every successful watch run |
+| `src/data/glossary.ts` | human (Doc) | as new SC terms become relevant |
+| `src/lib/site.ts` | human (Doc) | rarely — referral URL, palette, author |
+
+### Lessons learned, encoded
+
+- **Resend broadcast endpoint returns 500 application_error on
+  non-ASCII subjects.** The watch workflow ASCII-transliterates the
+  subject via `iconv //TRANSLIT` before sending. Page typography is
+  unaffected.
+- **GitHub Secrets preserve trailing whitespace from clipboard
+  pastes.** The broadcast workflow strips whitespace from
+  `RESEND_API_KEY`, `RESEND_AUDIENCE_ID`, and the resolved `FROM`
+  before use. A stray newline in the secret was the cause of a
+  full afternoon of debugging on 2026-04-27.
+- **Resend's `{{{RESEND_UNSUBSCRIBE_URL}}}` merge tag broke broadcast
+  creation** in our HTML body. We removed it; the auto-injected
+  `List-Unsubscribe` header on every broadcast handles unsubscribe
+  in modern email clients without needing a body link.
+
+### Manual playbooks
+
+- **Force-trigger the digest right now**: Actions → "sc-news watch"
+  → Run workflow → branch `main` → set `force` input to `true`.
+- **Re-run a failed broadcast**: Actions → "sc-news draft broadcast"
+  → Run workflow → leave `digest_file` blank (uses newest in
+  `digests/`) or set to a specific path.
+- **Light up a referral bonus manually**: edit
+  `src/data/referral-bonus.ts` directly with `active: true` and
+  real dates, push, merge. The chip lights up next render.
