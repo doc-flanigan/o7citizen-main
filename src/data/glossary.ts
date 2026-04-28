@@ -479,7 +479,7 @@ export const GLOSSARY: GlossaryTerm[] = [
     term: 'Ballista',
     category: 'Ships',
     definition:
-      "Anvil ground anti-air vehicle — quad missile launcher on a tracked chassis. Used to deny airspace during ground engagements. Sometimes lumped under the 'tonk' label.",
+      "Anvil ground anti-air vehicle — quad missile launcher on an 8-wheeled chassis. Used to deny airspace during ground engagements. Sometimes lumped under the 'tonk' label.",
   },
   {
     term: 'Pisces',
