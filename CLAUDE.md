@@ -285,9 +285,35 @@ docs: update README
 Everything below was added incrementally during the build-out and is the
 canonical reference for how the live site stays current.
 
-### The weekly digest pipeline
+### Site direction (current focus)
 
-Five pieces, all hands-off after the initial setup:
+The site is leaned toward **new-player onboarding**. The primary user
+journey is `/day-one-citizen` — twelve sequential sections from
+&laquo;is Star Citizen worth buying?&raquo; through &laquo;your first
+flight.&raquo; Supporting pages: `/glossary` (terminology reference),
+`/free-fly-events` (when the game is free to try), and `/o7-meaning`
+(SEO anchor for the &laquo;what does o7 mean&raquo; search query, with
+the About content folded in).
+
+**Retired routes** (308-redirected in `next.config.mjs` so backlinks
+keep working):
+- `/weekly-update` -> `/`
+- `/about` -> `/o7-meaning#about`
+
+### The weekly digest pipeline (PAUSED)
+
+The pipeline below is preserved in code but **not currently active**.
+The `/weekly-update` page was retired and the email broadcast was
+turned off when the site refocused on Day One Citizen. The workflows
+have their automatic triggers commented out; everything is kept in
+place so the pipeline can be revived later without rebuilding.
+
+To revive: uncomment `schedule:` in `.github/workflows/sc-news-watch.yml`
+and the `pull_request:` trigger in `sc-news-broadcast.yml`, restore
+the `/weekly-update` route (or update the agent prompt to write to a
+different page), and re-enable the homepage's "latest update" preview.
+
+The pipeline used five pieces, all hands-off once configured:
 
 1. **`sc-news-watch.yml`** — runs daily at **23:30 UTC** (chosen from a
    100-Comm-Link sample showing CIG's publishing window is 15:00–22:00
@@ -315,9 +341,13 @@ Five pieces, all hands-off after the initial setup:
    The workflow never sends — Doc reviews and clicks send in the
    Resend dashboard.
 
-Cost: about $0.40–$1.00/month at typical merge cadence.
+Cost (when active): about $0.40–$1.00/month at typical merge cadence.
 
-### The newsletter signup pipeline
+### The newsletter signup pipeline (PAUSED)
+
+The signup forms were removed from the live site at the same time as
+the weekly-update page. The components and the API route stay in the
+codebase so the form can be re-mounted later if needed.
 
 - Form: `src/components/NewsletterSignup.tsx` — validates email
   client-side, includes a hidden honeypot field for bots.
@@ -452,8 +482,8 @@ scope):
 | File | Owned by | Updated when |
 |---|---|---|
 | `digests/<DATE>.md` | sc-news agent | every weekly digest |
-| `src/data/updates.ts` | sc-news agent | every weekly digest |
-| `src/app/weekly-update/page.tsx` | sc-news agent | every weekly digest |
+| `src/data/updates.ts` | sc-news agent (paused) | dormant — last touched before the digest pipeline was paused |
+| ~~`src/app/weekly-update/page.tsx`~~ | sc-news agent | retired — file no longer exists; revival would recreate it |
 | `src/data/referral-bonus.ts` | sc-news agent | only when a CIG promo is detected |
 | `.github/sc-news-state.json` | watch workflow | every successful watch run |
 | `src/data/glossary.ts` | human (Doc) for new terms; glossary-audit agent for `lastVerified` | new terms = ad hoc; audit timestamps = weekly cron + on-demand |
