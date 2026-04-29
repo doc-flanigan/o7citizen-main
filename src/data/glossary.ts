@@ -11,6 +11,13 @@ export type GlossaryTerm = {
   definition: string
   category: GlossaryCategory
   also?: string
+  /**
+   * ISO YYYY-MM-DD of the last time the entry's factual claims were
+   * verified against an authoritative source. Maintained by the
+   * glossary-audit workflow (see `.github/workflows/glossary-audit.yml`).
+   * Absent on entries that have never been audited yet.
+   */
+  lastVerified?: string
 }
 
 export const GLOSSARY: GlossaryTerm[] = [
