@@ -27,8 +27,8 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
   title: {
     default:
-      "o7citizen.com — Star Citizen, No Jargon. Just the 'Verse, Plain and Simple.",
-    template: '%s | o7citizen.com',
+      "dayonecitizen.com — Star Citizen for Day-One Players. Plain English, No Jargon.",
+    template: '%s | dayonecitizen.com',
   },
   description: SITE.description,
   applicationName: SITE.name,
@@ -37,15 +37,15 @@ export const metadata: Metadata = {
   publisher: SITE.author,
   keywords: [
     'Star Citizen',
-    'o7',
-    'o7 meaning',
     'Star Citizen for beginners',
+    'Day One Citizen',
+    'Star Citizen new player guide',
     'Star Citizen referral code',
     'UEC',
     'Free Fly',
-    'the Verse',
-    'Star Citizen guide',
-    'Star Citizen new player',
+    "the 'Verse",
+    'Star Citizen first flight',
+    'how to start Star Citizen',
   ],
   alternates: { canonical: '/' },
   openGraph: {
@@ -53,20 +53,20 @@ export const metadata: Metadata = {
     siteName: SITE.name,
     url: SITE.url,
     title:
-      "o7citizen.com — Star Citizen, No Jargon. Just the 'Verse, Plain and Simple.",
+      "dayonecitizen.com — Star Citizen for Day-One Players. Plain English, No Jargon.",
     description: SITE.description,
     images: [
       {
         url: '/images/hero/hero-01.jpg',
         width: 1600,
         height: 900,
-        alt: 'Star Citizen — the Verse',
+        alt: "Star Citizen — the 'Verse",
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'o7citizen.com — Star Citizen, plain and simple.',
+    title: 'dayonecitizen.com — Star Citizen, plain and simple.',
     description: SITE.description,
     images: ['/images/hero/hero-01.jpg'],
   },

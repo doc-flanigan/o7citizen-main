@@ -134,7 +134,7 @@ jobs:
           msg = client.messages.create(
               model="claude-haiku-4-5-20251001",
               max_tokens=2000,
-              messages=[{"role": "user", "content": f"""Write the body of a narration script for a Star Citizen patch notes YouTube video on o7citizen.com.
+              messages=[{"role": "user", "content": f"""Write the body of a narration script for a Star Citizen patch notes YouTube video on dayonecitizen.com.
 
           Rules: write for someone who has never played any video game. Explain every game term in plain English in the same sentence. No hype words. No gaming jargon (use 'released' not 'shipped', 'players' not 'users'). Sentences under 25 words. Spell out numbers under 100. Full paragraphs only, no bullet points.
 

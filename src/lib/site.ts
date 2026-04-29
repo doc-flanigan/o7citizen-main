@@ -1,8 +1,8 @@
 export const SITE = {
-  name: 'o7citizen.com',
-  shortName: 'o7citizen',
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? 'https://o7citizen.com',
-  hubUrl: process.env.NEXT_PUBLIC_HUB_URL ?? 'https://o7citizen.com',
+  name: 'dayonecitizen.com',
+  shortName: 'dayonecitizen',
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? 'https://dayonecitizen.com',
+  hubUrl: process.env.NEXT_PUBLIC_HUB_URL ?? 'https://dayonecitizen.com',
   referralUrl:
     process.env.NEXT_PUBLIC_REFERRAL_URL ??
     'https://www.robertsspaceindustries.com/enlist?referral=STAR-GCQJ-N6NC',
@@ -13,8 +13,8 @@ export const SITE = {
   // render time to check current status.
   author: 'Doc_Flanigan',
   description:
-    "Star Citizen — no jargon, no fluff. Just the 'Verse, plain and simple. An unofficial fan site by Doc_Flanigan.",
-  twitterHandle: '@o7citizen',
+    "Star Citizen for brand-new players — buying the game, installing it, your first flight. Plain English, no jargon. An unofficial fan site by Doc_Flanigan.",
+  twitterHandle: '@dayonecitizen',
 }
 
 export const NAV_LINKS = [

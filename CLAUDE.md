@@ -1,11 +1,18 @@
-# CLAUDE.md — o7citizen.com
+# CLAUDE.md — dayonecitizen.com
 
 ## Project Overview
-Build the primary hub site for o7citizen.com — an unofficial Star Citizen fan site
-created by Doc_Flanigan. Target audience: brand new players with zero experience in
-Star Citizen or "the 'Verse." Tone: friendly, plain-English, no jargon without
-explanation. Think of it as "Star Citizen explained by a helpful veteran to a
-curious newcomer."
+The primary hub site for **dayonecitizen.com** — an unofficial Star Citizen
+fan site created by Doc_Flanigan. Target audience: brand new players with
+zero experience in Star Citizen or "the 'Verse." Tone: friendly,
+plain-English, no jargon without explanation. Think of it as "Star Citizen
+explained by a helpful veteran to a curious newcomer."
+
+> **Brand history:** The site launched as `o7citizen.com` and was renamed
+> to `dayonecitizen.com` in April 2026 to lean fully into the new-player
+> focus. The old domain still resolves and 308-redirects to the new one
+> on a 1:1 path basis (see `next.config.mjs`). Older sections of this
+> document still mention the old name — they describe build steps that
+> happened before the rename and are kept for historical reference.
 
 ## Plain-English Standard (NON-NEGOTIABLE)
 
@@ -223,9 +230,10 @@ Confirm page and schema render before proceeding.
   - Optimize all images with next/image
   - Add /app/manifest.ts for PWA basics
   - Ensure all pages have unique, keyword-rich title and description
-  - Generate _redirects or next.config.js redirects:
-      o7citizens.com → o7citizen.com
-      o7citizen.gg → o7citizen.com
+  - Generate _redirects or next.config.js redirects (post-rebrand):
+      o7citizen.com → dayonecitizen.com
+      o7citizens.com → dayonecitizen.com
+      o7citizen.gg → dayonecitizen.com
   - Confirm Lighthouse SEO score > 95 (run with `npx lighthouse`)
 Confirm SEO audit passes before proceeding.
 
@@ -337,7 +345,7 @@ The pipeline used five pieces, all hands-off once configured:
    `digests/*.md`, runs `scripts/digest-to-email-html.mjs` to render
    inline-styled email HTML (dark navy/gold theme matching the site),
    and POSTs to `api.resend.com/broadcasts` as a **draft**. The
-   broadcast `name` field is set to `"o7citizen weekly — YYYY-MM-DD"`.
+   broadcast `name` field is set to `"dayonecitizen weekly — YYYY-MM-DD"`.
    The workflow never sends — Doc reviews and clicks send in the
    Resend dashboard.
 
@@ -453,7 +461,7 @@ short label, not reuse one of the above.
 
 | Variable (optional) | Default if unset |
 |---|---|
-| `RESEND_FROM` | `weekly@o7citizen.com` |
+| `RESEND_FROM` | `weekly@dayonecitizen.com` |
 
 GitHub repo → Settings → Actions → General → Workflow permissions:
 **"Allow GitHub Actions to create and approve pull requests"** must
@@ -464,9 +472,9 @@ scope):
 
 - `RESEND_API_KEY`
 - `RESEND_AUDIENCE_ID`
-- `NEXT_PUBLIC_SITE_URL` = `https://o7citizen.com`
+- `NEXT_PUBLIC_SITE_URL` = `https://dayonecitizen.com`
 - `NEXT_PUBLIC_REFERRAL_URL` = the referral URL above
-- `NEXT_PUBLIC_HUB_URL` = `https://o7citizen.com`
+- `NEXT_PUBLIC_HUB_URL` = `https://dayonecitizen.com`
 
 ### Branch protection on `main`
 

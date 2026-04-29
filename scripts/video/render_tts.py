@@ -1,5 +1,5 @@
 """
-render_tts.py -- renders an o7citizen video script to MP3.
+render_tts.py -- renders a dayonecitizen video script to MP3.
 Cross-platform: works on Windows (local) and Linux (GitHub Actions).
 
 Usage:

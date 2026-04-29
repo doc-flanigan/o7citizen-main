@@ -120,7 +120,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Section 3: Why o7citizen */}
+        {/* Section 3: Why dayonecitizen */}
         <section className="border-t border-white/5 bg-starfield py-20 sm:py-24">
           <div className="container-narrow">
             <div className="card-surface relative overflow-hidden p-8 sm:p-12">
@@ -137,7 +137,7 @@ export default function Home() {
                   community channel, I had no idea what it meant. It turned out
                   to be one of the most common questions new players ask — and
                   one of the hardest to find a straight answer for. That moment
-                  is why I built o7citizen.com.
+                  is why I built dayonecitizen.com.
                 </p>
                 <p className="mt-4 text-base leading-relaxed text-starwhite/85">
                   Plain-English Star Citizen for anyone who&rsquo;s curious

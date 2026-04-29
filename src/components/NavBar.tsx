@@ -39,10 +39,13 @@ export default function NavBar() {
           href="/"
           className="flex items-center gap-2 text-lg font-bold tracking-tight"
         >
-          <span className="rounded-md bg-gold px-2 py-1 font-display text-navy">
-            o7
+          <span
+            className="rounded-md bg-gold px-2 py-1 font-display text-navy"
+            aria-label="Day One Citizen"
+          >
+            01
           </span>
-          <span className="hidden sm:inline text-starwhite">citizen.com</span>
+          <span className="hidden sm:inline text-starwhite">dayonecitizen.com</span>
         </Link>
 
         <ul className="hidden items-center gap-1 md:flex">

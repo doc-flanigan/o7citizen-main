@@ -64,7 +64,7 @@ jobs:
           echo "file=$FILE" >> "$GITHUB_OUTPUT"
           TITLE=$(grep -m1 '^# ' "$FILE" | sed 's/^# *//')
           if [ -z "$TITLE" ]; then
-            TITLE="o7citizen weekly update"
+            TITLE="dayonecitizen weekly update"
           fi
           # Resend's broadcast endpoint appears to crash on UTF-8 subjects
           # (curly quotes, em-dashes, etc.), returning a generic 500
@@ -102,16 +102,16 @@ jobs:
           RESEND_AUDIENCE_ID="$(printf '%s' "$RESEND_AUDIENCE_ID" | tr -d '[:space:]')"
           echo "API key length after whitespace strip: ${#RESEND_API_KEY}"
           echo "Audience id length after whitespace strip: ${#RESEND_AUDIENCE_ID}"
-          FROM="${RESEND_FROM:-weekly@o7citizen.com}"
+          FROM="${RESEND_FROM:-weekly@dayonecitizen.com}"
           FROM="$(printf '%s' "$FROM" | tr -d '[:space:]')"
 
           # Build a human-readable broadcast name for the Resend dashboard.
           # The "name" field is internal-only — different from "subject", which
           # is what subscribers see in their inbox. Pulled from the digest
           # filename so the dashboard list reads like:
-          #   o7citizen weekly — 2026-04-27
+          #   dayonecitizen weekly — 2026-04-27
           DIGEST_DATE=$(basename "${{ steps.pick.outputs.file }}" .md)
-          BROADCAST_NAME="o7citizen weekly — $DIGEST_DATE"
+          BROADCAST_NAME="dayonecitizen weekly — $DIGEST_DATE"
 
           PAYLOAD=$(jq -n \
             --arg aud "$RESEND_AUDIENCE_ID" \

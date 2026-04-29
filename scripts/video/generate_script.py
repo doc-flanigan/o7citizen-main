@@ -1,5 +1,5 @@
 """
-generate_script.py -- wraps patch notes content in the o7citizen video script template.
+generate_script.py -- wraps patch notes content in the dayonecitizen video script template.
 
 Usage:
     python scripts/video/generate_script.py --patch "4.7.2" --notes /tmp/notes.txt
@@ -9,7 +9,7 @@ Usage:
 import argparse
 from pathlib import Path
 
-INTRO = """Welcome to o7citizen -- a new-player guide to the most ambitious space simulation ever made, written by a veteran backer for someone who has never even seen the game. If you are brand new here, this is the place where Star Citizen stops being confusing and starts making sense. No jargon, no gatekeeping, just plain English. Glad you found us.
+INTRO = """Welcome to Day One Citizen -- a new-player guide to the most ambitious space simulation ever made, written by a veteran backer for someone who has never even seen the game. If you are brand new here, this is the place where Star Citizen stops being confusing and starts making sense. No jargon, no gatekeeping, just plain English. Glad you found us.
 
 Today we are covering version {patch} -- the latest update to Star Citizen. Let's get into it.
 

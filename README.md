@@ -1,42 +1,49 @@
-# o7citizen.com
+# dayonecitizen.com
 
-> **Star Citizen — No Jargon. No Fluff. Just the 'Verse, Plain and Simple.**
+> **Star Citizen for day-one players. Plain English, no jargon.**
 
-Unofficial fan site by Doc_Flanigan. The go-to plain-English resource for new
-Star Citizen players who want to understand the game without drowning in
-community jargon.
+Unofficial fan site by Doc_Flanigan. A new-player onboarding resource — from
+&laquo;is this game worth buying?&raquo; through your first take-off — for
+people who want to understand Star Citizen without drowning in community jargon.
 
-## Why This Exists
+## Why this exists
 
-"What does o7 mean?" is one of the most common first questions new Star Citizen
-players ask. This site answers that — and everything else a newcomer needs —
-in plain, accessible English.
+Star Citizen has a steep learning cliff. The wiki is huge, the forums assume
+you already speak the language, and most "guides" are aimed at returning
+backers, not the curious newcomer staring at a `$45` checkout page.
+dayonecitizen.com is the on-ramp.
 
-## Features
+The site started life as `o7citizen.com` (still redirected here). The brand
+was renamed in April 2026 to lean into the new-player focus.
 
-- 📖 **Full Glossary** — 40+ Star Citizen terms explained in plain English
-- 📰 **Weekly Update** — This week in the 'Verse, readable in 5 minutes
-- 🚀 **Free Fly Event Tracker** — Never miss a free trial window
-- ✋ **o7 Explained** — The origin and meaning of the community salute
-- 📬 **Newsletter** — Weekly update delivered to your inbox
+## What's on the site
 
-## Referral Program
+- 🚀 **Day One Citizen** — twelve sequential sections from "should I even buy
+  this?" through "your first flight." The primary user journey.
+- 📖 **Glossary** — 150+ Star Citizen terms explained in plain English, with
+  hover-tooltips you can drop anywhere on the site via `<Term name="...">`.
+- 🛫 **Free Fly tracker** — when the game is free to try, and what's flyable.
+- ✋ **o7 meaning** — the origin and meaning of the community salute, plus
+  the &laquo;about this site&raquo; story.
+
+## Referral program
 
 New players who sign up using the referral link on this site receive **50,000
-free UEC** (in-game currency). The site owner receives an in-game bonus reward.
-See footer for full FTC disclosure.
+free UEC** (in-game currency). The site owner receives an in-game bonus reward
+at no cost to you. See footer for the full FTC disclosure.
 
 **Referral URL:** https://www.robertsspaceindustries.com/enlist?referral=STAR-GCQJ-N6NC
 
-## Tech Stack
+## Tech stack
 
 - Next.js 14 (App Router)
 - TypeScript
 - Tailwind CSS
 - Framer Motion
-- Vercel deployment
+- Vercel deployment + Vercel Analytics
+- Resend (newsletter pipeline, currently paused)
 
-## Getting Started
+## Getting started
 
 ```bash
 npm install
@@ -45,15 +52,15 @@ npm run dev
 
 Visit http://localhost:3000
 
-## Hero Images
+## Hero images
 
-Add your hero images to `/public/images/hero/` named:
-`hero-01.jpg` through `hero-10.jpg`
+Add your hero images to `/public/images/hero/` named `hero-01.jpg` through
+`hero-12.jpg`.
 
-## RSI Fankit
+## RSI fankit
 
-Place the "Made by the Community" fankit image at:
-`/public/images/made-by-community.png`
+Place the "Made by the Community" fankit image at
+`/public/images/made-by-community.png`.
 
 ## Disclaimer
 
