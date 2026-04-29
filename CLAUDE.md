@@ -428,6 +428,43 @@ stamp), so `lastVerified` is genuine evidence rather than a checkbox.
   signals and update rules.
 - Manual override is still trivial: edit the file, push, merge.
 
+### Brand mark assets
+
+The DOC wordmark (Day One Citizen / Doc_Flanigan) ships as eleven
+pre-rendered PNGs under `public/images/brand/` — favicon set, PWA
+icons, OG card, X card + banner, YouTube banner, Discord avatar,
+and a transparent square logo. They exist for **social-platform
+uploads** (X profile header, YouTube channel banner, Discord server
+icon, link previews on Facebook / LinkedIn). They are **not wired
+into the site** — `layout.tsx` and `manifest.ts` still reference the
+existing hero / made-by-community assets. Wire them in if/when you
+want the site favicon and OG to match the social brand.
+
+To regenerate (e.g. after a palette change):
+
+```bash
+# 1. Bootstrap Orbitron TTFs from the npm woff2 (one-time, transient
+#    install — fonts are committed under scripts/fonts/).
+npm install --no-save @fontsource/orbitron
+pip install Pillow fonttools brotli
+python3 -c "
+from fontTools.ttLib import TTFont
+import os; os.makedirs('scripts/fonts', exist_ok=True)
+for w, name in [(700, 'Bold'), (400, 'Regular')]:
+    f = TTFont(f'node_modules/@fontsource/orbitron/files/orbitron-latin-{w}-normal.woff2')
+    f.flavor = None
+    f.save(f'scripts/fonts/Orbitron-{name}.ttf')
+"
+
+# 2. Render all eleven assets.
+python3 scripts/render-brand-mark.py
+```
+
+Palette and per-asset spec live at the top of
+`scripts/render-brand-mark.py`. The script auto-fits text to the
+available width, so longer wordmarks (e.g. `dayonecitizen.com`) on
+narrower banners shrink instead of clipping.
+
 ### CTA conventions
 
 The site has eight distinct referral CTA labels, each under 25

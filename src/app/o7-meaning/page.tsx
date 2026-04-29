@@ -271,26 +271,36 @@ export default function O7MeaningPage() {
             </h2>
             <div className="mt-5 space-y-4 text-base leading-relaxed text-starwhite/85">
               <p>
-                When I first heard <strong className="text-gold">o7</strong> in
-                a Star Citizen community channel, I had no idea what it meant.
-                It turned out to be one of the most common questions new
-                players ask — and one of the hardest to find a straight answer
-                for. That moment is why this site exists.
+                Years back I sat down to try Star Citizen for the first
+                time. Within the first hour I got stuck on a piece of
+                chat shorthand nobody around me could explain. Looking up
+                the answer meant wading through wiki pages, forum
+                threads, and Discord backlogs — for a two-character
+                emoticon.
+              </p>
+              <p>
+                That small, dumb friction is what made me build this
+                site. If a single emoticon could stop a curious new
+                player cold, what was the rest of the on-ramp doing to
+                them? dayonecitizen.com is the answer I wish I&rsquo;d
+                been handed on <em>my</em> day one.
+              </p>
+              <p>
+                It&rsquo;s for the friend whose partner won&rsquo;t shut
+                up about <Term name="Pyro">Pyro</Term>. For the player
+                who installed the game last night. For the lurker
+                who&rsquo;s wondered for a year whether Star Citizen is
+                even worth a try.
               </p>
               <p>
                 I&rsquo;m {SITE.author}, a veteran Star Citizen{' '}
-                <Term name="Backer">backer</Term>. The wiki is great if you
-                already speak the language. The{' '}
-                <Term name="Spectrum">Spectrum</Term> forums are great if you
-                have time. This site is for everyone else — the friend
-                who&rsquo;s curious, the partner who keeps hearing you say
-                &laquo;<Term name="Pyro">Pyro</Term>,&raquo; the new player who
-                Googled &laquo;what does o7 mean&raquo; and ended up here.
-              </p>
-              <p>
-                No gatekeeping. No 200-page wiki dives. No assumptions about
-                what you already know. Just plain English, written by someone
-                who still remembers being new.
+                <Term name="Backer">backer</Term>. The wiki is great if
+                you already speak the language. The{' '}
+                <Term name="Spectrum">Spectrum</Term> forums are great if
+                you have time. This site is for everyone else — no
+                gatekeeping, no 200-page wiki dives, no assumptions about
+                what you already know. Just plain English, written by
+                someone who still remembers being new.
               </p>
             </div>
           </section>
