@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import { Check, X, Heart } from 'lucide-react'
 import NavBar from '@/components/NavBar'
 import Footer from '@/components/Footer'
 import CTAButton from '@/components/CTAButton'
@@ -257,6 +258,150 @@ export default function O7MeaningPage() {
               >
                 See full glossary →
               </Link>
+            </div>
+          </section>
+
+          {/* About this site (merged in from the former /about page). */}
+          <section id="about" className="border-t border-white/5 pt-12">
+            <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-gold">
+              About this site
+            </p>
+            <h2 className="heading-display text-3xl">
+              Why I built o7citizen.com.
+            </h2>
+            <div className="mt-5 space-y-4 text-base leading-relaxed text-starwhite/85">
+              <p>
+                When I first heard <strong className="text-gold">o7</strong> in
+                a Star Citizen community channel, I had no idea what it meant.
+                It turned out to be one of the most common questions new
+                players ask — and one of the hardest to find a straight answer
+                for. That moment is why this site exists.
+              </p>
+              <p>
+                I&rsquo;m {SITE.author}, a veteran Star Citizen{' '}
+                <Term name="Backer">backer</Term>. The wiki is great if you
+                already speak the language. The{' '}
+                <Term name="Spectrum">Spectrum</Term> forums are great if you
+                have time. This site is for everyone else — the friend
+                who&rsquo;s curious, the partner who keeps hearing you say
+                &laquo;<Term name="Pyro">Pyro</Term>,&raquo; the new player who
+                Googled &laquo;what does o7 mean&raquo; and ended up here.
+              </p>
+              <p>
+                No gatekeeping. No 200-page wiki dives. No assumptions about
+                what you already know. Just plain English, written by someone
+                who still remembers being new.
+              </p>
+            </div>
+          </section>
+
+          <section className="grid gap-6 md:grid-cols-2">
+            <div className="card-surface p-7">
+              <div className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-500/15 text-emerald-300">
+                <Check size={20} aria-hidden />
+              </div>
+              <h3 className="heading-display text-xl">What this site is</h3>
+              <ul className="mt-4 space-y-3 text-sm text-starwhite/85">
+                <li>
+                  <strong className="text-starwhite">An unofficial fan site.</strong>{' '}
+                  Made by a player, for players. Not a CIG product.
+                </li>
+                <li>
+                  <strong className="text-starwhite">Plain-English.</strong>{' '}
+                  Every term is defined the first time it&rsquo;s used. The
+                  glossary is one click away from every page.
+                </li>
+                <li>
+                  <strong className="text-starwhite">Honest about the game.</strong>{' '}
+                  Star Citizen is in alpha. It&rsquo;s ambitious, beautiful,
+                  and sometimes broken. We say so.
+                </li>
+                <li>
+                  <strong className="text-starwhite">Free.</strong> The site,
+                  the glossary, all of it.
+                </li>
+              </ul>
+            </div>
+            <div className="card-surface p-7">
+              <div className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-red-500/15 text-red-300">
+                <X size={20} aria-hidden />
+              </div>
+              <h3 className="heading-display text-xl">What this site is not</h3>
+              <ul className="mt-4 space-y-3 text-sm text-starwhite/85">
+                <li>
+                  <strong className="text-starwhite">Not affiliated with CIG.</strong>{' '}
+                  <Term name="CIG">Cloud Imperium Games</Term> has nothing to
+                  do with this site.
+                </li>
+                <li>
+                  <strong className="text-starwhite">Not official.</strong> For
+                  the source of truth go to robertsspaceindustries.com.
+                </li>
+                <li>
+                  <strong className="text-starwhite">Not a hype machine.</strong>{' '}
+                  We don&rsquo;t cheerlead delays or pretend everything is
+                  fine when it&rsquo;s not.
+                </li>
+                <li>
+                  <strong className="text-starwhite">Not a doomposting machine, either.</strong>{' '}
+                  The constant &laquo;SC is a scam&raquo; rage-bait isn&rsquo;t
+                  useful for anyone trying to decide if they want to play.
+                </li>
+                <li>
+                  <strong className="text-starwhite">Not a wiki.</strong> Star
+                  Citizen Wiki is excellent for deep dives. We&rsquo;re the
+                  on-ramp, not the encyclopedia.
+                </li>
+              </ul>
+            </div>
+          </section>
+
+          <section id="referral-disclosure" className="border-t border-white/5 pt-12">
+            <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-gold">
+              FTC disclosure
+            </p>
+            <h2 className="heading-display text-2xl">
+              About the referral links.
+            </h2>
+            <div className="mt-5 space-y-4 text-sm leading-relaxed text-starwhite/85">
+              <p>
+                This site contains <strong>referral links</strong> to{' '}
+                <Term name="RSI">Roberts Space Industries</Term>. If you create
+                a Star Citizen account using the{' '}
+                <Term name="Referral Code">referral code</Term> on this site,
+                you receive{' '}
+                <strong className="text-gold">50,000 UEC free</strong> on
+                signup. I (the site owner, {SITE.author}) receive a small
+                in-game bonus reward for referring you. There is no monetary
+                kickback.
+              </p>
+              <p>
+                <strong>Cost to you: zero.</strong> The bonus is from{' '}
+                <Term name="CIG">CIG</Term> to you. You&rsquo;d pay the same
+                amount whether you used my code, a friend&rsquo;s code, or no
+                code at all. If you have a friend who already plays Star
+                Citizen, use <em>their</em> code — they earned the
+                introduction.
+              </p>
+              <div className="rounded-2xl border border-gold/20 bg-gold/5 p-4">
+                <p className="font-mono text-sm text-gold">
+                  Referral code: {SITE.referralCode}
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <section className="border-t border-white/5 pt-12">
+            <div className="card-surface flex flex-col items-start gap-4 p-7 sm:flex-row sm:items-center sm:gap-6">
+              <Heart className="text-red-300" size={28} aria-hidden />
+              <p className="text-sm text-starwhite/85">
+                Built with absurd amounts of caffeine, an embarrassing number
+                of <Term name="Vulture">Vulture</Term>{' '}
+                <Term name="Salvage">salvage</Term> runs, and one stubborn
+                belief: that Star Citizen, for all its bugs and delays, is the
+                most ambitious game ever made — and it deserves a front door
+                for newcomers.
+              </p>
             </div>
           </section>
         </article>
