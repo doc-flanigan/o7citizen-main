@@ -79,24 +79,24 @@ export default function WeeklyUpdatePage() {
           <Section title="Game updates">
             <ul className="space-y-3">
               <Bullet>
-                <strong>Alpha 4.7.2 was released on Wednesday, April 22.</strong>{' '}
-                It expands Nyx — a recently opened third star system beyond <Term name="Stanton">Stanton</Term> and <Term name="Pyro">Pyro</Term> — with nearly one hundred new contracts spanning thirteen job types. These include transport runs, combat missions, cargo recovery, resource gathering, and missing-persons cases. Beginner-friendly Courier and Delivery Pilot contracts invite new players to haul packages and start building a career. (
+                <strong>Alpha 4.7.2 arrived on April 22 with nearly one hundred new missions in Nyx.</strong>{' '}
+                Nyx is a recently opened star system, and this update populates it with new work spanning thirteen types of contracts. These include courier runs, delivery jobs, cargo recovery, ship combat waves, salvage operations, and more. Some of these mission types were not previously available in Nyx. Courier and Delivery Pilot contracts are beginner-friendly and require only flying and package delivery — no combat. (
                 <SourceLink href="https://robertsspaceindustries.com/en/comm-link/transmission/21125-Star-Citizen-Alpha-472">
                   Official RSI blog post
                 </SourceLink>
                 )
               </Bullet>
               <Bullet>
-                <strong>Some Nyx contracts reward blueprints.</strong>{' '}
-                Blueprints are in-game recipes used to craft equipment. Completing these contracts is valuable for both new players learning the game and veterans hunting crafting materials. <Term name="CIG">CIG</Term> noted that some courier missions are currently unavailable due to a known issue being addressed. (
+                <strong>Some Nyx contracts reward blueprints instead of just currency.</strong>{' '}
+                Blueprints are in-game recipes used to craft items. Several contracts pay in these recipes rather than purely in <Term name="aUEC">aUEC</Term>, the alpha currency. <Term name="CIG">CIG</Term> noted that some courier missions are currently not showing up correctly and the team is working on a fix. (
                 <SourceLink href="https://robertsspaceindustries.com/en/comm-link/transmission/21125-Star-Citizen-Alpha-472">
                   Official RSI blog post
                 </SourceLink>
                 )
               </Bullet>
               <Bullet>
-                <strong>Alpha 4.8 testing began this week.</strong> The first wave goes to a small invited group called <Term name="Evocati">Evocati</Term> testers. They sign an NDA — a non-disclosure agreement — and are the first outside the development team to try new content. <Term name="CIG">CIG</Term> distributed multiple test builds across the week. (
-                <SourceLink href="https://robertsspaceindustries.com/spectrum/community/SC/forum/190048/thread/star-citizen-alpha-4-8-ptu-patch-notes-1/8786552">
+                <strong>Alpha 4.8 <Term name="EPTU">Evocati PTU</Term> testing is underway.</strong> The earliest test wave of the next major update began this week with a small invited group of long-time backers. <Term name="CIG">CIG</Term> distributed multiple test builds, and new features including Tactical Strike Groups — a co-operative combat mission for organized teams — and the return of Xenothreat — a large-scale fleet battle event — are both in testing. (
+                <SourceLink href="https://robertsspaceindustries.com/spectrum/community/SC/forum/190048/thread/star-citizen-alpha-4-8-ptu-patch-notes-2/8793999">
                   Official forum post
                 </SourceLink>
                 )
@@ -106,18 +106,17 @@ export default function WeeklyUpdatePage() {
 
           <Section title="New ships and vehicles">
             <p>
-              <strong>The Aegis Hammerhead is receiving a gold standard pass.</strong>{' '}
-              A gold standard pass means a full visual and functional overhaul to bring it in line with the game&rsquo;s current quality bar. The Hammerhead is a large, heavily armed gunship with six crewed weapon turrets designed to protect a fleet from smaller attacking ships. This work is confirmed for Alpha 4.8. (
+              <strong>No new ships became flyable this week.</strong> However, the <Term name="Roadmap">roadmap</Term> update from April 22 confirmed that the Drake <Term name="Caterpillar">Caterpillar</Term> — a large modular cargo hauler — is receiving a major gameplay change in Alpha 4.8. A new feature called the Vehicle Command Module is being developed and tested. A smaller command ship will dock onto the Caterpillar, which cannot fly on its own without one attached. Once docked, the command ship pilot takes full control of the combined vessel as a single unit, with access to <Term name="Quantum Travel">quantum travel</Term>, landing, and combat. Undocking reverses the process. This is the first implementation of what <Term name="CIG">CIG</Term> is calling ship pairing. (
               <SourceLink href="https://robertsspaceindustries.com/en/comm-link/transmission/21132-Roadmap-Roundup-April-22-2026">
                 Official RSI blog post
               </SourceLink>
               )
             </p>
             <p>
-              <strong>The Drake <Term name="Caterpillar">Caterpillar</Term> gains a new ownership mechanic in Alpha 4.8.</strong>{' '}
-              The Vehicle Command Module changes how the large cargo hauler is flown. Without a small docked command ship attached, the <Term name="Caterpillar">Caterpillar</Term> cannot be piloted at all. The smaller ship connects and transfers navigation control to the larger vessel. (
-              <SourceLink href="https://robertsspaceindustries.com/spectrum/community/SC/forum/190048/thread/star-citizen-alpha-4-8-ptu-patch-notes-2/8793999">
-                Official forum post
+              <strong>Several Alpha 4.8 items moved to tentative status.</strong>{' '}
+              The roadmap flagged the UltiFlex Novia Crossbow — a near-silent precision hand weapon — a Tailwind flight suit, and a visual refresh of several ground weapons as tentative for Alpha 4.8. Tentative means the team is working on them but not committed to shipping them in this patch. (
+              <SourceLink href="https://robertsspaceindustries.com/en/comm-link/transmission/21132-Roadmap-Roundup-April-22-2026">
+                Official RSI blog post
               </SourceLink>
               )
             </p>
@@ -125,10 +124,7 @@ export default function WeeklyUpdatePage() {
 
           <Section title="What's new for new players">
             <p>
-              If you are just starting, the ninety-odd new contracts added to Nyx are your biggest break this week. Courier and Delivery Pilot missions are beginner-friendly transport work with no combat required. Accept a job from the Contract Manager on your <Term name="mobiGlas">mobiGlas</Term> and fly to a pickup location. Collect a package, deliver it to the marked destination, and get paid in <Term name="aUEC">aUEC</Term>, the in-game test currency.
-            </p>
-            <p>
-              These missions require no combat skill and no large ship. They teach you flying, navigation, and money-making from day one. Nyx is a region of space now accessible from <Term name="Stanton">Stanton</Term>, where most new players start. (
+              If you are just getting started, Alpha 4.7.2 is the biggest reason to visit Nyx right now. The Nyx system — a new region of space with its own stations, missions, and resources — now has courier and delivery jobs designed for brand-new players. These are simple transport missions: pick up a package, fly it to a destination, collect payment. They are the lowest-stakes way to learn how the game works, earn some <Term name="aUEC">aUEC</Term>, and explore a region of <Term name="the 'Verse">the 'Verse</Term> that was barely populated before this week. No combat required, no large ship needed. (
               <SourceLink href="https://robertsspaceindustries.com/en/comm-link/transmission/21125-Star-Citizen-Alpha-472">
                 Official RSI blog post
               </SourceLink>
@@ -138,17 +134,17 @@ export default function WeeklyUpdatePage() {
 
           <Section title="What's new for veterans">
             <p>
-              <strong>Tactical Strike Groups is a new co-operative combat mission now in Alpha 4.8 testing.</strong>{' '}
-              It is designed for organized groups of seven or more ships attacking a fortified asteroid base in Nyx. Different phases require different ship sizes and combat roles — a smaller escort fighter handles different objectives than a large gunship, rewarding balanced mixed fleets. The mission culminates in an attack on an <Term name="Idris">Idris</Term>-class frigate controlled by hostile forces. (
-              <SourceLink href="https://robertsspaceindustries.com/spectrum/community/SC/forum/190048/thread/star-citizen-alpha-4-8-ptu-patch-notes-1/8786552">
+              <strong>The Item Recovery system for vehicle loadouts is being tested in Alpha 4.8.</strong>{' '}
+              Players will be able to register their ship&rsquo;s configured weapons and components at an <Term name="ASOP">ASOP</Term> terminal. If that ship is then lost in the game, the registered configuration can be reclaimed. The trade-off: items looted from a claimed ship will eventually stop working — a mechanic the developers are calling bricking. <Term name="CIG">CIG</Term> confirmed that the goal is to end component duplication exploits. Pledged store ships are automatically registered and cannot be permanently lost. (
+              <SourceLink href="https://robertsspaceindustries.com/spectrum/community/SC/forum/190048/thread/star-citizen-alpha-4-8-ptu-patch-notes-4/8800501">
                 Official forum post
               </SourceLink>
               )
             </p>
             <p>
-              <strong>Xenothreat is returning in Alpha 4.8 testing.</strong>{' '}
-              This recurring faction event lets players take five concurrent mercenary contracts: four completable alone or in small groups, and a fifth — an assault on a Xenothreat-controlled <Term name="Idris">Idris</Term> frigate — designed for ten or more coordinated players. Completing contracts earns progress on shared reward tracks giving out blueprints at milestones. (
-              <SourceLink href="https://robertsspaceindustries.com/spectrum/community/SC/forum/190048/thread/star-citizen-alpha-4-8-ptu-patch-notes-1/8786552">
+              <strong>Tactical Strike Groups and Xenothreat are both in Alpha 4.8 testing.</strong>{' '}
+              Tactical Strike Groups is a new co-operative combat mission designed for organized groups of seven or more ships. Xenothreat — a recurring large-scale fleet battle event — is returning this week. Both are available to <Term name="EPTU">Evocati PTU</Term> testers only at this point. (
+              <SourceLink href="https://robertsspaceindustries.com/spectrum/community/SC/forum/190048/thread/star-citizen-alpha-4-8-ptu-patch-notes-2/8793999">
                 Official forum post
               </SourceLink>
               )
@@ -158,28 +154,28 @@ export default function WeeklyUpdatePage() {
           <Section title="Events and community">
             <ul className="space-y-3">
               <Bullet>
-                <strong>CLX Gaming PC Giveaway (open now, ends May 4)</strong> — <Term name="CIG">CIG</Term> partnered with hardware manufacturer CLX to run a giveaway open worldwide. Five winners receive an in-game package including an <Term name="Aurora">Aurora</Term> Mk II with <Term name="LTI">Lifetime Insurance</Term>. The grand prize winner also gets a physical CLX gaming PC. The giveaway runs until May 4, 2026 at 11:59 AM <abbr title="Eastern Daylight Time">EDT</abbr>. (
+                <strong>CLX Gaming PC Giveaway (open now, ends May 4 at 11:59 AM EDT)</strong> — <Term name="CIG">CIG</Term> partnered with hardware manufacturer CLX to run a giveaway open globally. Five winners will receive an <Term name="Aurora">Aurora</Term> Mk II — a small starter ship — with <Term name="LTI">Lifetime Insurance</Term> and a game package. The grand prize winner also takes home a high-end CLX gaming PC. Anyone can enter from home at CLX&rsquo;s website; no purchase required. (
                 <SourceLink href="https://robertsspaceindustries.com/comm-link/transmission/21104-CLX-Gaming-PC-Giveaway">
                   Official RSI blog post
                 </SourceLink>
                 )
               </Bullet>
               <Bullet>
-                <strong>LVL UP EXPO — Las Vegas (April 24–26, now concluded)</strong> — <Term name="CIG">CIG</Term> hosted a booth at LVL UP EXPO at the Las Vegas Convention Center. Attendees could try Star Citizen on hardware from Virpil and Tobii — companies that make flight sticks and eye-tracking devices. The event included cosplay competitions, giveaway entries, and a Bar Citizen — the community&rsquo;s name for an in-person meet-up — on Saturday evening. (
+                <strong>Bar Citizen — Xi&rsquo;an, China (Saturday, May 2)</strong> — <Term name="CIG">CIG</Term> staff will attend a community meet-up — called a Bar Citizen — at the Gaoxin International Conference Center in Xi&rsquo;an, China on Saturday, May 2. A Bar Citizen is the community&rsquo;s name for an in-person social gathering open to any Star Citizen player in the area. This event&rsquo;s theme is a friendly visit between the human <Term name="UEE">UEE</Term> and the Xi&rsquo;an alien civilisation — two cultures in the game&rsquo;s lore. No advance ticket or registration was announced. (
                 <SourceLink href="https://robertsspaceindustries.com/en/comm-link/transmission/21144-This-Week-In-Star-Citizen">
                   Official RSI blog post
                 </SourceLink>
                 )
               </Bullet>
               <Bullet>
-                <strong>Bar Citizen — Xi&rsquo;an, China (Saturday, May 2)</strong> — A community meet-up is scheduled for Saturday, May 2 at the Gaoxin International Conference Center in Xi&rsquo;an, China. <Term name="CIG">CIG</Term> staff will be present. The event carries a theme of friendly meeting between the human <Term name="UEE">UEE</Term> and the Xi&rsquo;an alien civilisation — two in-fiction factions. (
+                <strong>XGR Divisions Racing (Sunday, May 3)</strong> — A community-run racing series called XGR Divisions is holding a race on the New Babbage City Tour track, inside the city of <Term name="New Babbage">New Babbage</Term> on the frozen planet <Term name="microTech">microTech</Term>. The recommended ship is the <Term name="Origin">Origin</Term> 350R — a racing variant of Origin&rsquo;s three-hundred-series line. Signups were open as of April twenty-seven. This is an in-game event open to any player. (
                 <SourceLink href="https://robertsspaceindustries.com/en/comm-link/transmission/21144-This-Week-In-Star-Citizen">
                   Official RSI blog post
                 </SourceLink>
                 )
               </Bullet>
               <Bullet>
-                <strong>XGR Divisions Racing (Sunday, April 27)</strong> — XGR Divisions is a player-run racing series. This Sunday&rsquo;s race on the New Babbage City Tour track on <Term name="microTech">microTech</Term>, a frozen tundra planet, uses the <Term name="Origin">Origin</Term> 350R — a single-seat racing ship. Signups are open to paid backers. (
+                <strong>United Danes Initiative — Gamebox Festival</strong> — A community group called the United Danes Initiative ran a Star Citizen booth at Gamebox Festival in Herning, Denmark this past weekend. The booth included a simulator cockpit, on-foot combat stations, and a Vanduul Swarm competition — a wave-based mode where players face AI-controlled alien attackers. A Bar Citizen followed on Saturday evening with players attending from Scandinavia, Germany, and the Netherlands. (
                 <SourceLink href="https://robertsspaceindustries.com/en/comm-link/transmission/21144-This-Week-In-Star-Citizen">
                   Official RSI blog post
                 </SourceLink>
@@ -190,25 +186,17 @@ export default function WeeklyUpdatePage() {
 
           <Section title="Developer news">
             <p>
-              <strong>Ray tracing is in development for <Term name="Squadron 42">Squadron 42</Term>.</strong>{' '}
-              A <Term name="CIG">CIG</Term> graphics engineer confirmed this on <Term name="Spectrum">Spectrum</Term>. Ray-traced global illumination — a visual technology simulating realistic light bouncing — is being developed first for <Term name="Squadron 42">Squadron 42</Term>, the game&rsquo;s single-player campaign. After stabilizing there, bringing it to the online multiplayer world will require additional work. Reflections on metallic and opaque surfaces will use ray tracing in the high-spec version. Transparent surfaces like water and glass will use an older technique due to performance constraints. (
-              <SourceLink href="https://robertsspaceindustries.com/spectrum/community/SC/forum/50259/thread/ray-traced-reflections/8798846">
+              <strong>Ray-traced global illumination is in development for <Term name="Squadron 42">Squadron 42</Term>.</strong>{' '}
+              A <Term name="CIG">CIG</Term> graphics developer posted on the official <Term name="Spectrum">Spectrum</Term> forum this week confirming work on ray-traced reflections — a rendering technique that simulates how light bounces off surfaces to produce more accurate shadows and reflections. The high-specification version will also cover specular reflections on metallic and shiny surfaces. The current priority is getting the feature ready for <Term name="Squadron 42">Squadron 42</Term>, the game&rsquo;s single-player campaign. Additional work will be needed before it comes to the online multiplayer game. No release date was given for either. (
+              <SourceLink href="https://robertsspaceindustries.com/spectrum/community/SC/forum/50259/thread/ray-traced-reflections/8798741">
                 Official forum post
               </SourceLink>
               )
             </p>
             <p>
-              <strong>The New Flight Model continues development.</strong>{' '}
-              A developer on the flight model team confirmed that distributing power to engines will affect ship performance in the redesigned system. Even at minimum power, a ship remains fully flyable. The performance gap between minimum and maximum power sits at roughly ten to fifteen percent depending on the ship. The model has not yet been released publicly. (
-              <SourceLink href="https://robertsspaceindustries.com/spectrum/community/SC/forum/50259/thread/can-we-combine-acceleration-limiter-and-engine-pip/8780197">
-                Official forum post
-              </SourceLink>
-              )
-            </p>
-            <p>
-              <strong>Three Alpha 4.8 items moved to Tentative status.</strong>{' '}
-              The Roadmap Roundup published April 22 marked the <Term name="FPS">FPS</Term> Weapons Art Refactor, the Tailwind Flight Suit, and Vehicle Loadout recovery as Tentative — meaning the team is working on them but not committing them to Alpha 4.8. (
-              <SourceLink href="https://robertsspaceindustries.com/en/comm-link/transmission/21132-Roadmap-Roundup-April-22-2026">
+              <strong>DefenseCon twenty-fifty-six is coming soon.</strong>{' '}
+              The April twenty-two <Term name="Roadmap">roadmap</Term> update teased DefenseCon twenty-fifty-six — a recurring in-game military showcase event. <Term name="CIG">CIG</Term> stated that details would be published on April twenty-nine, twenty twenty-six. Check the official RSI site for that announcement and the event details. (
+              <SourceLink href="https://robertsspaceindustries.com/en/comm-link/transmission/21144-This-Week-In-Star-Citizen">
                 Official RSI blog post
               </SourceLink>
               )
@@ -287,7 +275,7 @@ export default function WeeklyUpdatePage() {
           </div>
 
           <p className="mt-10 text-xs uppercase tracking-[0.2em] text-muted">
-            Compiled by Doc_Flanigan for o7citizen.com — Tuesday 28 April 2026
+            Compiled by Doc_Flanigan for o7citizen.com — Wednesday 29 April 2026
           </p>
         </article>
 

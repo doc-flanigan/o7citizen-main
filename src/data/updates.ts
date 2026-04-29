@@ -2,6 +2,15 @@ import type { WeeklyUpdate } from '@/components/UpdateCard'
 
 export const UPDATES: WeeklyUpdate[] = [
   {
+    slug: 'apr-29-2026-digest',
+    date: '2026-04-29',
+    title: 'Item Recovery System Announced, Nyx Missions Expand, Alpha 4.8 Testing Continues',
+    summary:
+      'Alpha 4.8 will let players register and recover ship configurations through a new Item Recovery system. The Caterpillar cargo ship is getting a major overhaul with ship pairing — docking a command ship to take control. Nyx star system missions continue to expand, and community events gathered players worldwide from Las Vegas to Denmark.',
+    readMinutes: 5,
+    tag: 'Alpha 4.8',
+  },
+  {
     slug: 'apr-28-2026-digest',
     date: '2026-04-28',
     title: 'Nearly One Hundred New Jobs in Nyx, Alpha 4.8 Testing Expands With Tactical Missions',
