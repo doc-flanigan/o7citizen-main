@@ -4,7 +4,6 @@ import { useMemo, useState } from 'react'
 import { Search } from 'lucide-react'
 import GlossaryCard from '@/components/GlossaryCard'
 import CTAButton from '@/components/CTAButton'
-import NewsletterSignup from '@/components/NewsletterSignup'
 import { CATEGORIES, GLOSSARY, type GlossaryCategory } from '@/data/glossary'
 
 type Filter = GlossaryCategory | 'All'
@@ -182,9 +181,6 @@ export default function GlossaryClient() {
           ))
         )}
 
-        <div className="mt-16">
-          <NewsletterSignup variant="full" heading="Don't memorize jargon. Get it weekly." subheading="Each Friday we send the week's new terms, slang, and patch-note translations. 5 minutes, plain English." />
-        </div>
       </div>
     </>
   )

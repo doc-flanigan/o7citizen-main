@@ -1,15 +1,11 @@
 import Link from 'next/link'
-import Image from 'next/image'
 import type { ReactNode } from 'react'
 import { ArrowRight, Rocket, Coins, Globe2 } from 'lucide-react'
 import NavBar from '@/components/NavBar'
 import Footer from '@/components/Footer'
 import HeroCarousel from '@/components/HeroCarousel'
 import CTAButton from '@/components/CTAButton'
-import NewsletterSignup from '@/components/NewsletterSignup'
-import UpdateCard from '@/components/UpdateCard'
 import Term from '@/components/Term'
-import { FEATURED_UPDATE } from '@/data/updates'
 import { SITE } from '@/lib/site'
 
 type StartHereCard = {
@@ -124,44 +120,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Section 3: Latest Weekly Update */}
-        <section className="border-t border-white/5 bg-gradient-to-b from-navy to-navyLight/30 py-20 sm:py-24">
-          <div className="container-wide grid gap-10 lg:grid-cols-[1.2fr,1fr] lg:items-center">
-            <UpdateCard update={FEATURED_UPDATE} featured />
-            <div>
-              <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-gold">
-                Weekly Update
-              </p>
-              <h2 className="heading-display text-3xl sm:text-4xl">
-                The whole week, in five minutes.
-              </h2>
-              <p className="mt-4 text-base text-muted">
-                Every Friday we publish a plain-English breakdown of what
-                changed in Star Citizen — patch notes translated, events
-                flagged, rumors filtered. No hype, no doomposting. Built for
-                people who actually have day jobs.
-              </p>
-              <div className="mt-6 flex flex-wrap gap-3">
-                <CTAButton
-                  href="/weekly-update"
-                  variant="ghost"
-                  trackingLabel="home-weekly-cta"
-                  showIcon={false}
-                >
-                  Read this week&rsquo;s update
-                </CTAButton>
-                <Link
-                  href="/weekly-update#archive"
-                  className="inline-flex items-center gap-1.5 self-center text-sm font-medium text-starwhite/80 hover:text-gold"
-                >
-                  Browse archive <ArrowRight size={14} aria-hidden />
-                </Link>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Section 4: Why o7citizen */}
+        {/* Section 3: Why o7citizen */}
         <section className="border-t border-white/5 bg-starfield py-20 sm:py-24">
           <div className="container-narrow">
             <div className="card-surface relative overflow-hidden p-8 sm:p-12">
@@ -187,7 +146,7 @@ export default function Home() {
                 </p>
                 <div className="mt-7 flex flex-wrap items-center gap-4">
                   <Link
-                    href="/about"
+                    href="/o7-meaning"
                     className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-navyLight/50 px-5 py-2.5 text-sm font-semibold text-starwhite hover:border-gold/40 hover:text-gold"
                   >
                     Read the full story
@@ -201,14 +160,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Section 5: Newsletter */}
-        <section className="border-t border-white/5 bg-navy py-20 sm:py-24">
-          <div className="container-narrow">
-            <NewsletterSignup variant="full" />
-          </div>
-        </section>
-
-        {/* Section 6: Referral CTA banner */}
+        {/* Section 4: Referral CTA banner */}
         <section className="border-t border-white/5 bg-gradient-to-r from-navyLight via-navyLight/80 to-navy py-20 sm:py-24">
           <div className="container-wide flex flex-col gap-8 md:flex-row md:items-center md:justify-between">
             <div className="md:max-w-2xl">
