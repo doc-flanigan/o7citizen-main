@@ -1,0 +1,197 @@
+name: video narration pipeline
+
+# Detects new patch releases, translates notes to plain English via Claude,
+# and commits a ready-to-render script to the repo as a PR.
+# Rendering happens locally so Doc has full control over the final MP3.
+#
+# Workflow:
+#   1. This action opens a PR with video-scripts/<patch>/script.txt
+#   2. Review and edit the script in the PR (fix any awkward phrasing)
+#   3. Merge when satisfied, then git pull locally
+#   4. python scripts/video/render_tts.py --patch "X.X.X" --script video-scripts/X.X.X/script.txt
+
+on:
+  workflow_run:
+    workflows: ["sc-news watch"]
+    types: [completed]
+  workflow_dispatch:
+    inputs:
+      patch:
+        description: "Patch version (e.g. 4.7.2) -- leave blank to auto-detect"
+        required: false
+        default: ""
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: video-narration
+  cancel-in-progress: false
+
+jobs:
+  detect:
+    if: |
+      github.event_name == 'workflow_dispatch' ||
+      github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    outputs:
+      run: ${{ steps.decide.outputs.run }}
+      patch_version: ${{ steps.detect.outputs.patch_version }}
+      comm_link_id: ${{ steps.detect.outputs.comm_link_id }}
+    steps:
+      - name: Detect patch release from Comm-Link API
+        id: detect
+        env:
+          PATCH_OVERRIDE: ${{ inputs.patch }}
+        run: |
+          set -euo pipefail
+          if [ -n "${PATCH_OVERRIDE:-}" ]; then
+            echo "Manual override: patch=$PATCH_OVERRIDE"
+            echo "patch_version=$PATCH_OVERRIDE" >> "$GITHUB_OUTPUT"
+            CL_ID=$(curl -fsSL "https://api.star-citizen.wiki/api/comm-links/search?query=Alpha+${PATCH_OVERRIDE}" \
+              | jq -r '(.data // .)[0].id // ""')
+            echo "comm_link_id=$CL_ID" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          JSON=$(curl -fsSL "https://api.star-citizen.wiki/api/comm-links?limit=10")
+          PATCH=$(echo "$JSON" | jq -r \
+            '(.data // .) | map(select(.category == "Release Info")) | .[0].title // ""' \
+            | grep -oP '(?i)alpha\s+\K[\d.]+' || true)
+          CL_ID=$(echo "$JSON" | jq -r \
+            '(.data // .) | map(select(.category == "Release Info")) | .[0].id // ""')
+          if [ -z "$PATCH" ]; then
+            echo "No patch release in latest comm-links -- skipping."
+            echo "patch_version=" >> "$GITHUB_OUTPUT"
+            echo "comm_link_id=" >> "$GITHUB_OUTPUT"
+          else
+            echo "Detected patch: $PATCH (comm-link $CL_ID)"
+            echo "patch_version=$PATCH" >> "$GITHUB_OUTPUT"
+            echo "comm_link_id=$CL_ID" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Decide whether to run
+        id: decide
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PATCH: ${{ steps.detect.outputs.patch_version }}
+        run: |
+          if [ -z "$PATCH" ]; then
+            echo "run=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          # Skip if a PR for this patch is already open
+          COUNT=$(gh pr list --repo "$GITHUB_REPOSITORY" --state open --json headRefName \
+            --jq "[.[] | select(.headRefName == \"video-script/$PATCH\")] | length" 2>/dev/null || echo 0)
+          if [ "$COUNT" != "0" ]; then
+            echo "PR already open for video-script/$PATCH -- skipping."
+            echo "run=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "run=true" >> "$GITHUB_OUTPUT"
+          fi
+
+  generate-script:
+    needs: detect
+    if: needs.detect.outputs.run == 'true'
+    runs-on: ubuntu-latest
+    env:
+      PATCH: ${{ needs.detect.outputs.patch_version }}
+      CL_ID: ${{ needs.detect.outputs.comm_link_id }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install anthropic
+        run: pip install anthropic
+
+      - name: Fetch raw patch notes from Comm-Link API
+        run: |
+          set -euo pipefail
+          if [ -n "$CL_ID" ]; then
+            RAW=$(curl -fsSL "https://api.star-citizen.wiki/api/comm-links/$CL_ID" \
+              | jq -r '.translations.en_EN // .data.translations.en_EN // ""')
+          else
+            RAW=$(curl -fsSL "https://api.star-citizen.wiki/api/comm-links/search?query=Alpha+$PATCH" \
+              | jq -r '(.data // .)[0].translations.en_EN // ""')
+          fi
+          [ -n "$RAW" ] || { echo "::error::No comm-link body found for patch $PATCH"; exit 1; }
+          echo "$RAW" > /tmp/notes_raw.txt
+          echo "Fetched $(wc -w < /tmp/notes_raw.txt) words of raw patch notes."
+
+      - name: Translate to plain-English narration body via Claude
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          python - <<'PYEOF'
+          import os, anthropic
+          from pathlib import Path
+          raw   = Path("/tmp/notes_raw.txt").read_text(encoding="utf-8")
+          patch = os.environ["PATCH"]
+          client = anthropic.Anthropic()
+          msg = client.messages.create(
+              model="claude-haiku-4-5-20251001",
+              max_tokens=2000,
+              messages=[{"role": "user", "content": f"""Write the body of a narration script for a Star Citizen patch notes YouTube video on o7citizen.com.
+
+          Rules: write for someone who has never played any video game. Explain every game term in plain English in the same sentence. No hype words. No gaming jargon (use 'released' not 'shipped', 'players' not 'users'). Sentences under 25 words. Spell out numbers under 100. Full paragraphs only, no bullet points.
+
+          Patch: {patch}
+          Raw notes:
+          {raw}
+
+          Write ONLY body paragraphs. No intro, no outro, no headers."""}]
+          )
+          Path("/tmp/notes_translated.txt").write_text(msg.content[0].text, encoding="utf-8")
+          print(f"Translated: {len(msg.content[0].text.split())} words")
+          PYEOF
+
+      - name: Generate video script from template
+        run: |
+          mkdir -p "video-scripts/$PATCH"
+          python scripts/video/generate_script.py \
+            --patch "$PATCH" \
+            --notes /tmp/notes_translated.txt \
+            --output "video-scripts/$PATCH/script.txt"
+          echo "Script word count: $(wc -w < video-scripts/$PATCH/script.txt)"
+
+      - name: Commit script and open PR
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          BRANCH="video-script/$PATCH"
+          git config user.name "video-narration-bot"
+          git config user.email "video-narration-bot@users.noreply.github.com"
+          git checkout -b "$BRANCH"
+          git add "video-scripts/$PATCH/script.txt"
+          git commit -m "feat: video narration script for patch $PATCH"
+          git push -u origin "$BRANCH"
+          gh pr create \
+            --title "Video script ready -- patch $PATCH" \
+            --base main \
+            --head "$BRANCH" \
+            --body "Narration script for Star Citizen patch **$PATCH**, ready for local rendering.
+
+          **Before merging:** read through \`video-scripts/$PATCH/script.txt\` and edit any phrasing that sounds awkward when read aloud. You can edit directly in this PR.
+
+          **To render locally after merging:**
+          \`\`\`bash
+          git pull
+          python scripts/video/render_tts.py --patch \"$PATCH\" --script video-scripts/$PATCH/script.txt
+          \`\`\`
+          Output: \`/tmp/narration_${PATCH}.mp3\`
+
+          **Voice:** en-US-AndrewNeural @ +15% speed / 200ms sentence pauses"
+
+      - name: Summary
+        run: |
+          echo "## Video script ready -- patch $PATCH" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "PR opened on branch \`video-script/$PATCH\`" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "1. Review and edit \`video-scripts/$PATCH/script.txt\` in the PR" >> "$GITHUB_STEP_SUMMARY"
+          echo "2. Merge when satisfied" >> "$GITHUB_STEP_SUMMARY"
+          echo "3. \`git pull && python scripts/video/render_tts.py --patch \"$PATCH\" --script video-scripts/$PATCH/script.txt\`" >> "$GITHUB_STEP_SUMMARY"
