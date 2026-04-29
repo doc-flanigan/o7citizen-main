@@ -14,12 +14,23 @@ explained by a helpful veteran to a curious newcomer."
 > document still mention the old name — they describe build steps that
 > happened before the rename and are kept for historical reference.
 
+## Quick Reference
+
+```
+Referral code:  STAR-GCQJ-N6NC
+Enlist URL:     https://www.robertsspaceindustries.com/enlist?referral=STAR-GCQJ-N6NC
+Hub:            https://dayonecitizen.com
+Conventions:    E:\Claude Code\sc-portfolio\SHARED_CONVENTIONS.md
+```
+
 ## Plain-English Standard (NON-NEGOTIABLE)
 
 The entire purpose of this site is to explain Star Citizen to people who have
 never played the game. Every piece of user-facing copy on every page must
 pass these rules. This standard applies to all pages, all sections, all
 agent output rendered to the site, and every future weekly update.
+
+> Base tone rules are defined in SHARED_CONVENTIONS.md § Tone Rules. The rules below extend and supersede them for this site.
 
 Rules — apply without exception:
 
@@ -114,7 +125,7 @@ Build these reusable components in /components/:
     fade transition, accepts overlay title + subtitle + optional CTA button
   - CTAButton.tsx: primary gold button linking to referral URL
     https://www.robertsspaceindustries.com/enlist?referral=STAR-GCQJ-N6NC
-  - NavBar.tsx: sticky top nav, logo "o7citizen.com", links: Home, Glossary,
+  - NavBar.tsx: sticky top nav, logo "dayonecitizen.com", links: Home, Glossary,
     Weekly Update, Free Fly Events, About, Newsletter. Mobile hamburger menu.
   - Footer.tsx: three-section footer (see shared spec below)
   - NewsletterSignup.tsx: email capture form with CTA "Get the Weekly Update"
@@ -131,7 +142,7 @@ Build app/page.tsx:
     what the 'Verse means, and what UEC is. Each card links to Glossary.
   Section 3: Latest Weekly Update preview — UpdateCard component, "Read This
     Week's Update" button
-  Section 4: "Why o7citizen.com?" — brief origin story callout block mentioning
+  Section 4: "Why dayonecitizen.com?" — brief origin story callout block mentioning
     Doc_Flanigan (links to About page)
   Section 5: NewsletterSignup component
   Section 6: Referral CTA banner — "Ready to Jump In? Use a Referral Code and
@@ -142,7 +153,7 @@ Confirm page renders fully on mobile and desktop before proceeding.
 ### Agent 4 — Glossary Page (/glossary)
 Build app/glossary/page.tsx:
   - SEO meta: title="Star Citizen Glossary — Plain English Definitions |
-    o7citizen.com" description="New to Star Citizen? Plain-English definitions
+    dayonecitizen.com" description="New to Star Citizen? Plain-English definitions
     of every term, acronym, and piece of 'Verse slang you'll encounter."
   - Search/filter bar at top
   - Alphabetical index (A-Z anchor links)
@@ -160,7 +171,7 @@ Confirm page and search function work before proceeding.
 ### Agent 5 — Weekly Update Page (/weekly-update)
 Build app/weekly-update/page.tsx:
   - SEO meta: title="Star Citizen Weekly Update — Plain English in 5 Minutes |
-    o7citizen.com"
+    dayonecitizen.com"
   - Hero: "This Week in the 'Verse" with "5-minute read" badge
   - Placeholder update content with realistic structure:
       * Patch Notes Summary (plain English)
@@ -176,7 +187,7 @@ Confirm page renders before proceeding.
 ### Agent 6 — Free Fly Events Page (/free-fly-events)
 Build app/free-fly-events/page.tsx:
   - SEO meta: title="Star Citizen Free Fly Events — Play Free, No Purchase
-    Needed | o7citizen.com"
+    Needed | dayonecitizen.com"
   - Explainer: What is a Free Fly event, how to join, what you can do
   - Current event banner (placeholder with "Check Back Soon" state)
   - Upcoming events timeline (placeholder)
@@ -187,13 +198,13 @@ Confirm page renders before proceeding.
 
 ### Agent 7 — About Page (/about)
 Build app/about/page.tsx:
-  - SEO meta: title="About o7citizen.com — Why This Site Exists"
+  - SEO meta: title="About dayonecitizen.com — Why This Site Exists"
   - Hero: "What Does o7 Mean? And Why I Built This Site."
   - Story section written in first person as Doc_Flanigan:
     "When I first heard 'o7' in a Star Citizen community channel, I had no idea
     what it meant. It turned out to be one of the most common questions new
     players ask — and one of the hardest to find a straight answer for. That
-    moment is why I built o7citizen.com: a plain-English guide to Star Citizen
+    moment is why I built dayonecitizen.com: a plain-English guide to Star Citizen
     for anyone who's curious about the 'Verse but doesn't know where to start.
     I'm Doc_Flanigan, a veteran Star Citizen backer, and this is my unofficial
     love letter to the game and its community."
@@ -249,16 +260,6 @@ Confirm SEO audit passes before proceeding.
 ## Referral URL
 https://www.robertsspaceindustries.com/enlist?referral=STAR-GCQJ-N6NC
 
-## Footer Spec
-Three mandatory sections:
-1. Fan site disclaimer: "This is an unofficial fan site and is not affiliated
-   with, endorsed by, or connected to Cloud Imperium Games, Roberts Space
-   Industries, or the Star Citizen franchise in any way."
-2. FTC disclosure: "Affiliate Disclosure: This site contains referral links.
-   If you create a Star Citizen account using our referral code, the site owner
-   (Doc_Flanigan) will receive an in-game bonus reward at no cost to you."
-3. RSI Fankit badge: <Image src="/images/made-by-community.png" alt="Made by
-   the Star Citizen Community" width={120} height={40} />
 
 ## Color Palette
   --navy: #0a0e1a
@@ -268,11 +269,9 @@ Three mandatory sections:
   --starwhite: #e8eaf0
   --muted: #8892a4
 
-## Commit Message Convention
-feat: [component/page] — brief description
-fix: [component/page] — brief description
-seo: [page] — brief description
-docs: update README
+## Network Conventions
+See `E:\Claude Code\sc-portfolio\SHARED_CONVENTIONS.md` for footer spec,
+commit convention, tech stack, and agentic build pattern.
 
 ## PR/Merge Description Template
 ### What this PR does
