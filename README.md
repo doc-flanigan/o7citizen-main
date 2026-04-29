@@ -1,4 +1,4 @@
-# dayonecitizen.com
+# DayOneCitizen.com
 
 > **Star Citizen for day-one players. Plain English, no jargon.**
 
