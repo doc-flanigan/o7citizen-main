@@ -3,7 +3,6 @@ import { Calendar, Clock, AlertCircle, Plane, Download, Wallet } from 'lucide-re
 import NavBar from '@/components/NavBar'
 import Footer from '@/components/Footer'
 import CTAButton from '@/components/CTAButton'
-import NewsletterSignup from '@/components/NewsletterSignup'
 import Term from '@/components/Term'
 
 export const metadata: Metadata = {
@@ -269,15 +268,6 @@ export default function FreeFlyPage() {
           </div>
         </section>
 
-        <section className="py-20">
-          <div className="container-narrow">
-            <NewsletterSignup
-              variant="full"
-              heading="Never miss a Free Fly window"
-              subheading="One email when an event starts, one when it ends. Plus the loaner-ship rotation. That's it."
-            />
-          </div>
-        </section>
       </main>
       <Footer />
     </>

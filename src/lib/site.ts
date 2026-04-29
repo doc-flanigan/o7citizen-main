@@ -19,11 +19,10 @@ export const SITE = {
 
 export const NAV_LINKS = [
   { href: '/', label: 'Home' },
+  { href: '/day-one-citizen', label: 'Day One Citizen' },
   { href: '/glossary', label: 'Glossary' },
-  { href: '/weekly-update', label: 'Weekly Update' },
   { href: '/free-fly-events', label: 'Free Fly Events' },
   { href: '/o7-meaning', label: 'o7 Meaning' },
-  { href: '/about', label: 'About' },
 ] as const
 
 export const HERO_IMAGES = Array.from({ length: 12 }, (_, i) => {

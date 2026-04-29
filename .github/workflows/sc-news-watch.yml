@@ -1,12 +1,17 @@
 name: sc-news watch
 
+# PAUSED — see CLAUDE.md "Weekly digest pipeline (paused)" section.
+# The /weekly-update page and the email broadcast were retired in favor of
+# the Day One Citizen onboarding focus. The schedule trigger is commented
+# out so this workflow no longer runs on cron. The agent's writes target
+# files (`src/app/weekly-update/page.tsx`) that no longer exist, so even
+# manual workflow_dispatch runs will fail until the page is restored.
+# Kept here intentionally so the pipeline can be revived later without
+# rebuilding from scratch.
+
 on:
-  schedule:
-    # Daily at 23:30 UTC — chosen from a 100-Comm-Link sample showing CIG's
-    # publishing window is 15:00-22:00 UTC (mode 20:00, latest 22:00). 23:30
-    # is 90 minutes after the latest observed publish, so a digest run picks
-    # up everything from that day before the next day's window opens.
-    - cron: "30 23 * * *"
+  # schedule:
+  #   - cron: "30 23 * * *"
   workflow_dispatch:
     inputs:
       force:

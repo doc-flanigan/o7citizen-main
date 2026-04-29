@@ -62,24 +62,19 @@ export default function Footer() {
             </li>
             <li>
               <Link
+                href="/day-one-citizen"
+                className="text-starwhite/80 hover:text-gold"
+              >
+                Day One Citizen
+              </Link>
+            </li>
+            <li>
+              <Link
                 href="/glossary"
                 className="text-starwhite/80 hover:text-gold"
               >
                 Glossary A–Z
               </Link>
-            </li>
-            <li>
-              <Link
-                href="/weekly-update"
-                className="text-starwhite/80 hover:text-gold"
-              >
-                This week&rsquo;s update
-              </Link>
-            </li>
-            <li>
-              <a href="#newsletter" className="text-starwhite/80 hover:text-gold">
-                Newsletter
-              </a>
             </li>
           </ul>
         </div>

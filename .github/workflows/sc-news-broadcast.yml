@@ -1,13 +1,18 @@
 name: sc-news draft broadcast
 
-# When a sc-news/* PR is merged into main, take the latest digest markdown
-# and create a DRAFT broadcast in Resend. Doc reviews and clicks send in
-# the Resend dashboard — the workflow never sends on its own.
+# PAUSED — see CLAUDE.md "Weekly digest pipeline (paused)" section.
+# The email broadcast was retired in favor of the Day One Citizen
+# onboarding focus. The pull_request trigger is commented out so this
+# workflow no longer fires automatically. workflow_dispatch is kept so
+# the full email-rendering path can be exercised manually if Doc ever
+# wants to send an ad-hoc broadcast from a digest in `digests/`.
+# Kept here intentionally so the pipeline can be revived later without
+# rebuilding from scratch.
 
 on:
-  pull_request:
-    types: [closed]
-    branches: [main]
+  # pull_request:
+  #   types: [closed]
+  #   branches: [main]
   workflow_dispatch:
     inputs:
       digest_file:
