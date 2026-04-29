@@ -12,9 +12,9 @@ export default function Footer() {
           <Link href="/" className="inline-flex items-center gap-2 text-lg font-bold">
             <span
               className="rounded-md bg-gold px-2 py-1 font-display text-navy"
-              aria-label="Day One Citizen"
+              aria-label="DOC — Day One Citizen"
             >
-              01
+              DOC
             </span>
             <span className="text-starwhite">dayonecitizen.com</span>
           </Link>

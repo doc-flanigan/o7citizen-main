@@ -41,9 +41,9 @@ export default function NavBar() {
         >
           <span
             className="rounded-md bg-gold px-2 py-1 font-display text-navy"
-            aria-label="Day One Citizen"
+            aria-label="DOC — Day One Citizen"
           >
-            01
+            DOC
           </span>
           <span className="hidden sm:inline text-starwhite">dayonecitizen.com</span>
         </Link>
