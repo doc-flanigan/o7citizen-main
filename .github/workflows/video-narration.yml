@@ -1,0 +1,156 @@
+name: video narration pipeline
+
+# Triggers when sc-news-watch detects new content, or manually with a patch override.
+# Skips silently if the latest comm-link is not a patch release.
+# Output: downloadable artifact -- narration-X.X.X (MP3 + script, 90-day retention).
+
+on:
+  workflow_run:
+    workflows: ["sc-news watch"]
+    types: [completed]
+  workflow_dispatch:
+    inputs:
+      patch:
+        description: "Patch version (e.g. 4.7.2) -- leave blank to auto-detect"
+        required: false
+        default: ""
+
+permissions:
+  contents: read
+
+concurrency:
+  group: video-narration
+  cancel-in-progress: false
+
+jobs:
+  detect:
+    if: |
+      github.event_name == 'workflow_dispatch' ||
+      github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    outputs:
+      run: ${{ steps.detect.outputs.run }}
+      patch_version: ${{ steps.detect.outputs.patch_version }}
+      comm_link_id: ${{ steps.detect.outputs.comm_link_id }}
+    steps:
+      - name: Detect patch release from Comm-Link API
+        id: detect
+        env:
+          PATCH_OVERRIDE: ${{ inputs.patch }}
+        run: |
+          set -euo pipefail
+          if [ -n "${PATCH_OVERRIDE:-}" ]; then
+            echo "Manual override: patch=$PATCH_OVERRIDE"
+            echo "run=true" >> "$GITHUB_OUTPUT"
+            echo "patch_version=$PATCH_OVERRIDE" >> "$GITHUB_OUTPUT"
+            CL_ID=$(curl -fsSL "https://api.star-citizen.wiki/api/comm-links/search?query=Alpha+${PATCH_OVERRIDE}" \
+              | jq -r '(.data // .)[0].id // ""')
+            echo "comm_link_id=$CL_ID" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          JSON=$(curl -fsSL "https://api.star-citizen.wiki/api/comm-links?limit=10")
+          PATCH=$(echo "$JSON" | jq -r \
+            '(.data // .) | map(select(.category == "Release Info")) | .[0].title // ""' \
+            | grep -oP '(?i)alpha\s+\K[\d.]+' || true)
+          CL_ID=$(echo "$JSON" | jq -r \
+            '(.data // .) | map(select(.category == "Release Info")) | .[0].id // ""')
+          if [ -z "$PATCH" ]; then
+            echo "No patch release in latest comm-links -- skipping."
+            echo "run=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "Detected patch: $PATCH (comm-link $CL_ID)"
+            echo "run=true" >> "$GITHUB_OUTPUT"
+            echo "patch_version=$PATCH" >> "$GITHUB_OUTPUT"
+            echo "comm_link_id=$CL_ID" >> "$GITHUB_OUTPUT"
+          fi
+
+  render:
+    needs: detect
+    if: needs.detect.outputs.run == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install edge-tts anthropic
+
+      - name: Fetch and translate patch notes
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          PATCH: ${{ needs.detect.outputs.patch_version }}
+          CL_ID: ${{ needs.detect.outputs.comm_link_id }}
+        run: |
+          set -euo pipefail
+          if [ -n "$CL_ID" ]; then
+            RAW=$(curl -fsSL "https://api.star-citizen.wiki/api/comm-links/$CL_ID" \
+              | jq -r '.translations.en_EN // .data.translations.en_EN // ""')
+          else
+            RAW=$(curl -fsSL "https://api.star-citizen.wiki/api/comm-links/search?query=Alpha+$PATCH" \
+              | jq -r '(.data // .)[0].translations.en_EN // ""')
+          fi
+          [ -n "$RAW" ] || { echo "::error::No comm-link body found for patch $PATCH"; exit 1; }
+          echo "$RAW" > /tmp/notes_raw.txt
+          echo "Fetched $(wc -w < /tmp/notes_raw.txt) words of raw patch notes."
+
+          python - <<'PYEOF'
+          import os, anthropic
+          from pathlib import Path
+          raw = Path("/tmp/notes_raw.txt").read_text(encoding="utf-8")
+          patch = os.environ["PATCH"]
+          client = anthropic.Anthropic()
+          msg = client.messages.create(
+              model="claude-haiku-4-5-20251001",
+              max_tokens=2000,
+              messages=[{"role": "user", "content": f"""Write the body of a narration script for a Star Citizen patch notes YouTube video on o7citizen.com.
+
+          Rules: write for someone who has never played any video game. Explain every game term in plain English in the same sentence. No hype words. No gaming jargon (use 'released' not 'shipped', 'players' not 'users'). Sentences under 25 words. Spell out numbers under 100. Full paragraphs only, no bullet points.
+
+          Patch: {patch}
+          Raw notes:
+          {raw}
+
+          Write ONLY body paragraphs. No intro, no outro, no headers."""}]
+          )
+          Path("/tmp/notes_translated.txt").write_text(msg.content[0].text, encoding="utf-8")
+          print(f"Translated: {len(msg.content[0].text.split())} words")
+          PYEOF
+
+      - name: Generate video script
+        env:
+          PATCH: ${{ needs.detect.outputs.patch_version }}
+        run: |
+          python scripts/video/generate_script.py \
+            --patch "$PATCH" \
+            --notes /tmp/notes_translated.txt \
+            --output "/tmp/script_${PATCH}.txt"
+
+      - name: Render MP3
+        env:
+          PATCH: ${{ needs.detect.outputs.patch_version }}
+        run: |
+          python scripts/video/render_tts.py \
+            --patch "$PATCH" \
+            --script "/tmp/script_${PATCH}.txt" \
+            --output "/tmp/narration_${PATCH}.mp3"
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: narration-${{ needs.detect.outputs.patch_version }}
+          path: |
+            /tmp/narration_${{ needs.detect.outputs.patch_version }}.mp3
+            /tmp/script_${{ needs.detect.outputs.patch_version }}.txt
+          retention-days: 90
+
+      - name: Summary
+        env:
+          PATCH: ${{ needs.detect.outputs.patch_version }}
+        run: |
+          echo "## Video narration ready -- patch $PATCH" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Voice: en-US-AndrewNeural @ +15% / 200ms pauses" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Artifact: **narration-$PATCH** (MP3 + script, 90-day retention)" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Download: Actions tab -> this run -> Artifacts section" >> "$GITHUB_STEP_SUMMARY"
