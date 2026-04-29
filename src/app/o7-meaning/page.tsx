@@ -267,7 +267,7 @@ export default function O7MeaningPage() {
               About this site
             </p>
             <h2 className="heading-display text-3xl">
-              Why I built o7citizen.com.
+              Why I built dayonecitizen.com.
             </h2>
             <div className="mt-5 space-y-4 text-base leading-relaxed text-starwhite/85">
               <p>

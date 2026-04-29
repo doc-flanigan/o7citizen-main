@@ -10,8 +10,13 @@ export default function Footer() {
       <div className="container-wide grid gap-10 py-14 md:grid-cols-4">
         <div className="md:col-span-2">
           <Link href="/" className="inline-flex items-center gap-2 text-lg font-bold">
-            <span className="rounded-md bg-gold px-2 py-1 font-display text-navy">o7</span>
-            <span className="text-starwhite">citizen.com</span>
+            <span
+              className="rounded-md bg-gold px-2 py-1 font-display text-navy"
+              aria-label="DOC — Day One Citizen"
+            >
+              DOC
+            </span>
+            <span className="text-starwhite">dayonecitizen.com</span>
           </Link>
           <p className="mt-4 max-w-md text-sm leading-relaxed text-muted">
             {SITE.description}
@@ -101,7 +106,7 @@ export default function Footer() {
           </p>
         </div>
         <div className="container-wide pb-8 text-xs text-muted/80">
-          © {year} {SITE.name} · Built with o7 by {SITE.author}
+          © {year} {SITE.name} · Built by {SITE.author} · o7
         </div>
       </div>
     </footer>

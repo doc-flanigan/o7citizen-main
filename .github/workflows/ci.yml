@@ -36,7 +36,7 @@ jobs:
           # so dummy values are fine for CI — we just want the build to compile.
           RESEND_API_KEY: ci-build-dummy
           RESEND_AUDIENCE_ID: ci-build-dummy
-          NEXT_PUBLIC_SITE_URL: https://o7citizen.com
+          NEXT_PUBLIC_SITE_URL: https://dayonecitizen.com
           NEXT_PUBLIC_REFERRAL_URL: https://www.robertsspaceindustries.com/enlist?referral=STAR-GCQJ-N6NC
-          NEXT_PUBLIC_HUB_URL: https://o7citizen.com
+          NEXT_PUBLIC_HUB_URL: https://dayonecitizen.com
         run: npm run build

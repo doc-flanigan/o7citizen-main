@@ -6,7 +6,7 @@
 // the Resend Broadcasts API. No external CSS, no <script>, no fancy layout —
 // email clients reject most of that anyway.
 //
-// Palette mirrors the o7citizen.com site:
+// Palette mirrors the dayonecitizen.com site:
 //   navy        #0a0e1a   page background
 //   navyLight   #141c2e   card background
 //   gold        #f0c040   headings, links, accents
@@ -75,7 +75,7 @@ const html = `<!doctype html>
     <hr style="margin:32px 0 16px;border:none;border-top:1px solid #2a2f3e" />
     <p style="font-family:Georgia,serif;font-size:13px;line-height:1.5;color:#8892a4;margin:0">
       You&rsquo;re getting this because you signed up for the weekly update at
-      <a href="https://o7citizen.com" style="color:#c49a20;text-decoration:underline">o7citizen.com</a>.
+      <a href="https://dayonecitizen.com" style="color:#c49a20;text-decoration:underline">dayonecitizen.com</a>.
       An unofficial fan site. Not affiliated with Cloud Imperium Games.
       Use the unsubscribe button in your email client&rsquo;s header to stop receiving these.
     </p>
