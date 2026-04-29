@@ -9,19 +9,24 @@ the navy palette (#0a0e1a / #141c2e). DOC is both the brand initials
 (Day One Citizen) and Doc_Flanigan's in-game handle — same single mark
 for both meanings.
 
-Output goes to public/images/brand/ as PNG files, eleven assets total:
+Outputs are split between two destinations:
 
-    favicon-16.png            16x16    browser tab favicon
-    favicon-32.png            32x32    browser tab favicon
-    apple-touch-icon.png      180x180  iOS home-screen icon
-    icon-192.png              192x192  PWA / Android icon
-    icon-512.png              512x512  PWA / Android icon (large)
-    og-image.png              1200x630 OpenGraph card (Facebook, LinkedIn, etc.)
-    twitter-card.png          1200x600 X/Twitter summary_large_image card
-    x-banner.png              1500x500 X/Twitter profile header banner
-    youtube-banner.png        2560x1440 YouTube channel banner
-    discord-icon.png          512x512  Discord server avatar
-    logo-mark.png             1024x1024 Transparent square mark
+    public/images/brand/   (served by the site, wired into layout.tsx
+                            and manifest.ts)
+        favicon-16.png            16x16    browser tab favicon
+        favicon-32.png            32x32    browser tab favicon
+        apple-touch-icon.png      180x180  iOS home-screen icon
+        icon-192.png              192x192  PWA / Android icon
+        icon-512.png              512x512  PWA / Android icon (large)
+        og-image.png              1200x630 OpenGraph card (link previews)
+        twitter-card.png          1200x600 X summary_large_image card
+        logo-mark.png             1024x1024 transparent square mark
+
+    assets/brand/          (NOT served — manual upload to social
+                            platforms, kept out of the production bundle)
+        x-banner.png              1500x500  X profile header banner
+        youtube-banner.png        2560x1440 YouTube channel banner
+        discord-icon.png          512x512   Discord server avatar
 
 Run:
     python3 scripts/render-brand-mark.py
@@ -32,14 +37,16 @@ assets" for the bootstrap recipe).
 """
 from __future__ import annotations
 
-import os
+import math
+import random
 from pathlib import Path
 
 from PIL import Image, ImageDraw, ImageFont
 
 ROOT = Path(__file__).resolve().parent.parent
 FONTS_DIR = ROOT / "scripts" / "fonts"
-OUT_DIR = ROOT / "public" / "images" / "brand"
+SITE_OUT = ROOT / "public" / "images" / "brand"
+SOCIAL_OUT = ROOT / "assets" / "brand"
 
 # Palette — kept in sync with tailwind.config.ts.
 NAVY = (10, 14, 26)          # #0a0e1a
@@ -48,6 +55,10 @@ GOLD = (240, 192, 64)        # #f0c040
 GOLD_DARK = (196, 154, 32)   # #c49a20
 STARWHITE = (232, 234, 240)  # #e8eaf0
 MUTED = (136, 146, 164)      # #8892a4
+
+# Single subcopy used everywhere a banner needs a tagline, so OG,
+# Twitter, X header, and YouTube all read consistently.
+SUBCOPY = "Star Citizen for brand-new players. Plain English. No jargon."
 
 BOLD_PATH = FONTS_DIR / "Orbitron-Bold.ttf"
 REGULAR_PATH = FONTS_DIR / "Orbitron-Regular.ttf"
@@ -212,12 +223,152 @@ def banner_card(
     return img
 
 
+def starfield(size: tuple[int, int], seed: int = 7) -> Image.Image:
+    """Speckled starfield overlay on the navy gradient. Density and
+    seed are fixed so the output is deterministic across runs."""
+    w, h = size
+    img = gradient_navy(size).convert("RGBA")
+    draw = ImageDraw.Draw(img, "RGBA")
+    rng = random.Random(seed)
+    # Star count scales with canvas area so big banners get richer
+    # fields and small ones don't get cluttered.
+    count = max(60, (w * h) // 8000)
+    for _ in range(count):
+        x = rng.randint(0, w - 1)
+        y = rng.randint(0, h - 1)
+        # Most stars are tiny dim points; ~10% are larger and brighter
+        # so the field has some visual hierarchy.
+        if rng.random() < 0.1:
+            r = rng.randint(2, 4)
+            alpha = rng.randint(140, 220)
+            color = STARWHITE
+        else:
+            r = rng.randint(0, 1)
+            alpha = rng.randint(40, 110)
+            color = MUTED
+        draw.ellipse(
+            (x - r, y - r, x + r, y + r),
+            fill=(color[0], color[1], color[2], alpha),
+        )
+    return img
+
+
+def youtube_banner(width: int = 2560, height: int = 1440) -> Image.Image:
+    """YouTube channel banner. YouTube crops aggressively across
+    devices; only the central 1546x423 safe zone is guaranteed to
+    show on every device, so the most important elements (DOC mark
+    + headline + sub) live inside that. The outer canvas gets a
+    starfield, full-width gold rules, and decorative side text so
+    the desktop view doesn't read as 60% empty space."""
+    img = starfield((width, height))
+    draw = ImageDraw.Draw(img, "RGBA")
+
+    safe_w, safe_h = 1546, 423
+    safe_x = (width - safe_w) // 2
+    safe_y = (height - safe_h) // 2
+
+    # Full-width gold rule above and below the safe zone, fading out
+    # at the canvas edges so the banner reads as one composition.
+    for offset, _label in [(-30, "top"), (safe_h + 30, "bottom")]:
+        y = safe_y + offset
+        rule_w = max(2, height // 480)
+        # Three-segment fade: faint - solid - faint.
+        for i in range(width):
+            t = i / (width - 1)
+            # Triangular alpha — peaks at center, near 0 at edges.
+            a = int(180 * (1 - abs(2 * t - 1)))
+            if a > 0:
+                draw.rectangle(
+                    (i, y, i + 1, y + rule_w),
+                    fill=(GOLD[0], GOLD[1], GOLD[2], a),
+                )
+
+    # DOC mark inside the safe zone, left side.
+    mark_size = int(safe_h * 0.92)
+    mark_x = safe_x + int(safe_h * 0.05)
+    mark_y = safe_y + (safe_h - mark_size) // 2
+    mark = square_mark(mark_size, transparent=True)
+    img.paste(mark, (mark_x, mark_y), mark)
+
+    # Vertical hair-line separator inside the safe zone.
+    sep_x = mark_x + mark_size + int(safe_h * 0.10)
+    draw.line(
+        [(sep_x, safe_y + int(safe_h * 0.18)),
+         (sep_x, safe_y + int(safe_h * 0.82))],
+        fill=(GOLD[0], GOLD[1], GOLD[2], 140),
+        width=max(2, height // 480),
+    )
+
+    # Headline + sub on the right side of the safe zone.
+    text_x = sep_x + int(safe_h * 0.10)
+    text_max_w = (safe_x + safe_w) - text_x - int(safe_h * 0.05)
+
+    headline = "dayonecitizen.com"
+    headline_fnt = fit_font(
+        headline, text_max_w, int(safe_h * 0.40), int(safe_h * 0.32)
+    )
+    sub_fnt = fit_font(
+        SUBCOPY, text_max_w, int(safe_h * 0.20), int(safe_h * 0.10), bold=False
+    )
+
+    _hw, hh = measure(headline, headline_fnt)
+    _sw, sh = measure(SUBCOPY, sub_fnt)
+    gap = int(safe_h * 0.06)
+    block_h = hh + gap + sh
+    block_top = safe_y + (safe_h - block_h) // 2
+
+    draw_left(img, headline, headline_fnt, GOLD, text_x, block_top)
+    draw_left(img, SUBCOPY, sub_fnt, STARWHITE, text_x, block_top + hh + gap)
+
+    # Vertical "DAY ONE / CITIZEN" wordmark stacked at the far left
+    # and right edges, dim gold, decorative only — adds presence on
+    # wide screens that show the full canvas.
+    side_fnt = font(int(height * 0.055))
+    for line, line_y in [("DAY ONE", height // 2 - int(height * 0.05)),
+                         ("CITIZEN", height // 2 + int(height * 0.05))]:
+        # Far left
+        lw, _lh = measure(line, side_fnt)
+        left_x = (safe_x - lw) // 2
+        draw_left(img, line, side_fnt,
+                  (GOLD_DARK[0], GOLD_DARK[1], GOLD_DARK[2], 90),
+                  left_x, line_y)
+        # Far right
+        right_x = safe_x + safe_w + ((width - (safe_x + safe_w)) - lw) // 2
+        draw_left(img, line, side_fnt,
+                  (GOLD_DARK[0], GOLD_DARK[1], GOLD_DARK[2], 90),
+                  right_x, line_y)
+
+    # Tagline along the very bottom of the canvas, centered, dim.
+    foot_fnt = font(int(height * 0.022), bold=False)
+    foot_text = "An unofficial fan site by Doc_Flanigan"
+    fw, fh = measure(foot_text, foot_fnt)
+    foot_y = height - fh - int(height * 0.04)
+    draw_left(
+        img, foot_text, foot_fnt,
+        (MUTED[0], MUTED[1], MUTED[2], 200),
+        (width - fw) // 2, foot_y,
+    )
+
+    return img
+
+
 def render_all() -> None:
-    OUT_DIR.mkdir(parents=True, exist_ok=True)
+    SITE_OUT.mkdir(parents=True, exist_ok=True)
+    SOCIAL_OUT.mkdir(parents=True, exist_ok=True)
 
-    written: list[tuple[str, str]] = []
+    written: list[tuple[Path, str, str]] = []
 
-    # 1-5: square icon set
+    def save_rgb(img: Image.Image, out: Path, name: str, dims: str) -> None:
+        img.convert("RGB").save(out / name, "PNG", optimize=True)
+        written.append((out, name, dims))
+
+    def save_rgba(img: Image.Image, out: Path, name: str, dims: str) -> None:
+        img.save(out / name, "PNG", optimize=True)
+        written.append((out, name, dims))
+
+    # ----- public/images/brand/ : served by the site -----
+
+    # Square icon set (favicons + PWA + Apple touch icon).
     for filename, size in [
         ("favicon-16.png", 16),
         ("favicon-32.png", 32),
@@ -225,65 +376,53 @@ def render_all() -> None:
         ("icon-192.png", 192),
         ("icon-512.png", 512),
     ]:
-        img = square_mark(size)
-        img.convert("RGB").save(OUT_DIR / filename, "PNG", optimize=True)
-        written.append((filename, f"{size}x{size}"))
+        save_rgb(square_mark(size), SITE_OUT, filename, f"{size}x{size}")
 
-    # 6: OpenGraph card (Facebook, LinkedIn, link previews)
-    og = banner_card(
-        1200, 630,
-        headline="dayonecitizen.com",
-        sub="Star Citizen for brand-new players. Plain English. No jargon.",
+    # OpenGraph card (Facebook, LinkedIn, link previews).
+    save_rgb(
+        banner_card(1200, 630, headline="dayonecitizen.com", sub=SUBCOPY),
+        SITE_OUT, "og-image.png", "1200x630",
     )
-    og.convert("RGB").save(OUT_DIR / "og-image.png", "PNG", optimize=True)
-    written.append(("og-image.png", "1200x630"))
 
-    # 7: Twitter / X summary_large_image card
-    tw = banner_card(
-        1200, 600,
-        headline="dayonecitizen.com",
-        sub="Star Citizen, explained for day one.",
+    # X / Twitter summary_large_image card. Same subcopy as OG so
+    # link previews read identically across networks.
+    save_rgb(
+        banner_card(1200, 600, headline="dayonecitizen.com", sub=SUBCOPY),
+        SITE_OUT, "twitter-card.png", "1200x600",
     )
-    tw.convert("RGB").save(OUT_DIR / "twitter-card.png", "PNG", optimize=True)
-    written.append(("twitter-card.png", "1200x600"))
 
-    # 8: X / Twitter profile header banner
-    xb = banner_card(
-        1500, 500,
-        headline="DAY ONE CITIZEN",
-        sub="Star Citizen for brand-new players.",
-        headline_scale=0.20,
-        sub_scale=0.055,
+    # Transparent square logo mark for in-site header / overlay use.
+    save_rgba(
+        square_mark(1024, transparent=True),
+        SITE_OUT, "logo-mark.png", "1024x1024 (transparent)",
     )
-    xb.convert("RGB").save(OUT_DIR / "x-banner.png", "PNG", optimize=True)
-    written.append(("x-banner.png", "1500x500"))
 
-    # 9: YouTube channel banner. The 2560x1440 canvas has a 1546x423
-    # safe zone in the center for text, so the headline scale is
-    # smaller relative to the banner height than the X banner.
-    yt = banner_card(
-        2560, 1440,
-        headline="DAYONECITIZEN.COM",
-        sub="Plain-English Star Citizen for brand-new players.",
-        headline_scale=0.075,
-        sub_scale=0.024,
+    # ----- assets/brand/ : NOT served, manual upload -----
+
+    # X / Twitter profile header banner.
+    save_rgb(
+        banner_card(
+            1500, 500,
+            headline="DAY ONE CITIZEN",
+            sub=SUBCOPY,
+            headline_scale=0.20,
+            sub_scale=0.055,
+        ),
+        SOCIAL_OUT, "x-banner.png", "1500x500",
     )
-    yt.convert("RGB").save(OUT_DIR / "youtube-banner.png", "PNG", optimize=True)
-    written.append(("youtube-banner.png", "2560x1440"))
 
-    # 10: Discord server icon (square avatar)
-    di = square_mark(512)
-    di.convert("RGB").save(OUT_DIR / "discord-icon.png", "PNG", optimize=True)
-    written.append(("discord-icon.png", "512x512"))
+    # YouTube channel banner — uses the dedicated full-canvas design.
+    save_rgb(
+        youtube_banner(2560, 1440),
+        SOCIAL_OUT, "youtube-banner.png", "2560x1440",
+    )
 
-    # 11: Transparent square logo mark for site header / overlay use
-    lm = square_mark(1024, transparent=True)
-    lm.save(OUT_DIR / "logo-mark.png", "PNG", optimize=True)
-    written.append(("logo-mark.png", "1024x1024 (transparent)"))
+    # Discord server avatar.
+    save_rgb(square_mark(512), SOCIAL_OUT, "discord-icon.png", "512x512")
 
-    print(f"Wrote {len(written)} assets to {OUT_DIR.relative_to(ROOT)}/")
-    for name, size in written:
-        print(f"  {name:28s} {size}")
+    print(f"Wrote {len(written)} assets:")
+    for out, name, size in written:
+        print(f"  {out.relative_to(ROOT)}/{name:24s} {size}")
 
 
 if __name__ == "__main__":

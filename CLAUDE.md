@@ -430,15 +430,34 @@ stamp), so `lastVerified` is genuine evidence rather than a checkbox.
 
 ### Brand mark assets
 
-The DOC wordmark (Day One Citizen / Doc_Flanigan) ships as eleven
-pre-rendered PNGs under `public/images/brand/` — favicon set, PWA
-icons, OG card, X card + banner, YouTube banner, Discord avatar,
-and a transparent square logo. They exist for **social-platform
-uploads** (X profile header, YouTube channel banner, Discord server
-icon, link previews on Facebook / LinkedIn). They are **not wired
-into the site** — `layout.tsx` and `manifest.ts` still reference the
-existing hero / made-by-community assets. Wire them in if/when you
-want the site favicon and OG to match the social brand.
+The DOC wordmark (Day One Citizen / Doc_Flanigan) is rendered by
+`scripts/render-brand-mark.py` into eleven PNG variants split
+between two destinations:
+
+- **`public/images/brand/` (8 assets, served by the site)** —
+  favicons (16, 32), Apple touch icon (180), PWA icons (192, 512),
+  OpenGraph card (1200×630), X / Twitter card (1200×600), and a
+  transparent 1024² `logo-mark.png`. These are wired into
+  `layout.tsx` (`metadata.icons`, `metadata.openGraph.images`,
+  `metadata.twitter.images`, and the Organization JSON-LD `logo`)
+  and `manifest.ts` (PWA icon list).
+- **`assets/brand/` (3 assets, NOT served)** — `x-banner.png`
+  (1500×500, X profile header), `youtube-banner.png` (2560×1440),
+  and `discord-icon.png` (512²). These exist purely for **manual
+  upload** to social platforms. Keeping them outside `public/`
+  means they never ship in the production bundle.
+
+The OG card and X / Twitter card share the same subcopy
+(`SUBCOPY` constant in the script: "Star Citizen for brand-new
+players. Plain English. No jargon.") so link previews read
+identically across networks.
+
+The YouTube banner uses a dedicated full-canvas design — starfield
+background, full-width gold rules at the safe-zone edges, side
+"DAY ONE / CITIZEN" wordmarks in the off-safe-zone areas, and a
+"unofficial fan site by Doc_Flanigan" foot tag — because the
+default `banner_card` composition leaves YouTube's 2560×1440
+canvas reading 60% empty.
 
 To regenerate (e.g. after a palette change):
 
@@ -456,7 +475,7 @@ for w, name in [(700, 'Bold'), (400, 'Regular')]:
     f.save(f'scripts/fonts/Orbitron-{name}.ttf')
 "
 
-# 2. Render all eleven assets.
+# 2. Render all eleven assets to their respective destinations.
 python3 scripts/render-brand-mark.py
 ```
 
