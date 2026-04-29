@@ -48,6 +48,16 @@ export const metadata: Metadata = {
     'how to start Star Citizen',
   ],
   alternates: { canonical: '/' },
+  icons: {
+    icon: [
+      { url: '/images/brand/favicon-32.png', sizes: '32x32', type: 'image/png' },
+      { url: '/images/brand/favicon-16.png', sizes: '16x16', type: 'image/png' },
+      { url: '/images/brand/icon-192.png', sizes: '192x192', type: 'image/png' },
+    ],
+    apple: [
+      { url: '/images/brand/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
+    ],
+  },
   openGraph: {
     type: 'website',
     siteName: SITE.name,
@@ -57,10 +67,10 @@ export const metadata: Metadata = {
     description: SITE.description,
     images: [
       {
-        url: '/images/hero/hero-01.jpg',
-        width: 1600,
-        height: 900,
-        alt: "Star Citizen — the 'Verse",
+        url: '/images/brand/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'dayonecitizen.com — Star Citizen for brand-new players.',
       },
     ],
   },
@@ -68,7 +78,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'dayonecitizen.com — Star Citizen, plain and simple.',
     description: SITE.description,
-    images: ['/images/hero/hero-01.jpg'],
+    images: ['/images/brand/twitter-card.png'],
   },
   robots: {
     index: true,
@@ -88,7 +98,7 @@ export default function RootLayout({
     '@type': 'Organization',
     name: SITE.name,
     url: SITE.url,
-    logo: `${SITE.url}/images/made-by-community.png`,
+    logo: `${SITE.url}/images/brand/logo-mark.png`,
     sameAs: [],
     founder: { '@type': 'Person', name: SITE.author },
     description: SITE.description,
