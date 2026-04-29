@@ -93,16 +93,28 @@ export default function FreeFlyPage() {
               <div className="absolute right-0 top-0 h-48 w-48 -translate-y-12 translate-x-16 rounded-full bg-gold/15 blur-3xl" />
               <div className="relative flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
                 <div>
-                  <span className="inline-flex items-center gap-2 rounded-full border border-yellow-400/30 bg-yellow-400/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-yellow-300">
-                    <Clock size={12} aria-hidden /> Current Status
+                  <span className="inline-flex items-center gap-2 rounded-full border border-emerald-400/30 bg-emerald-400/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-emerald-300">
+                    <Clock size={12} aria-hidden /> Confirmed: May 14&ndash;27, 2026
                   </span>
                   <h2 className="heading-display mt-3 text-3xl">
-                    No active Free Fly right now.
+                    Drake DefenseCon — Free Fly window confirmed.
                   </h2>
                   <p className="mt-3 max-w-xl text-sm text-muted">
-                    The next confirmed window is Invictus Launch Week, expected
-                    in late May. We&rsquo;ll update this banner the moment it&rsquo;s
-                    official.
+                    <Term name="CIG">CIG</Term> has officially announced Drake
+                    DefenseCon — the 2026 rebrand of the annual military-themed
+                    event previously called Invictus Launch Week. The free-to-play
+                    window runs <strong className="text-starwhite">May 14 through
+                    May 27, 2026</strong>, hosted in-fiction at Area18 on{' '}
+                    <Term name="ArcCorp">ArcCorp</Term>. (
+                    <a
+                      href="https://robertsspaceindustries.com/en/comm-link/transmission/21134-Countdown-To-DefenseCon"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-gold underline-offset-4 hover:underline"
+                    >
+                      Official RSI blog post
+                    </a>
+                    )
                   </p>
                 </div>
                 <div className="flex flex-col gap-2">
@@ -128,25 +140,30 @@ export default function FreeFlyPage() {
               The next likely Free Fly windows
             </h2>
             <p className="mt-4 max-w-2xl text-sm text-muted">
-              <Term name="CIG">CIG</Term> hasn&rsquo;t officially announced
-              these dates, but they follow a predictable annual pattern. Treat
-              these as best-guess targets and check back for confirmation.
+              The May 2026 window is officially confirmed by{' '}
+              <Term name="CIG">CIG</Term>. The summer and fall entries below
+              follow a predictable annual pattern but have not yet been
+              announced — treat them as best-guess targets and check back for
+              confirmation.
             </p>
 
             <ol className="mt-10 space-y-4">
               <TimelineItem
-                date="May 2026"
-                name="Invictus Launch Week (predicted)"
+                date="May 14–27, 2026"
+                name="Drake DefenseCon (confirmed)"
                 detail={
                   <>
-                    Annual military-themed event. Combat ships from{' '}
-                    <Term name="Aegis">Aegis</Term>,{' '}
+                    The 2026 rebrand of the annual military-themed event
+                    previously known as Invictus Launch Week. <Term name="CIG">CIG</Term>{' '}
+                    confirmed the dates and a fourteen-day Free Fly window in
+                    the &ldquo;Countdown to DefenseCon&rdquo; announcement.
+                    Combat ships from <Term name="Aegis">Aegis</Term>,{' '}
                     <Term name="Anvil">Anvil</Term>, and{' '}
                     <Term name="Drake">Drake</Term> typically rotate as
-                    flyables. 7–10 days.
+                    flyables.
                   </>
                 }
-                badge="Predicted"
+                badge="Confirmed"
               />
               <TimelineItem
                 date="Aug 2026"

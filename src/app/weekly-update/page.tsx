@@ -158,6 +158,22 @@ export default function WeeklyUpdatePage() {
           <Section title="Events and community">
             <ul className="space-y-3">
               <Bullet>
+                <strong>Drake DefenseCon dates announced — May 14 to May 27, 2026.</strong>{' '}
+                <Term name="CIG">CIG</Term> published a &ldquo;Countdown to
+                DefenseCon&rdquo; announcement confirming the dates of the
+                annual military-themed event. Drake DefenseCon is the 2026
+                rebrand of the event previously known as Invictus Launch Week.
+                The fourteen-day window includes a <Term name="Free Fly">Free Fly</Term>{' '}
+                period — Star Citizen will be free to download and play with
+                no <Term name="Pledge">pledge</Term> required. The in-fiction
+                event takes place at Area18 on <Term name="ArcCorp">ArcCorp</Term>.
+                See our <a href="/free-fly-events" className="text-gold underline-offset-4 hover:underline">Free Fly events page</a> for details. (
+                <SourceLink href="https://robertsspaceindustries.com/en/comm-link/transmission/21134-Countdown-To-DefenseCon">
+                  Official RSI blog post
+                </SourceLink>
+                )
+              </Bullet>
+              <Bullet>
                 <strong>CLX Gaming PC Giveaway (open now, ends May 4)</strong> — <Term name="CIG">CIG</Term> partnered with hardware manufacturer CLX to run a giveaway open worldwide. Five winners receive an in-game package including an <Term name="Aurora">Aurora</Term> Mk II with <Term name="LTI">Lifetime Insurance</Term>. The grand prize winner also gets a physical CLX gaming PC. The giveaway runs until May 4, 2026 at 11:59 AM <abbr title="Eastern Daylight Time">EDT</abbr>. (
                 <SourceLink href="https://robertsspaceindustries.com/comm-link/transmission/21104-CLX-Gaming-PC-Giveaway">
                   Official RSI blog post
