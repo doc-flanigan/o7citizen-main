@@ -1,0 +1,65 @@
+Welcome to o7citizen — your plain-English guide to the most ambitious space simulation ever made, written by a veteran backer for someone who has never even seen the game.
+
+This is Step One. You bought the game, you downloaded the launcher, and now you're staring at a screen wondering what comes next. I've been there. Let's walk through it together.
+
+The RSI Launcher is Roberts Space Industries' own application — think of it like a Battle.net or Epic launcher, but for Star Citizen only. When it opens, you'll see your account name in the top right. If you don't, log in with the email and password you used when you bought the game.
+
+Before you hit Play, take a look at the version number. Star Citizen is still in alpha, which means the game is actively being built. The version number changes every few weeks as patches roll out. That's normal. That's the game.
+
+You'll also see a toggle between LIVE and PTU. Live is the main game — that's where you want to be. PTU stands for Public Test Universe, which is basically a testing environment for upcoming patches. Stick to Live for now.
+
+When you're ready, click Launch. The game takes a while to load the first time — sometimes several minutes. This is also normal. Grab a drink.
+
+Once the game loads, you'll be prompted to choose a home location. This is where you'll spawn every time you start a new session. You have a few options, and none of them are wrong — but here's what you need to know.
+
+New Babbage is on the planet microTech. It's a clean, modern city with a techy aesthetic. Popular with players who like the colder, high-tech feel.
+
+Area 18 is on ArcCorp, a planet that is literally covered in one giant city. It's loud, urban, and busy. If you've ever played Coruscant in your head, this is the vibe.
+
+Lorville is on Hurston — the industrial city. Darker atmosphere, gritty, but has solid access to gear.
+
+Orison is the floating city on Crusader, a gas giant. Stunning visually, but getting out of the atmosphere takes a bit longer.
+
+For a first playthrough, I recommend New Babbage or Area 18 — both have good access to tutorials, shops, and missions when you're ready to explore.
+
+Pick your city, and confirm.
+
+Before you do anything else, let's talk settings. Hit Escape to open the menu, then go to Options.
+
+Under Graphics, the most important setting is your overall quality preset. If your frame rate feels choppy, drop it one level. Star Citizen is a demanding game and even top-end hardware can struggle in busy areas. A 3090 Ti will handle Ultra to High without much trouble in most locations — but if you're in a city with a lot of players around, High or Medium keeps things smoother.
+
+Film Grain and Chromatic Aberration are both on by default. Turn them both off. They make the image softer and muddier, and there's no reason to keep them.
+
+Under Keybindings, don't change anything yet. The default layout is a lot to take in, but you'll learn the keys you actually need as you go. The most important ones right now are F — which opens your character menu — and V, which is your visor wipe if your helmet fogs up.
+
+One more: your Field of View. If the default feels too zoomed in, bump it up slightly. Personal preference — there's no wrong answer.
+
+Your HAB is your starting room. Think of it as a hotel room in space. It's small, it's functional, and it's where you begin every session.
+
+When you first load in, your character wakes up from a bed. You can interact with the bed to sleep and log out safely if you ever need to. More on that later.
+
+Look around the room. There's usually a closet or locker where you can store gear, and a mirror where you can check your loadout. These are small details, but they matter — Star Citizen rewards players who take their time and explore.
+
+To move, walk toward the door. It opens automatically. You are now in the corridor of your station or city block. The in-game tutorial should trigger here, or shortly after.
+
+Star Citizen has a built-in tutorial called the New Player Experience. If it doesn't pop up automatically, open your mobiGlas — that's the wrist computer you access by pressing F1 — and look for it under your Journal or Missions tab.
+
+The tutorial walks you through the basics: how to move, how to interact with objects, how to use elevators and transit systems. It's worth doing, even if you feel like you want to skip ahead. The elevators especially trip up new players who skip this step.
+
+A few things the tutorial won't tell you that you should know.
+
+Hold F to bring up the interaction menu for most objects. If something looks interactive and pressing E doesn't work, hold F.
+
+Your character has a stamina bar. If you sprint too long, you'll slow down. It recovers on its own.
+
+The game has a physical persistence system. That means items you drop stay where you dropped them — and if your character dies, you respawn from a medical facility with only what you had in your inventory. Don't carry everything you own at once until you know what you're doing.
+
+And finally — things will break. You'll fall through a floor, a door won't open, a mission will bug out. This is alpha. When it happens, open your mobiGlas with F1, go to the main menu, and use the Claim Ship or Unstick options. Or simply log out and back in. Most issues fix themselves on a fresh load.
+
+You've made it through your first session. You know how to launch the game, set up your settings, navigate your HAB, and start the tutorial. That's more than most people figure out on their own.
+
+In the next video, we'll get you your first ship, fly out of the station for the first time, and show you what Star Citizen actually feels like when you're out in open space.
+
+If this helped, drop your referral code in when you first created your account — or use mine in the description. It gets you extra starting credits at no cost to you.
+
+I'm Doc Flanigan, and I'll see you in the 'verse.
