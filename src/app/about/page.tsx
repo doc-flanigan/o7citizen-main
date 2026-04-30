@@ -105,13 +105,17 @@ export default function AboutPage() {
             <div className="mt-5 space-y-4 text-base leading-relaxed text-starwhite/85">
               <p>
                 I still remember the sheer frustration of that first session. I was stumbling
-                around Port Olisar — a space station that once orbited the planet{' '}
+                around <Term name="Port Olisar">Port Olisar</Term> — a space station that
+                once orbited the planet{' '}
                 <Term name="Crusader">Crusader</Term> — pressing everything I could until I
-                finally managed to call my Avenger Titan to a landing pad. Then I
+                finally managed to call my{' '}
+                <Term name="Avenger Titan">Avenger Titan</Term> to a{' '}
+                <Term name="Landing Pad">landing pad</Term>. Then I
                 couldn&rsquo;t find it.
               </p>
               <p>
-                A few minutes of wandering later, some patient strangers in global chat
+                A few minutes of wandering later, some patient strangers in{' '}
+                <Term name="Global Chat">global chat</Term>{' '}
                 pointed me to the right pad. There it was: my little ship against that
                 enormous, rust-red planet behind it. My first taste of the scale of this
                 game was enough to give me goosebumps.
@@ -150,7 +154,8 @@ export default function AboutPage() {
                 touch the game for months.
               </p>
               <p>
-                I came back eventually — only because my friend FireMedicSlim had the
+                I came back eventually — only because my friend{' '}
+                <Term name="FireMedicSlim">FireMedicSlim</Term> had the
                 patience to sit with me and walk me through everything I&rsquo;d been
                 doing wrong. With someone to guide me, it all clicked. The confusion fell
                 away and the game underneath it finally showed itself.

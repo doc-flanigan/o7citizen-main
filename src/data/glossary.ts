@@ -186,6 +186,12 @@ export const GLOSSARY: GlossaryTerm[] = [
       "Alien race conquered by humans during the Tevarin Wars. Lore-heavy backstory; the Esperia Prowler is a Tevarin ship preserved by enthusiasts.",
   },
   {
+    term: 'FireMedicSlim',
+    category: 'Community',
+    definition:
+      "Doc_Flanigan's friend and the sole reason DayOneCitizen exists. FireMedicSlim had the patience to sit down and walk Doc through Star Citizen when Doc was ready to quit — at which point everything clicked. He is also the reason Doc is now broke. Introducing someone to this game is a financial liability.",
+  },
+  {
     term: 'Daymar Rally',
     category: 'Community',
     definition:
@@ -330,12 +336,14 @@ export const GLOSSARY: GlossaryTerm[] = [
     category: 'Ships',
     definition:
       "The smallest, cheapest starter ship from RSI. Cramped but capable of light cargo, basic combat, and short hauls. A common first ship for new backers.",
+    also: 'Aurora MR, Aurora LN, Aurora CL, Aurora ES',
   },
   {
     term: 'Mustang',
     category: 'Ships',
     definition:
       "A starter ship from Consolidated Outland. Slightly nimbler than the Aurora, popular with new pilots who want to dogfight early.",
+    also: 'Mustang Alpha, Mustang Beta, Mustang Delta, Mustang Gamma',
   },
   {
     term: 'Hornet',
@@ -354,6 +362,7 @@ export const GLOSSARY: GlossaryTerm[] = [
     category: 'Ships',
     definition:
       "Aegis multi-role light fighter — Titan (cargo), Stalker (bounty hunting cell), Warlock (EMP). Punches above its weight class for the price.",
+    also: 'Avenger Titan, Avenger Stalker, Avenger Warlock',
   },
   {
     term: 'Vanguard',
@@ -538,6 +547,34 @@ export const GLOSSARY: GlossaryTerm[] = [
     category: 'Gameplay',
     definition:
       'Automated Ship Operations and Placement — the in-game terminal where you retrieve, store, or insurance-claim your ships. Pronounced "A-sop."',
+  },
+  {
+    term: 'Landing Pad',
+    category: 'Gameplay',
+    definition:
+      "A numbered platform at a station or city spaceport where your ship is assigned when you request it from the ASOP terminal. Each pad has a number — finding the right one is a rite of passage for new players.",
+    also: 'Pad',
+  },
+  {
+    term: 'Global Chat',
+    category: 'Gameplay',
+    definition:
+      "The server-wide text chat channel visible to all players on your game instance. The quickest way to ask a question, call for help, or trade o7s with strangers. Veterans are usually patient — ask away.",
+    also: 'global',
+  },
+  {
+    term: 'Hab',
+    category: 'Gameplay',
+    definition:
+      "Short for habitation room — your character's personal room at a station or city. A place to store gear and set your respawn point. Press the bed to sleep and lock in your location.",
+    also: 'Hab Room, Habitation',
+  },
+  {
+    term: 'Loaner Ship',
+    category: 'Gameplay',
+    definition:
+      "A temporary ship CIG provides when your pledged ship isn't yet flyable in the live game, or during Free Fly events. Loaners give everyone something to fly without an additional purchase.",
+    also: 'Loaner',
   },
   {
     term: 'Quantum Travel',
@@ -874,6 +911,12 @@ export const GLOSSARY: GlossaryTerm[] = [
     category: 'Locations',
     definition:
       "The new-player landing area added in 4.0. A Stanton orientation station with tutorials, kiosks, and starter missions to help newbies before they head to the city.",
+  },
+  {
+    term: 'Port Olisar',
+    category: 'Locations',
+    definition:
+      "The original player-accessible station in Stanton, orbiting the gas giant Crusader. The first place most players ever landed. Removed from the game in 2021 and replaced by Orison and the current station network — but it lives on in every veteran's first-session story.",
   },
   {
     term: 'Bunker',
