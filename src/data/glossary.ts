@@ -270,6 +270,44 @@ export const GLOSSARY: GlossaryTerm[] = [
 
   // ─────────────── Ships — Manufacturers ───────────────
   {
+    term: 'Aopoa',
+    category: 'Ships',
+    definition:
+      "Xi'an ship manufacturer — makes the Nox hover bike and the Khartu-al fighter. Xi'an designs are organic and alien-looking compared to anything humans build.",
+  },
+  {
+    term: 'Consolidated Outland',
+    category: 'Ships',
+    definition:
+      "Budget manufacturer known for the Mustang starter ship and the Nomad multi-role. Built for accessibility — the working-class alternative to Origin's luxury line.",
+    also: 'CO',
+  },
+  {
+    term: 'Gatac Manufacture',
+    category: 'Ships',
+    definition:
+      "A Xi'an ship manufacturer that produces the Syulen — one of the few alien-made ships new players can fly. Xi'an engineering means unusual controls and exotic aesthetics.",
+  },
+  {
+    term: 'Kruger Intergalactic',
+    category: 'Ships',
+    definition:
+      "Manufacturer of snub fighters and light ships — including the Merlin parasite fighter and the P-72 Archimedes racing snub. Specializes in small, fast craft meant to be launched from larger ships.",
+  },
+  {
+    term: 'Mirai',
+    category: 'Ships',
+    definition:
+      "Manufacturer known for sleek, futuristic racing and combat ships — the Razor racing line and the Guardian fighter series. High-tech aesthetic, often used in competitive racing events.",
+  },
+  {
+    term: 'Roberts Space Industries',
+    category: 'Ships',
+    definition:
+      "The in-fiction ship manufacturer founded by the Roberts family — and the brand under which CIG sells Star Citizen. Makes the Aurora starter ship, the Constellation, and the Polaris.",
+    also: 'RSI ships',
+  },
+  {
     term: 'Origin',
     category: 'Ships',
     definition:
@@ -521,6 +559,379 @@ export const GLOSSARY: GlossaryTerm[] = [
     category: 'Ships',
     definition:
       "RSI Ursa — armored 4-wheeled rover. Often comes with the Constellation Aquila or sold separately. Solid for moon-side expeditions.",
+  },
+
+  // ─────────────── Ships — Aegis Dynamics ───────────────
+  {
+    term: 'Eclipse',
+    category: 'Ships',
+    definition:
+      "Aegis single-seat stealth bomber. Built to sneak past enemy radar and deliver torpedoes to large targets. It carries almost no defensive weapons — the plan is that you never get spotted.",
+  },
+  {
+    term: 'Redeemer',
+    category: 'Ships',
+    definition:
+      "Aegis heavy gunship that blends fighter firepower with a small troop bay. A flying weapons platform that can also drop off a squad. Crew-optional but stronger with a full team.",
+  },
+  {
+    term: 'Retaliator',
+    category: 'Ships',
+    definition:
+      "Aegis large modular torpedo bomber designed to crack open capital ships. Its bay sections can be swapped for different mission types — bombers, crew quarters, or cargo.",
+    also: 'Retaliator Bomber',
+  },
+  {
+    term: 'Sabre',
+    category: 'Ships',
+    definition:
+      "Aegis space superiority fighter — fast, stealthy, and capable. Trades some durability for better speed compared to the Hornet. Great for pilots who prefer finesse over brute force.",
+    also: 'Sabre Comet, Sabre Firebird, Sabre Raven, Sabre Peregrine',
+  },
+
+  // ─────────────── Ships — Anvil Aerospace ───────────────
+  {
+    term: 'Arrow',
+    category: 'Ships',
+    definition:
+      "Anvil's smallest, fastest combat ship. A nimble dogfighter that rewards hit-and-run tactics — just don't take too many hits. One of the most affordable dedicated fighters.",
+  },
+  {
+    term: 'F8C Lightning',
+    category: 'Ships',
+    definition:
+      "The civilian version of the UEE military's top-tier fighter. Exceptionally powerful and fast — one of the best combat ships a player can own, with a price tag to match.",
+    also: 'Lightning',
+  },
+  {
+    term: 'Gladiator',
+    category: 'Ships',
+    definition:
+      "Anvil two-seat torpedo bomber. The pilot lines up the attack while a rear gunner keeps enemy fighters off their tail — classic bomber-crew teamwork.",
+  },
+  {
+    term: 'Hawk',
+    category: 'Ships',
+    definition:
+      "Anvil compact fighter with a built-in prisoner transport cell. Popular with bounty hunters because you can chase down a target, disable their ship, and bring them back alive.",
+  },
+  {
+    term: 'Hurricane',
+    category: 'Ships',
+    definition:
+      "Anvil two-seat heavy fighter with a manned top turret. The gunner handles rear defense while the pilot flies — it punches far above its weight class for the size.",
+  },
+  {
+    term: 'Paladin',
+    category: 'Ships',
+    definition:
+      "Anvil gunship designed for sustained combat with a small crew. Sits between a fighter and a capital ship — lots of guns, solid armor, and crew stations for a tight team.",
+  },
+  {
+    term: 'Terrapin',
+    category: 'Ships',
+    definition:
+      "Anvil heavily armored exploration ship with almost no weapons — it survives danger by being nearly impenetrable rather than fighting back. Great for venturing into hostile space solo.",
+    also: 'Terrapin Medic',
+  },
+  {
+    term: 'Valkyrie',
+    category: 'Ships',
+    definition:
+      "Anvil military dropship that carries up to twenty passengers with serious on-board firepower. Think of it as a flying armored bus that can fight its way to the landing zone.",
+  },
+
+  // ─────────────── Ships — Argo Astronautics ───────────────
+  {
+    term: 'MPUV',
+    category: 'Ships',
+    definition:
+      "Argo's small utility shuttle — nicknamed the 'Mule.' Variants handle cargo, crew transfers, and tractor work. No weapons, no frills; a flying delivery vehicle for port operations.",
+    also: 'Mule, MPUV Cargo, MPUV Personnel, MPUV Tractor',
+  },
+  {
+    term: 'RAFT',
+    category: 'Ships',
+    definition:
+      "Argo modular short-haul freighter built around swappable cargo containers. The middle section loads and unloads quickly at ports, making it efficient for regular cargo runs.",
+  },
+  {
+    term: 'SRV',
+    category: 'Ships',
+    definition:
+      "Argo tug ship — the space equivalent of a breakdown recovery truck. It locks onto disabled or damaged ships and tows them to safety. Essential for rescue operations and recovering wrecks.",
+  },
+
+  // ─────────────── Ships — Banu ───────────────
+  {
+    term: 'Defender',
+    category: 'Ships',
+    definition:
+      "Banu-designed alien heavy fighter that prioritizes shields over everything else — its shield technology is considered among the best in the galaxy. Slower than human fighters but extremely hard to kill.",
+  },
+
+  // ─────────────── Ships — Consolidated Outland ───────────────
+  {
+    term: 'Nomad',
+    category: 'Ships',
+    definition:
+      "Consolidated Outland small multi-role ship — can haul a little cargo, do light exploration, and hold its own in a fight. A good step up from the starter ships.",
+  },
+
+  // ─────────────── Ships — Crusader Industries ───────────────
+  {
+    term: 'Spirit',
+    category: 'Ships',
+    definition:
+      "Crusader Industries medium ship line — the C1 is a sleek light freighter, the A1 is a light bomber, and the E1 is an exploration variant. A versatile trio sharing the same hull.",
+    also: 'C1 Spirit, A1 Spirit, E1 Spirit',
+  },
+  {
+    term: 'Hercules Starlifter',
+    category: 'Ships',
+    definition:
+      "Crusader Industries massive military transport line. The C2 hauls cargo, the M2 moves troops and vehicles, and the A2 is a strategic bomber. Big enough to drive a tank inside.",
+    also: 'C2 Hercules, M2 Hercules, A2 Hercules, Herc',
+  },
+  {
+    term: 'Ares Star Fighter',
+    category: 'Ships',
+    definition:
+      "Crusader Industries single-seat heavy gunship. The Inferno carries a rotary gatling cannon that shreds fighters; the Ion carries a large laser for punching through capital ship armor. Glass cannons — huge firepower, light protection.",
+    also: 'Ares Inferno, Ares Ion',
+  },
+  {
+    term: 'Intrepid',
+    category: 'Ships',
+    definition:
+      "Crusader Industries entry-level transport aimed at new players who want something more capable than an Aurora or Mustang. Reliable and affordable for learning the basics of cargo hauling.",
+  },
+  {
+    term: 'Mercury Star Runner',
+    category: 'Ships',
+    definition:
+      "Crusader Industries fast medium freighter built for high-value and time-sensitive cargo — including illegal goods. Has hidden compartments and is fast enough to outrun most pursuit ships.",
+    also: 'MSR, Mercury',
+  },
+
+  // ─────────────── Ships — Drake Interplanetary ───────────────
+  {
+    term: 'Buccaneer',
+    category: 'Ships',
+    definition:
+      "Drake's scrappy light dogfighter — cheap, fast, and loaded with more weapons than a ship its size has any right to carry. Fragile, but what it lacks in armor it makes up for in aggression.",
+  },
+  {
+    term: 'Corsair',
+    category: 'Ships',
+    definition:
+      "Drake mid-size explorer with surprisingly heavy firepower. Built for people who want to venture into unknown space without being defenseless when they get there.",
+  },
+  {
+    term: 'Cutter',
+    category: 'Ships',
+    definition:
+      "Drake's entry-level ship — a tiny, boxy transport for hauling small loads on a budget. No frills, but it gets the job done. Variants include the Rambler (explorer) and Scout (recon).",
+    also: 'Cutter Rambler, Cutter Scout',
+  },
+  {
+    term: 'Golem',
+    category: 'Ships',
+    definition:
+      "Drake salvage ship that sits between the solo Vulture and the large Reclaimer. Built for small-crew salvage operations — stripping wrecks and collecting hull material for profit.",
+  },
+  {
+    term: 'Herald',
+    category: 'Ships',
+    definition:
+      "Drake data runner built entirely around fast information transport and electronic security. Bullet-shaped, very fast, used by hackers and smugglers who carry data rather than cargo.",
+  },
+
+  // ─────────────── Ships — Esperia ───────────────
+  {
+    term: 'Prowler',
+    category: 'Ships',
+    definition:
+      "Esperia's replica of a Tevarin alien boarding ship — designed for stealthy troop insertion onto enemy vessels without being detected. Has room for a squad and moves quietly for its size.",
+    also: 'Prowler Utility',
+  },
+  {
+    term: 'Talon',
+    category: 'Ships',
+    definition:
+      "Esperia's replica of a Tevarin fighter — fast, sleek, with strong shields and a distinctive alien look. The Shrike variant adds missile racks for hitting larger targets.",
+    also: 'Talon Shrike',
+  },
+  {
+    term: 'Khartu-al',
+    category: 'Ships',
+    definition:
+      "Aopoa/Esperia Xi'an-designed light fighter that maneuvers unlike anything humans build — it can rotate its engines independently, making it extremely agile. Harder to fly but devastating in skilled hands.",
+  },
+  {
+    term: "San'tok.yai",
+    category: 'Ships',
+    definition:
+      "Aopoa Xi'an heavy fighter with more firepower and shields than the Khartu-al. Built around alien design philosophy — unique flight characteristics compared to any human ship.",
+  },
+
+  // ─────────────── Ships — Gatac / Xi'an ───────────────
+  {
+    term: 'Syulen',
+    category: 'Ships',
+    definition:
+      "Gatac Manufacture starter ship — one of the only alien-made ships new players can fly. Has Xi'an-style controls and aesthetics while still being manageable for solo pilots.",
+  },
+
+  // ─────────────── Ships — Kruger Intergalactic ───────────────
+  {
+    term: 'P-72 Archimedes',
+    category: 'Ships',
+    definition:
+      "Kruger tiny snub fighter designed to be carried inside larger ships. Too small for long solo trips, but perfect as a parasite fighter or for competitive racing inside stations.",
+    also: 'Archimedes',
+  },
+  {
+    term: 'L-21 Wolf',
+    category: 'Ships',
+    definition:
+      "Kruger light interceptor designed to hunt down fleeing targets. More maneuverable than it looks and a relatively affordable option for solo combat pilots who like to give chase.",
+    also: 'Wolf',
+  },
+
+  // ─────────────── Ships — Mirai ───────────────
+  {
+    term: 'Fury',
+    category: 'Ships',
+    definition:
+      "Mirai micro-fighter — barely bigger than a cockpit with engines and guns attached. Designed to be launched from a carrier ship. Too small to fly solo from port for long.",
+    also: 'Fury LX, Fury MX',
+  },
+  {
+    term: 'Guardian',
+    category: 'Ships',
+    definition:
+      "Mirai medium fighter with a futuristic look and well-rounded stats. Balanced between speed, firepower, and shields — a solid all-rounder. Variants include the MX (electronic warfare) and QI (quick intercept).",
+    also: 'Guardian MX, Guardian QI',
+  },
+  {
+    term: 'Razor',
+    category: 'Ships',
+    definition:
+      "Mirai racing ship built purely to win competitions. Almost no weapons, minimal cargo — everything sacrificed for speed and handling. Variants include the EX (extreme speed) and LX (balanced racing).",
+    also: 'Razor EX, Razor LX',
+  },
+
+  // ─────────────── Ships — MISC ───────────────
+  {
+    term: 'Reliant',
+    category: 'Ships',
+    definition:
+      "MISC starter ship with a distinctive horizontal wing design. Small and affordable, it can carry light cargo, do basic combat, or fit out for research. The Kore (cargo), Mako (broadcasting), Sen (science), and Tana (combat) are the main variants.",
+    also: 'Reliant Kore, Reliant Mako, Reliant Sen, Reliant Tana',
+  },
+  {
+    term: 'Starfarer',
+    category: 'Ships',
+    definition:
+      "MISC large fuel tanker — scoop hydrogen from gas giants, refine it on board, and sell it to ships that need refueling in space. The Gemini variant adds military-grade armor for dangerous territory.",
+    also: 'Starfarer Gemini',
+  },
+  {
+    term: 'Starlancer',
+    category: 'Ships',
+    definition:
+      "MISC large ship line — the MAX is a big cargo hauler for serious trade routes; the TAC is a military transport for moving armed teams into conflict zones.",
+    also: 'Starlancer MAX, Starlancer TAC',
+  },
+
+  // ─────────────── Ships — Origin Jumpworks ───────────────
+  {
+    term: '100 series',
+    category: 'Ships',
+    definition:
+      "Origin's entry-level luxury line — the 100i (multi-role), 125a (light fighter), and 135c (light cargo). Think luxury sports car at the starter price point. Small, sleek, and stylish.",
+    also: '100i, 125a, 135c',
+  },
+  {
+    term: '300 series',
+    category: 'Ships',
+    definition:
+      "Origin's mid-range luxury line. The 300i is a flexible multi-role; the 315p adds exploration scanners; the 325a upgrades the weapons; the 350r is a dedicated racer. All look extraordinary.",
+    also: '300i, 315p, 325a, 350r',
+  },
+  {
+    term: '400i',
+    category: 'Ships',
+    definition:
+      "Origin larger luxury explorer for solo pilots or a small crew. Includes top-tier sensors, a lounge area, and enough firepower to handle most threats encountered while exploring.",
+  },
+  {
+    term: '600i',
+    category: 'Ships',
+    definition:
+      "Origin's flagship luxury superyacht — a large explorer that is essentially a flying mansion with a lounge, bar, and captain's suite. One of the most prestigious ships you can own.",
+  },
+  {
+    term: '85X',
+    category: 'Ships',
+    definition:
+      "Origin luxury runabout designed to live inside the 600i or 890 Jump and handle short hops. The space equivalent of a personal speedboat stored on a superyacht.",
+  },
+  {
+    term: 'M50 Interceptor',
+    category: 'Ships',
+    definition:
+      "One of the fastest small ships in the game. Built to intercept and chase down targets; also a popular racing ship because almost nothing can keep up with it.",
+    also: 'M50',
+  },
+  {
+    term: 'X1',
+    category: 'Ships',
+    definition:
+      "Origin open-cockpit speeder — no canopy, just you and the stars. Designed for short hops and showing off. Variants include the Force (armed) and Velocity (racing-tuned).",
+    also: 'X1 Force, X1 Velocity',
+  },
+
+  // ─────────────── Ships — RSI ───────────────
+  {
+    term: 'Apollo',
+    category: 'Ships',
+    definition:
+      "RSI dedicated medical ship — picks up injured players, stabilizes them in flight, and gets them to a medical facility. One of the most important support ships for large org operations.",
+    also: 'Apollo Medivac, Apollo Triage',
+  },
+  {
+    term: 'Mantis',
+    category: 'Ships',
+    definition:
+      "RSI interdiction ship — its quantum snare can pull other ships out of quantum travel mid-flight. Used by bounty hunters and pirates to stop targets from escaping before they can be caught.",
+  },
+  {
+    term: 'Perseus',
+    category: 'Ships',
+    definition:
+      "RSI large, heavily armed patrol gunship. Requires a crew and carries weapons powerful enough to threaten frigates. Designed to defend space lanes rather than fight in tight dogfights.",
+  },
+  {
+    term: 'Scorpius',
+    category: 'Ships',
+    definition:
+      "RSI two-seat heavy fighter with a rear-facing gunner turret. The pilot handles flying and forward guns while the gunner defends the back. Looks aggressive and fights like it looks.",
+    also: 'Scorpius Antares',
+  },
+  {
+    term: 'Zeus Mk II',
+    category: 'Ships',
+    definition:
+      "RSI medium ship line — the CL is an affordable solo cargo hauler for regular trade routes; the ES is an exploration variant with upgraded scanners for mapping new star systems.",
+    also: 'Zeus CL, Zeus ES',
+  },
+  {
+    term: 'Hermes',
+    category: 'Ships',
+    definition:
+      "RSI large passenger and cargo transport designed for moving people and goods between major locations. The space equivalent of a commercial ferry on a regular route.",
   },
 
   // ─────────────── Gameplay ───────────────
