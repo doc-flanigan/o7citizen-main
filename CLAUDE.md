@@ -298,14 +298,13 @@ The site is leaned toward **new-player onboarding**. The primary user
 journey is `/day-one-citizen` — twelve sequential sections from
 &laquo;is Star Citizen worth buying?&raquo; through &laquo;your first
 flight.&raquo; Supporting pages: `/glossary` (terminology reference),
-`/free-fly-events` (when the game is free to try), and `/o7-meaning`
-(SEO anchor for the &laquo;what does o7 mean&raquo; search query, with
-the About content folded in).
+`/free-fly-events` (when the game is free to try), and `/about`
+(the About page, which explains the o7 meaning and site purpose).
 
 **Retired routes** (308-redirected in `next.config.mjs` so backlinks
 keep working):
 - `/weekly-update` -> `/`
-- `/about` -> `/o7-meaning#about`
+- `/o7-meaning` -> `/about`
 
 ### The weekly digest pipeline (PAUSED)
 

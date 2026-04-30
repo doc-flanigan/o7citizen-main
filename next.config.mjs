@@ -48,6 +48,7 @@ const nextConfig = {
       { source: '/weekly-update/:path*', destination: '/', permanent: true },
       // /o7-meaning is now /about. 301 passes SEO equity to the new URL.
       { source: '/o7-meaning', destination: '/about', permanent: true },
+      { source: '/o7-meaning/', destination: '/about', permanent: true },
     ]
   },
 }
