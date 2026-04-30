@@ -146,7 +146,7 @@ export default function Home() {
                 </p>
                 <div className="mt-7 flex flex-wrap items-center gap-4">
                   <Link
-                    href="/o7-meaning"
+                    href="/about"
                     className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-navyLight/50 px-5 py-2.5 text-sm font-semibold text-starwhite hover:border-gold/40 hover:text-gold"
                   >
                     Read the full story
