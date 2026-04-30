@@ -71,7 +71,6 @@ export default function Term({ name, children, className = '' }: TermProps) {
     >
       <a
         href={href}
-        title={term.definition}
         aria-describedby={tooltipId}
         onFocus={() => setOpen(true)}
         onBlur={() => setOpen(false)}
