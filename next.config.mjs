@@ -46,9 +46,8 @@ const nextConfig = {
       // Both 308 to the homepage; visitors land on a useful page.
       { source: '/weekly-update', destination: '/', permanent: true },
       { source: '/weekly-update/:path*', destination: '/', permanent: true },
-      // /about merged into /o7-meaning (which now carries the About content
-      // as a section near the bottom). 308 preserves backlink equity.
-      { source: '/about', destination: '/o7-meaning', permanent: true },
+      // /o7-meaning is now /about. 301 passes SEO equity to the new URL.
+      { source: '/o7-meaning', destination: '/about', permanent: true },
     ]
   },
 }
